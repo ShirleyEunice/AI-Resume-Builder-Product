@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from "./utils/db.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
+import atsRoutes from "./routes/atsRoutes.js";
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/resume", resumeRoutes);
+app.use("/api/ats", atsRoutes);
 
 const PORT = process.env.PORT || 5000;
 

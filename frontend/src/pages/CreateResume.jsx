@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { createResume } from '../features/resumeSlice';
+import { fetchATSScore } from '../features/atsSlice';
 
 const CreateResume = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {atsScore} = useSelector((state)=> state.agent);
 
     const [form, setForm] = useState({
         title: "",
@@ -13,6 +15,22 @@ const CreateResume = () => {
         email:"",
 
     });
+
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        dispatch(
+          fetchATSScore({
+            title: form.title,
+            personalInfo: {
+              name: form.name,
+              email: form.email,
+            },
+          }),
+        );
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }, [form, dispatch]);
 
     const handleSubmit = async(e)=>{
         e.preventDefault();
@@ -31,6 +49,7 @@ const CreateResume = () => {
   return (
     <div className='p-5'>
         <h1 className='text-2xl font-bold mb-4'>Create Resume</h1>
+        <h2 className='text-lg font-semibold mb-2'>ATS Score: {atsScore} %</h2>
 
         <form onSubmit={handleSubmit} className='space-y-4'>
             <input 

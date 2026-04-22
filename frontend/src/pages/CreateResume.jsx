@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { createResume } from '../features/resumeSlice';
 import { fetchATSScore } from '../features/atsSlice';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const CreateResume = () => {
     const dispatch = useDispatch();
@@ -42,40 +45,54 @@ const CreateResume = () => {
             }
         };
          console.log("Sending data:", data);
-        await dispatch(createResume(data));
+         try {
+          await dispatch(createResume(data)).unwrap();
         navigate("/");
+         } catch (error) {
+          alert(error.message || "Limit Reached");
+         }
     }
 
   return (
-    <div className='p-5'>
-        <h1 className='text-2xl font-bold mb-4'>Create Resume</h1>
-        <h2 className='text-lg font-semibold mb-2'>ATS Score: {atsScore} %</h2>
+    <Card className="max-w-xl mx-auto">
+  <CardContent className="p-6">
+    <h2 className="text-xl font-bold mb-4">Create Resume</h2>
+    <div className="mb-4">
+  <p className="text-sm text-gray-500">ATS Score</p>
+  <div className="text-2xl font-bold">
+    {atsScore}%
+  </div>
+</div>
 
-        <form onSubmit={handleSubmit} className='space-y-4'>
-            <input 
-            type="text" 
-            className='border p-2 w-full'
-            placeholder='Title'
-            value={form.title}
-            onChange={(e)=> setForm({...form, title: e.target.value})} />
+    <form onSubmit={handleSubmit} className="space-y-4">
 
-             <input 
-            type="text" 
-            className='border p-2 w-full'
-            placeholder='Name'
-            value={form.name}
-            onChange={(e)=> setForm({...form, name: e.target.value})} />
+      <Input
+        placeholder="Resume Title"
+        onChange={(e) =>
+          setForm({ ...form, title: e.target.value })
+        }
+      />
 
-             <input 
-            type="text" 
-            className='border p-2 w-full'
-            placeholder='Email'
-            value={form.email}
-            onChange={(e)=> setForm({...form, email: e.target.value})} />
+      <Input
+        placeholder="Full Name"
+        onChange={(e) =>
+          setForm({ ...form, name: e.target.value })
+        }
+      />
 
-            <button type='submit' className='bg-blue-500 text-white px-4 py-2'>Create Resume</button>
-        </form>
-    </div>
+      <Input
+        placeholder="Email"
+        onChange={(e) =>
+          setForm({ ...form, email: e.target.value })
+        }
+      />
+
+      <Button className="w-full">
+        Save Resume
+      </Button>
+    </form>
+  </CardContent>
+</Card>
   )
 }
 

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { connectDB } from "./utils/db.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import atsRoutes from "./routes/atsRoutes.js";
+import agentRoutes from "./routes/agentRoutes.js";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/resume", resumeRoutes);
 app.use("/api/ats", atsRoutes);
+app.use("/api/agent", agentRoutes);
 
 const PORT = process.env.PORT || 5000;
 

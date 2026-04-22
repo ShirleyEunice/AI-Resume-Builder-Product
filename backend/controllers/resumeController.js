@@ -3,12 +3,16 @@ import Resume from "../models/Resume.js";
 // Create Resume
 export const createResume = async (req, res) => {
   try {
-    console.log("Incoming data:", req.body);
 
-    // ✅ FIRST create
+    const count = await Resume.countDocuments();
+    if(count >= 5){
+        return res.status(403).json({message: "Resume limit Reached. Upgrade Required"});
+    }
+
+    //FIRST create
     const resume = new Resume(req.body);
 
-    // ✅ THEN use it
+    //THEN use it
     console.log("Before save:", resume);
 
     const saved = await resume.save();

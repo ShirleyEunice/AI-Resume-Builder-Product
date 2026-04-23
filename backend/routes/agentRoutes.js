@@ -2,6 +2,7 @@ import express from 'express';
 import multer from 'multer';
 import { parsePDF } from '../services/parser/pdfParser.js';
 import { analyseResume } from '../services/agents/resumeAnalyzer.js';
+import { jdMatcher } from '../services/agents/jdMatcher.js';
 
 
 const router = express.Router();
@@ -11,6 +12,16 @@ router.post('/analyze', upload.single('file'), async (req, res)=>{
     try {
         const text = await parsePDF(req.file.buffer);
         const result = await analyseResume(text);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
+router.post('/match', async (req, res)=>{
+    try {
+        const {resumeText, jdText} = req.body;
+        const result = await jdMatcher(resumeText, jdText);
         res.json(result);
     } catch (error) {
         res.status(500).json({ error: error.message });

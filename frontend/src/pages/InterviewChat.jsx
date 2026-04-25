@@ -16,6 +16,7 @@ const InterviewChat = () => {
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
+  
 
   useEffect(() => {
     try {

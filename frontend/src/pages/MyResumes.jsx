@@ -24,12 +24,6 @@ const MyResumes = () => {
       + Create Resume
     </Button>
   </div>
-
-  {resumes.length >= 5 && (
-    <p className="text-red-500 mb-4">
-      Free limit reached (5 resumes)
-    </p>
-  )}
   {loading ? (
   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
     {[...Array(6)].map((_, i) => (

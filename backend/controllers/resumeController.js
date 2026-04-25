@@ -4,11 +4,6 @@ import Resume from "../models/Resume.js";
 export const createResume = async (req, res) => {
   try {
 
-    const count = await Resume.countDocuments();
-    if(count >= 5){
-        return res.status(403).json({message: "Resume limit Reached. Upgrade Required"});
-    }
-
     //FIRST create
     const resume = new Resume(req.body);
 

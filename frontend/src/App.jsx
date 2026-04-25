@@ -5,6 +5,8 @@ import CreateResume from './pages/CreateResume';
 import MainLayout from './layouts/MainLayout';
 import ResumeAnalyzer from './pages/ResumeAnalyzer';
 import JdMatcher from './pages/jdMatcher';
+import CoverLetter from './pages/CoverLetter';
+import InterviewChat from './pages/InterviewChat';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -18,6 +20,8 @@ function App() {
           <Route path="/create" element={<CreateResume />} />
           <Route path='/ai-tools' element={<ResumeAnalyzer/>}/>
           <Route path='/jd-matcher' element={<JdMatcher/>}/>
+          <Route path='/cover-letter' element={<CoverLetter/>}/>
+          <Route path='/interview' element={<InterviewChat />}/>
         </Route>
       </Routes>
     </BrowserRouter>

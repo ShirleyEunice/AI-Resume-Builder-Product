@@ -6,12 +6,11 @@ import resumeRoutes from "./routes/resumeRoutes.js";
 import atsRoutes from "./routes/atsRoutes.js";
 import agentRoutes from "./routes/agentRoutes.js";
 
-dotenv.config();
-
+dotenv.config({ path: "./.env" });
 const app = express();
 app.use(cors());
 app.use(express.json());
-
+console.log("Running from:", process.cwd());
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });

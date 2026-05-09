@@ -9,6 +9,7 @@ import { mockAuth } from '../middlewares/mockAuth.js';
 import User from '../models/User.js';
 import Chat from '../models/Chat.js';
 import { runInterviewAgent } from '../services/agents/interviewAgent.js';
+import { rateLimiter } from '../middlewares/rateLimiter.js';
 
 
 const router = express.Router();
@@ -46,7 +47,7 @@ router.post('/cover-letter',mockAuth, checkCredits(10), async (req, res)=>{
     }
 })
 
-router.post("/interview", mockAuth, checkCredits(5), async (req, res)=>{
+router.post("/interview", mockAuth, rateLimiter, checkCredits(5), async (req, res)=>{
     const {message, chatId} = req.body;
     const user = req.user;
 

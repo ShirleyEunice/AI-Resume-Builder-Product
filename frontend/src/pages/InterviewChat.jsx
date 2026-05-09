@@ -2,6 +2,7 @@ import API from "@/api/axios";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React, { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 import ReactMarkdown from "react-markdown";
 
 const InterviewChat = () => {
@@ -51,7 +52,13 @@ const InterviewChat = () => {
 
       setChatId(res.data.chatId);
     } catch (error) {
-      console;
+      console.error("Error sending message:", error);
+
+      if(error.response?.status === 429){
+        toast.error("Too many requests. Please wait a moment and try again.");
+      }else{
+        toast.error("An error occurred. Please try again.");
+      }
     } finally {
       setLoading(false);
     }

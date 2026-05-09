@@ -1,6 +1,21 @@
 import OpenAI from "openai";
+import redis from "../../utils/redis.js";
 
 export const runInterviewAgent = async (user, chatHistory, question) => {
+  // Create unique cache key
+  const cacheKey = `chat:${user._id}:${question}`;
+
+
+  //Check redis first
+  const cachedResponse = await redis.get(cacheKey);
+  if(cachedResponse){
+    console.log("Cache hit for:", cacheKey);
+    return cachedResponse;
+  }
+
+  //calling API 
+  console.log("Cache miss -> calling API");
+  
   const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
   });
@@ -54,5 +69,10 @@ Always format like a clean chat response.
     messages,
   });
 
-  return response.choices[0].message.content;
+  const reply = response.choices[0].message.content;
+
+  //cache the response
+  await redis.setEx(cacheKey, 3600, String(reply)); //cache for 1 hour(ms)
+
+  return reply;
 };

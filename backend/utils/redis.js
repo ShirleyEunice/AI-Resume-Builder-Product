@@ -1,0 +1,24 @@
+import { createClient } from "redis";
+import dotenv from "dotenv";
+dotenv.config();
+
+console.log("REDIS URL:", process.env.REDIS_URL);
+const redisClient = createClient({
+  url: process.env.REDIS_URL,   // ✅ THIS IS THE FIX
+  
+})
+
+redisClient.on("error", (err) => {
+  console.error("❌ Redis Error:", err);
+});
+
+(async () => {
+  try {
+    await redisClient.connect();
+    console.log("✅ Connected to Upstash Redis");
+  } catch (err) {
+    console.error("❌ Redis connection failed:", err);
+  }
+})();
+
+export default redisClient;

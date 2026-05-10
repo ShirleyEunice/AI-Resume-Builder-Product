@@ -8,6 +8,7 @@ import SkillsForm from '@/components/resume/forms/SkillsForm';
 import ResumePreview from '@/components/resume/ResumePreview';
 import ResumeSidebar from '@/components/resume/ResumeSidebar';
 import AppLayout from '@/layouts/AppLayout';
+import PremiumBanner from '@/layouts/PremiumBanner';
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -39,25 +40,33 @@ const ResumeBuilder = () => {
       }
     }
   return (
-    <>
-      <BuilderTopbar/>
-    <div className='flex h-[calc(87vh-120px)] bg-gray-100 dark:bg-black'>
-      {/* Sidebar */}
-      <div className="w-64 border-r bg-white dark-bg-gray-900">
-        <ResumeSidebar/>
-      </div>
+   <div className="h-screen overflow-hidden bg-gray-100 dark:bg-black">
 
-      {/* Dynamic Form */}
-      <div className='flex-1 overflow-y-auto p-6'>
-        {renderSection()}
-      </div>
+  {/* <PremiumBanner /> */}
 
-      {/* Live Preview */}
-      <div className="w-[50%] border-1 bg-gray-50 dark:bg-gray-950 overflow-y-auto p-6">
-        <ResumePreview/>
-      </div>
+  <BuilderTopbar />
+
+  {/* MAIN CONTENT */}
+  <div className="flex h-[calc(100vh-120px)]">
+
+    {/* SIDEBAR */}
+    <div className="w-64 overflow-y-auto border-r bg-white">
+      <ResumeSidebar />
     </div>
-    </>
+
+    {/* FORM PANEL */}
+    <div className="flex-1 overflow-y-auto p-6">
+      {renderSection()}
+    </div>
+
+    {/* PREVIEW PANEL */}
+    <div className="w-[50%] overflow-y-auto bg-gray-300 p-6">
+      <ResumePreview />
+    </div>
+
+  </div>
+
+</div>
   )
 }
 

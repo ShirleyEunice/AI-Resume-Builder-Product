@@ -53,10 +53,25 @@ const resumeSlice = createSlice({
     updateResume: (state, action)=>{
       const {section, data}= action.payload;
       state.currentResume[section] = data;
+    },
+
+    //update Experience
+    updateExperience: (state, action)=>{
+      state.currentResume.experience = action.payload;
+    },
+
+    //update education
+    updateEducation: (state, action)=>{
+      state.currentResume.education = action.payload;
+    },
+
+    //update project
+    updateProjects: (state, action)=>{
+      state.currentResume.projects = action.payload;
     }
   }
 })
 
-export const {setActiveSection, updateResume} = resumeSlice.actions;
+export const {setActiveSection, updateExperience, updateResume, updateEducation, updateProjects} = resumeSlice.actions;
 
   export default resumeSlice.reducer;

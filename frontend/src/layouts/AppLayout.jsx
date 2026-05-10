@@ -4,25 +4,30 @@ import React from 'react'
 import PremiumBanner from './PremiumBanner'
 import { Outlet } from 'react-router-dom'
 
-const AppLayout = ({children}) => {
+const AppLayout = () => {
   return (
-    <>
-    <PremiumBanner/>
-    {/* Header */}
-    <Header/>
-    <div className='h-[93vh] flex bg-gray-100 dark:bg-black'>
-        {/* Main Sidebar */}
-        <Sidebar/>
+    <div className="h-screen overflow-hidden bg-gray-100 dark:bg-black">
+
+      {/* Premium Banner */}
+      <PremiumBanner />
+
+      {/* Header */}
+      <Header />
+
+      {/* MAIN APP */}
+      <div className="flex h-[calc(100vh-104px)]">
+
+        {/* Sidebar */}
+        <Sidebar />
 
         {/* Main Content */}
-        <div className='flex-1 flex flex-col'>
-            {/* Page Content */}
-            <main>
-                <Outlet/>
-            </main>
-        </div>
+        <main className="flex-1 overflow-hidden">
+          <Outlet />
+        </main>
+
+      </div>
+
     </div>
-    </>
   )
 }
 

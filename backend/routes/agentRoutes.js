@@ -10,6 +10,8 @@ import User from '../models/User.js';
 import Chat from '../models/Chat.js';
 import { runInterviewAgent } from '../services/agents/interviewAgent.js';
 import { rateLimiter } from '../middlewares/rateLimiter.js';
+import { generateSummary } from '../services/agents/summaryGenerator.js';
+import { enhanceBullet } from '../services/agents/bulletEnhancer.js';
 
 
 const router = express.Router();
@@ -81,6 +83,32 @@ router.get("/chats", mockAuth, async(req, res)=>{
     try {
         const chats = (await Chat.find({ userId: req.user._id }).sort({ createdAt: -1 }));
         res.json(chats);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
+router.post('/generate-summary', mockAuth, checkCredits(3), async(req, res)=>{
+    try {
+        const {role, skills, experienceLevel} = req.body;
+        const summary = await generateSummary(role, skills, experienceLevel);
+        //deduct credits
+        req.user.credits -=3;
+        await req.user.save();
+        res.json({summary});
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: error.message });
+    }
+})
+
+router.post('/enhance-bullet', mockAuth, checkCredits(2), async (req, res)=>{
+    try {
+        const {bullet, role} = req.body;
+        const enhanced = await enhanceBullet(bullet, role);
+        req.user.credits -=2;
+        await req.user.save();
+        res.json({enhancedBullet: enhanced});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

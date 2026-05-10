@@ -6,33 +6,35 @@ const initialState = {
   currentResume: {
     title: "Untitled Resume",
 
-  personalInfo:{
-    fullName:"",
-    email:"",
-    headLine:"",
-    phone:"",
-    location:"",
-    linkedin:"",
-    github:"",
-    portfolio:"",
-    summary:""
-  },
+    personalInfo: {
+      fullName: "",
+      email: "",
+      headLine: "",
+      phone: "",
+      location: "",
+      linkedin: "",
+      github: "",
+      portfolio: "",
+      summary: "",
+      // AI helper fields
+      yearsOfExperience: "",
+    },
 
-  experience: [],
-  education: [],
-  projects: [],
+    experience: [],
+    education: [],
+    projects: [],
 
-  skills:{
-    technical:[],
-    soft:[],
-    tools:[],
-  },
-  certifications:[],
-  achievements:[],
-  languages:[],
+    skills: {
+      technical: [],
+      soft: [],
+      tools: [],
+    },
+    certifications: [],
+    achievements: [],
+    languages: [],
 
-  template: "modern",
-  atsScore: 0,
+    template: "modern",
+    atsScore: 0,
   },
 
   activeSection: "personalInfo",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
-import { createResume } from '../features/resumeSlice';
+import { createResume } from '../redux/slices/resumeSlice';
 import { fetchATSScore } from '../features/atsSlice';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

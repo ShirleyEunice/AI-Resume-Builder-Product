@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import API from "../api/axios";
 
 export const fetchATSScore = createAsyncThunk(
     "agent/fetchATSScore",

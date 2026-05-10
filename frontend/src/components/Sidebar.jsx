@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
-    <div className="w-64 bg-white dark:bg-gray-800 p-5 shadow">
+    <div className="w-64 bg-white dark:bg-gray-800 p-5 shadow border-r border-t ">
       <h1 className="text-xl font-bold mb-6">AI Resume</h1>
 
       <nav className="space-y-3">

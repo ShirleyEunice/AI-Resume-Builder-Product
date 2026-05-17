@@ -5,17 +5,25 @@ const client = new OpenAI({
 })
 
 export const generateSummary = async (role, Skills, experienceLevel)=>{
-    const prompt = `Write a professional ATS-friendly resume summary
-    Role: ${role}
-    Skills: ${Skills}
-    Experience Level: ${experienceLevel}
-    
-    Rules:
-    - concise
-    - professional
-    - impatctful
-    - ATS Optimized
-    - 3-5 lines`;
+    const prompt = `
+Rewrite this resume experience bullet professionally.
+
+Role: ${role}
+
+Original Bullet:
+${bullet}
+
+Instructions:
+- Rewrite naturally and professionally
+- Keep it concise and ATS-friendly
+- Use strong action verbs
+- Improve clarity and readability
+- DO NOT invent fake metrics, percentages, or placeholders like X%
+- ONLY include measurable impact if explicitly mentioned
+- Do NOT exaggerate achievements
+- Return plain text only
+- Do NOT include bullet symbols
+`;
 
     const response = await client.chat.completions.create({
         model: "gpt-4o-mini",

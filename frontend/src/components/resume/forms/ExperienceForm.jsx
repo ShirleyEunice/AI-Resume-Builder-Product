@@ -2,17 +2,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateExperience } from "@/redux/slices/resumeSlice";
 
 import { Plus, Trash2 } from "lucide-react";
+import { useState } from "react";
+import API from "@/api/axios";
 
 const ExperienceForm = () => {
+
   const dispatch = useDispatch();
+
+  const [enhancingIndex, setEnhancingIndex] =
+    useState(null);
 
   const experiences =
     useSelector(
-      (state) => state.resume.currentResume.experience
+      (state) =>
+        state.resume.currentResume.experience
     ) || [];
 
   // ADD EXPERIENCE
   const addExperience = () => {
+
     dispatch(
       updateExperience([
         ...experiences,
@@ -30,63 +38,110 @@ const ExperienceForm = () => {
 
   // REMOVE EXPERIENCE
   const removeExperience = (index) => {
-    const updated = experiences.filter(
-      (_, i) => i !== index
-    );
+
+    const updated =
+      experiences.filter((_, i) => i !== index);
 
     dispatch(updateExperience(updated));
   };
 
   // UPDATE FIELD
   const handleChange = (
-  index,
-  field,
-  value
-) => {
-  const updated = JSON.parse(
-    JSON.stringify(experiences)
-  );
+    index,
+    field,
+    value
+  ) => {
 
-  updated[index][field] = value;
+    const updated =
+      JSON.parse(JSON.stringify(experiences));
 
-  dispatch(updateExperience(updated));
-};
+    updated[index][field] = value;
+
+    dispatch(updateExperience(updated));
+  };
 
   // UPDATE BULLET
   const handleBulletChange = (
-  expIndex,
-  bulletIndex,
-  value
-) => {
-  const updated = JSON.parse(
-    JSON.stringify(experiences)
-  );
+    expIndex,
+    bulletIndex,
+    value
+  ) => {
 
-  updated[expIndex].description[
-    bulletIndex
-  ] = value;
+    const updated =
+      JSON.parse(JSON.stringify(experiences));
 
-  dispatch(updateExperience(updated));
-};
+    updated[expIndex]
+      .description[bulletIndex] = value;
+
+    dispatch(updateExperience(updated));
+  };
 
   // ADD BULLET
   const addBullet = (index) => {
-  const updated = JSON.parse(
-    JSON.stringify(experiences)
-  );
 
-  updated[index].description.push("");
+    const updated =
+      JSON.parse(JSON.stringify(experiences));
 
-  dispatch(updateExperience(updated));
-};
+    updated[index].description.push("");
+
+    dispatch(updateExperience(updated));
+  };
+
+  // AI ENHANCE
+  const enhanceWithAI = async (
+    expIndex,
+    bulletIndex,
+    bullet
+  ) => {
+
+    try {
+
+      setEnhancingIndex(
+        `${expIndex}-${bulletIndex}`
+      );
+
+      const res = await API.post(
+        "/agent/enhance-bullet",
+        {
+          bullet,
+
+          role:
+            experiences[expIndex].role,
+        }
+      );
+
+      const updated = JSON.parse(JSON.stringify(experiences));
+
+      const cleanedBullet =
+  res.data.enhancedBullet
+    .replace(/^[-•*]\s*/, "")
+    .trim();
+
+updated[expIndex]
+  .description[bulletIndex] =
+    cleanedBullet;
+
+      dispatch(updateExperience(updated));
+
+    } catch (err) {
+
+      console.error(err);
+
+    } finally {
+
+      setEnhancingIndex(null);
+    }
+  };
 
   return (
+
     <div className="space-y-6">
 
-      {/* TOP HEADER */}
+      {/* HEADER */}
       <div className="flex items-center justify-between">
 
         <div>
+
           <h1 className="text-3xl font-bold">
             Experience
           </h1>
@@ -94,6 +149,7 @@ const ExperienceForm = () => {
           <p className="text-gray-500 mt-1">
             Add your professional experience
           </p>
+
         </div>
 
         <button
@@ -104,27 +160,28 @@ const ExperienceForm = () => {
             px-4 py-2 rounded-xl
           "
         >
+
           <Plus size={18} />
           Add Experience
+
         </button>
 
       </div>
 
       {/* EXPERIENCE LIST */}
       {experiences.map((exp, index) => (
+
         <div
           key={index}
           className="
             bg-white dark:bg-gray-900
-            border
-            rounded-2xl
-            p-6
-            shadow-sm
+            border rounded-2xl
+            p-6 shadow-sm
             space-y-5
           "
         >
 
-          {/* CARD TOP */}
+          {/* TOP */}
           <div className="flex justify-between items-center">
 
             <div>
@@ -149,7 +206,9 @@ const ExperienceForm = () => {
                 p-2 rounded-lg
               "
             >
+
               <Trash2 size={18} />
+
             </button>
 
           </div>
@@ -157,53 +216,37 @@ const ExperienceForm = () => {
           {/* ROLE + COMPANY */}
           <div className="grid md:grid-cols-2 gap-4">
 
-            <div>
+            <input
+              placeholder="Frontend Developer"
+              value={exp.role}
+              onChange={(e) =>
+                handleChange(
+                  index,
+                  "role",
+                  e.target.value
+                )
+              }
+              className="
+                w-full border
+                p-3 rounded-xl
+              "
+            />
 
-              <label className="text-sm font-medium">
-                Role
-              </label>
-
-              <input
-                placeholder="Frontend Developer"
-                value={exp.role}
-                onChange={(e) =>
-                  handleChange(
-                    index,
-                    "role",
-                    e.target.value
-                  )
-                }
-                className="
-                  w-full border
-                  p-3 rounded-xl mt-1
-                "
-              />
-
-            </div>
-
-            <div>
-
-              <label className="text-sm font-medium">
-                Company
-              </label>
-
-              <input
-                placeholder="Google"
-                value={exp.company}
-                onChange={(e) =>
-                  handleChange(
-                    index,
-                    "company",
-                    e.target.value
-                  )
-                }
-                className="
-                  w-full border
-                  p-3 rounded-xl mt-1
-                "
-              />
-
-            </div>
+            <input
+              placeholder="Google"
+              value={exp.company}
+              onChange={(e) =>
+                handleChange(
+                  index,
+                  "company",
+                  e.target.value
+                )
+              }
+              className="
+                w-full border
+                p-3 rounded-xl
+              "
+            />
 
           </div>
 
@@ -226,29 +269,29 @@ const ExperienceForm = () => {
               "
             />
 
-            {
-              !exp.current && (
-                <input
-                  placeholder="End Date"
-                  value={exp.endDate}
-                  onChange={(e) =>
-                    handleChange(
-                      index,
-                      "endDate",
-                      e.target.value
-                    )
-                  }
-                  className="
-                    border
-                    p-3 rounded-xl
-                  "
-                />
-              )
-            }
+            {!exp.current && (
+
+              <input
+                placeholder="End Date"
+                value={exp.endDate}
+                onChange={(e) =>
+                  handleChange(
+                    index,
+                    "endDate",
+                    e.target.value
+                  )
+                }
+                className="
+                  border
+                  p-3 rounded-xl
+                "
+              />
+
+            )}
 
           </div>
 
-          {/* CURRENT JOB */}
+          {/* CURRENT */}
           <div className="flex items-center gap-3">
 
             <input
@@ -269,18 +312,22 @@ const ExperienceForm = () => {
 
           </div>
 
-          {/* BULLETS */}
-          <div className="space-y-3">
+          {/* RESPONSIBILITIES */}
+          <div className="space-y-4">
 
             <h3 className="font-medium">
               Responsibilities
             </h3>
 
-            {
-              exp.description.map(
-                (bullet, bulletIndex) => (
+            {exp.description.map(
+              (bullet, bulletIndex) => (
+
+                <div
+                  key={bulletIndex}
+                  className="space-y-2"
+                >
+
                   <textarea
-                    key={bulletIndex}
                     value={bullet}
                     onChange={(e) =>
                       handleBulletChange(
@@ -298,9 +345,48 @@ Built responsive dashboards improving performance by 30%
                       h-24 resize-none
                     "
                   />
-                )
+
+                  <div className="flex justify-end">
+
+                    <button
+                      onClick={() =>
+                        enhanceWithAI(
+                          index,
+                          bulletIndex,
+                          bullet
+                        )
+                      }
+
+                      disabled={
+                        enhancingIndex ===
+                        `${index}-${bulletIndex}`
+                      }
+
+                      className="
+                        text-sm
+                        text-violet-600
+                        font-medium
+                        hover:underline
+                      "
+                    >
+
+                      {
+                        enhancingIndex ===
+                        `${index}-${bulletIndex}`
+
+                          ? "Enhancing..."
+
+                          : "✨ Enhance with AI"
+                      }
+
+                    </button>
+
+                  </div>
+
+                </div>
+
               )
-            }
+            )}
 
             {/* ADD BULLET */}
             <button
@@ -309,28 +395,19 @@ Built responsive dashboards improving performance by 30%
               }
               className="
                 text-blue-600
-                text-sm font-medium
-              "
-            >
-              + Add Bullet Point
-            </button>
-
-            {/* AI BUTTON */}
-            <button
-              className="
                 text-sm
-                text-violet-600
                 font-medium
-                hover:underline
-                block
               "
             >
-              ✨ Enhance with AI
+
+              + Add Responsibility
+
             </button>
 
           </div>
 
         </div>
+
       ))}
 
     </div>

@@ -4,7 +4,7 @@ import Register from "./pages/auth/Register";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./routes/AdminRoute";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/dashboard/Dashboard";
 import ResumeAnalyzer from "./pages/ResumeAnalyzer";
 import JdMatcher from "./pages/jdMatcher";
 import CoverLetter from "./pages/CoverLetter";

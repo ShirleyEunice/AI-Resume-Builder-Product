@@ -9,20 +9,24 @@ export const enhanceBullet = async (
   role
 ) => {
 
-  const prompt = `
-Rewrite this resume bullet professionally.
+   const prompt = `
+Rewrite this resume experience bullet professionally.
 
-Role: ${role || "Software Engineer"}
+Role: ${role}
 
-Bullet:
-${bullet || ""}
+Original Bullet:
+${bullet}
 
-Rules:
-- ATS optimized
-- measurable impact if possible
-- concise
-- professional tone
-- action-oriented
+Instructions:
+- Rewrite naturally and professionally
+- Keep it concise and ATS-friendly
+- Use strong action verbs
+- Improve clarity and readability
+- DO NOT invent fake metrics, percentages, or placeholders like X%
+- ONLY include measurable impact if explicitly mentioned
+- Do NOT exaggerate achievements
+- Return plain text only
+- Do NOT include bullet symbols
 `;
 
   const response =

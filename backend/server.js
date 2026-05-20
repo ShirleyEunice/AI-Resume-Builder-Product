@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from "./utils/db.js";
+import authRoutes from "./routes/authRoutes.js";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import atsRoutes from "./routes/atsRoutes.js";
 import agentRoutes from "./routes/agentRoutes.js";
@@ -21,6 +22,7 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
+app.use("/api/auth", authRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use("/api/ats", atsRoutes);
 app.use("/api/agent", agentRoutes);

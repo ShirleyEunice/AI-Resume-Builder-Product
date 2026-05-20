@@ -1,7 +1,7 @@
-import { Download, LayoutTemplate, Save } from 'lucide-react'
-import React from 'react'
+import { Download, LayoutTemplate, Save } from "lucide-react";
+import React from "react";
 
-const BuilderTopbar = () => {
+const BuilderTopbar = ({analyzeATSScore, analyzing, atsData}) => {
   return (
     <div className="sticky border-t bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b px-6 py-3 flex items-center justify-between">
       {/* Left */}
@@ -13,9 +13,33 @@ const BuilderTopbar = () => {
       {/* Right */}
       <div className="flex items-center gap-4">
         {/* ATS Score */}
-        <div className="px-4 py-2 rounded-xl bg-green-100 text-green-700 font-semibold">
-          ATS Score: 82%
+        <div
+          className="
+    px-4 py-2
+    rounded-xl
+    bg-green-100
+    text-green-700
+    font-semibold
+  "
+        >
+          ATS Score: {atsData?.score || 0}%
         </div>
+
+        <button
+          onClick={analyzeATSScore}
+          disabled={analyzing}
+          className="
+    flex items-center gap-2
+    px-4 py-2
+    rounded-xl
+    bg-violet-600
+    text-white
+    hover:bg-violet-700
+    transition
+  "
+        >
+          {analyzing ? "Analyzing..." : "Analyze ATS"}
+        </button>
 
         {/* Template */}
         <button className="flex items-center gap-2 px-4 py-2 rounded-xl border hover:bg-gray-100 dark:hover:bg-gray-800">
@@ -52,6 +76,6 @@ const BuilderTopbar = () => {
       </div>
     </div>
   );
-}
+};
 
-export default BuilderTopbar
+export default BuilderTopbar;

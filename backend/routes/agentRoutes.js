@@ -115,7 +115,9 @@ router.post('/ats-score', mockAuth, checkCredits(5), async(req, res)=>{
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).message({error: error.message});
+        res.status(500).json({
+  error: error.message,
+});
     }
 })
 export default router;

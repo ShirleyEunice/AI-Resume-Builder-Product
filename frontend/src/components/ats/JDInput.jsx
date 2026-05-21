@@ -1,9 +1,13 @@
+import { setJDtext } from "@/redux/slices/atsSlice";
 import { div } from "framer-motion/client";
 import { FileText, Link2 } from "lucide-react";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const JDInput = () => {
   const [activeTab, setActiveTab] = useState("paste");
+  const {jdText} = useSelector((state)=> state.ats);
+  const dispatch = useDispatch();
   return (
     <div className="bg-white rounded-3xl p-6 border shadow-sm h-full">
       <h2 className="text-xl font-bold">Job Description</h2>
@@ -55,10 +59,14 @@ const JDInput = () => {
           activeTab === "paste" ? (
             <textarea
             placeholder="Paste complete job description here..."
+            value={jdText}
+            onChange={(e)=> dispatch(setJDtext(e.target.value))}
             className="w-full h-[260px] border rounded-2xl p-4 outline-none resize-none focus:ring-2 focus:ring-violet-500"/> 
           ) : (
             <div>
               <input type="text"
+              value={jdText}
+              onChange={(e)=> dispatch(setJDtext(e.target.value))}
               placeholder="https://company.com/careers/job-posting"
               className="w-full border rounded-2xl p-4 outline-none focus:ring-2 focus:ring-violet-500" />
 

@@ -1,23 +1,34 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
-export const fetchATSScore = createAsyncThunk(
-    "agent/fetchATSScore",
-    async (resume)=>{
-        const res = await API.post("/ats", resume);
-        return res.data.score;
-    }
-);
+const initialState = {
+    resumeFile: null,
+    jdText: "",
+    loading: false,
+    result: null,
+    error: null
+}
 
-const agentSlice = createSlice({
-    name: "agent",
-    initialState:{
-        atsScore:0,
-    },
-    extraReducers: (builder)=>{
-        builder.addCase(fetchATSScore.fulfilled, (state, action)=>{
-            state.atsScore = action.payload;
-        })
+const atsSlice = createSlice({
+    name: "ats",
+    initialState,
+    reducers: {
+        setResumeFile:(state, action)=>{
+            state.resumeFile = action.payload;
+        },
+        setJDtext:(state, action)=>{
+            state.jdText = action.payload;
+        },
+        setATSLoading:(state, action)=>{
+            state.loading = action.payload;
+        },
+        setATSResult:(state, action)=>{
+            state.result = action.payload;
+        },
+        setATSError:(state, action)=>{
+            state.error = action.payload;
+        }
     }
 })
 
-export default agentSlice.reducer;
+export const {setResumeFile, setJDtext, setATSLoading, setATSResult, setATSError} = atsSlice.actions;
+export default atsSlice.reducer;

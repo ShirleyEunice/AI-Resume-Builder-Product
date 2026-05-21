@@ -13,6 +13,8 @@ import Upgrade from "./Upgrade";
 import Success from "./pages/Success";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import ATSAnalyzer from "./pages/ats/ATSAnalyzer";
+import ATSLoading from "./pages/ats/ATSLoading";
+import ATSResults from "./pages/ats/ATSResults";
 
 function App() {
 
@@ -39,18 +41,10 @@ function App() {
         <Route
           element={
             <ProtectedRoute>
-              <ATSAnalyzer />
+              <Dashboard />
             </ProtectedRoute>
           }
         >
-        <Route
-        path="/ats-analyzer"
-          element={
-            <ProtectedRoute>
-              <ATSAnalyzer />
-            </ProtectedRoute>
-          }
-        ></Route>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/ai-tools" element={<ResumeAnalyzer />} />
           <Route path="/jd-matcher" element={<JdMatcher />} />
@@ -65,6 +59,20 @@ function App() {
           />
         </Route>
 
+<Route
+  path="/ats"
+  element={<ATSAnalyzer />}
+/>
+
+<Route
+  path="/ats/loading"
+  element={<ATSLoading />}
+/>
+
+<Route
+  path="/ats/results"
+  element={<ATSResults />}
+/>
       </Routes>
     </BrowserRouter>
   );

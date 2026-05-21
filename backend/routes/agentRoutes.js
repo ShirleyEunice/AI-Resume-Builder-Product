@@ -11,7 +11,7 @@ import { runInterviewAgent } from '../services/agents/interviewAgent.js';
 import { rateLimiter } from '../middlewares/rateLimiter.js';
 import { generateSummary } from '../services/agents/summaryGenerator.js';
 import { enhanceBullet } from '../services/agents/bulletEnhancer.js';
-import {atsScore} from '../services/agents/atsAnalyzer.js';
+import { analyzeATSController } from '../controllers/atsController.js';
 
 
 const router = express.Router();
@@ -101,23 +101,6 @@ router.post('/enhance-bullet', mockAuth, checkCredits(2), async (req, res)=>{
         res.json({enhancedBullet: enhanced});
     } catch (error) {
         res.status(500).json({ error: error.message });
-    }
-})
-
-router.post('/ats-score', mockAuth, checkCredits(5), async(req, res)=>{
-    try {
-        const {resumeData, jdText} = req.body;
-
-        const result = await atsScore(resumeData, jdText);
-
-        req.user.credits -=5;
-        await req.user.save();
-        res.json(result);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-  error: error.message,
-});
     }
 })
 export default router;

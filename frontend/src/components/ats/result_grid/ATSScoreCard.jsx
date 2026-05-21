@@ -1,8 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 const ATSScoreCard = () => {
-
-  const score = 82;
+  const {result} = useSelector((state)=> state.ats);
+  const score = result?.score || 0;
 
   return (
 

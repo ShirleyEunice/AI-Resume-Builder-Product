@@ -1,22 +1,22 @@
 import React from "react";
 
 import {
-  Lightbulb,
+  CheckCircle2,
 } from "lucide-react";
 
 import {
   useSelector,
 } from "react-redux";
 
-const ImprovementSuggestions = () => {
+const StrengthsCard = () => {
 
   const { result } =
     useSelector(
       (state) => state.ats
     );
 
-  const suggestions =
-    result?.suggestions || [];
+  const strengths =
+    result?.strengths || [];
 
   return (
 
@@ -31,8 +31,8 @@ const ImprovementSuggestions = () => {
       {/* HEADER */}
       <div className="
         bg-gradient-to-r
-        from-amber-500
-        to-orange-500
+        from-green-500
+        to-emerald-500
         p-5
         text-white
       ">
@@ -44,8 +44,8 @@ const ImprovementSuggestions = () => {
         ">
 
           <div className="
-            w-11
-            h-11
+            w-12
+            h-12
             rounded-2xl
             bg-white/20
             flex
@@ -53,12 +53,7 @@ const ImprovementSuggestions = () => {
             justify-center
           ">
 
-            <Lightbulb
-              className="
-                w-5
-                h-5
-              "
-            />
+            <CheckCircle2 />
 
           </div>
 
@@ -68,15 +63,15 @@ const ImprovementSuggestions = () => {
               text-2xl
               font-bold
             ">
-              AI Suggestions
+              Resume Strengths
             </h2>
 
             <p className="
-              text-orange-100
+              text-green-100
               text-sm
               mt-1
             ">
-              Actionable resume improvements
+              Strong matching areas identified by AI
             </p>
 
           </div>
@@ -87,13 +82,13 @@ const ImprovementSuggestions = () => {
 
       {/* CONTENT */}
       <div className="
-        p-5
-        space-y-3
+        p-6
+        space-y-4
       ">
 
         {
-          suggestions.length > 0
-          ? suggestions.map(
+          strengths.length > 0
+          ? strengths.map(
             (item, i) => (
 
             <div
@@ -101,44 +96,50 @@ const ImprovementSuggestions = () => {
 
               className="
                 flex
-                items-start
-                gap-3
-                bg-orange-50
+                gap-4
+                bg-green-50
                 border
-                border-orange-100
+                border-green-100
                 rounded-2xl
-                px-4
-                py-3
+                p-4
               "
             >
 
-              {/* DOT */}
+              {/* ICON */}
               <div className="
-                mt-2
-                w-2
-                h-2
-                rounded-full
-                bg-orange-500
-                shrink-0
-              " />
+                mt-1
+              ">
+
+                <CheckCircle2
+                  className="
+                    w-5
+                    h-5
+                    text-green-600
+                  "
+                />
+
+              </div>
 
               {/* TEXT */}
-              <p className="
-                text-sm
-                text-orange-900
-                leading-relaxed
-              ">
-                {item}
-              </p>
+              <div>
+
+                <p className="
+                  text-sm
+                  text-green-800
+                  leading-relaxed
+                ">
+                  {item}
+                </p>
+
+              </div>
 
             </div>
           ))
           : (
-
             <p className="
               text-gray-500
             ">
-              AI suggestions will appear here.
+              AI strengths will appear here.
             </p>
           )
         }
@@ -149,4 +150,4 @@ const ImprovementSuggestions = () => {
   );
 };
 
-export default ImprovementSuggestions;
+export default StrengthsCard;

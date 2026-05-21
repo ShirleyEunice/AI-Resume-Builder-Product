@@ -1,14 +1,9 @@
 import React from "react";
-
-const skills = [
-  "Docker",
-  "Kubernetes",
-  "Redis",
-  "CI/CD",
-  "AWS",
-];
+import { useSelector } from "react-redux";
 
 const MissingSkills = () => {
+  const {result} = useSelector((state)=> state.ats);
+  const skills = result?.missingSkills || [];
 
   return (
 

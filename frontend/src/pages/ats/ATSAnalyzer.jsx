@@ -1,12 +1,12 @@
-import AnalyzeButton from '@/components/ats/AnalyzeButton'
-import ATSHero from '@/components/ats/ATSHero'
-import ImproveResumeCTA from '@/components/ats/ImproveResumeCTA'
-import JDInput from '@/components/ats/JDInput'
-import ATSScoreCard from '@/components/ats/result_grid/ATSScoreCard'
-import ImprovementSuggestions from '@/components/ats/result_grid/ImprovementSuggestions'
-import MissingSkills from '@/components/ats/result_grid/MissingSkills'
-import ResumeUploader from '@/components/ats/ResumeUploader'
-import React from 'react'
+import AnalyzeButton from "@/components/ats/AnalyzeButton";
+import ATSHero from "@/components/ats/ATSHero";
+import ImproveResumeCTA from "@/components/ats/ImproveResumeCTA";
+import JDInput from "@/components/ats/JDInput";
+import ATSScoreCard from "@/components/ats/result_grid/ATSScoreCard";
+import ImprovementSuggestions from "@/components/ats/result_grid/ImprovementSuggestions";
+import MissingSkills from "@/components/ats/result_grid/MissingSkills";
+import ResumeUploader from "@/components/ats/ResumeUploader";
+import React from "react";
 
 const ATSAnalyzer = () => {
   return (
@@ -38,34 +38,20 @@ const ATSAnalyzer = () => {
           <JDInput />
         </div>
 
-        <div className="
+        <div
+          className="
   sticky
   top-4
   z-20
   flex
   justify-center
-">
-  <AnalyzeButton />
-</div>
-
-        <div
-          className="
-      grid
-      xl:grid-cols-3
-      gap-5
-    "
+"
         >
-          <ATSScoreCard />
-
-          <MissingSkills />
-
-          <ImprovementSuggestions />
+          <AnalyzeButton />
         </div>
-
-        <ImproveResumeCTA />
       </div>
     </div>
   );
-}
+};
 
-export default ATSAnalyzer
+export default ATSAnalyzer;

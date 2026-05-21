@@ -1,0 +1,76 @@
+import React from "react";
+
+const skills = [
+  "Docker",
+  "Kubernetes",
+  "Redis",
+  "CI/CD",
+  "AWS",
+];
+
+const MissingSkills = () => {
+
+  return (
+
+    <div className="
+      bg-white
+      rounded-3xl
+      p-6
+      border
+      shadow-sm
+    ">
+
+      <h2 className="
+        text-xl
+        font-bold
+      ">
+        Missing Skills
+      </h2>
+
+      <p className="
+        text-sm
+        text-gray-500
+        mt-1
+      ">
+        Skills missing from your resume
+      </p>
+
+      <div className="
+        flex
+        flex-wrap
+        gap-3
+        mt-6
+      ">
+
+        {
+          skills.map((skill, i) => (
+
+            <div
+              key={i}
+
+              className="
+                bg-red-50
+                text-red-600
+                border
+                border-red-100
+                px-4
+                py-2
+                rounded-full
+                text-sm
+                font-medium
+              "
+            >
+
+              {skill}
+
+            </div>
+          ))
+        }
+
+      </div>
+
+    </div>
+  );
+};
+
+export default MissingSkills;

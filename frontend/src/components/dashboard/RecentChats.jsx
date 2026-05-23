@@ -141,7 +141,7 @@ const RecentChats = () => {
                       w-12
                       h-12
                       rounded-xl
-                      bg-violet-100
+                      bg-brand-primary/20
                       flex
                       items-center
                       justify-center
@@ -150,7 +150,7 @@ const RecentChats = () => {
 
                       <MessageSquare
                         className="
-                          text-violet-600
+                          text-brand-primary
                         "
                       />
 
@@ -193,7 +193,7 @@ const RecentChats = () => {
                       w-5
                       h-5
                       text-gray-400
-                      group-hover:text-violet-600
+                      group-hover:text-brand-primary
                       transition
                     "
                   />
@@ -223,9 +223,9 @@ const RecentChats = () => {
           py-3
           text-xs
           font-medium
-          text-gray-600
+          text-gray-300
           hover:border-violet-400
-          hover:text-violet-600
+          hover:text-brand-primary
           transition
         "
       >

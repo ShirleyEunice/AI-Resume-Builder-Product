@@ -98,7 +98,7 @@ const Header = () => {
             flex
             items-center
             justify-center
-            hover:bg-gray-100
+            hover:bg-white/10
             transition
           "
         >
@@ -161,6 +161,7 @@ const Header = () => {
               outline-none
               text-sm
               w-full
+              focus:ring-brand-primary
             "
           />
 
@@ -171,7 +172,7 @@ const Header = () => {
           px-4
           py-2
           rounded-2xl
-          bg-violet-50
+          bg-brand-accent/10
           border
           border-violet-100
           flex
@@ -182,13 +183,13 @@ const Header = () => {
           <Crown className="
             w-4
             h-4
-            text-violet-600
+            text-brand-accent
           " />
 
           <span className="
             text-sm
             font-semibold
-            text-brand-primary
+            text-brand-accent
           ">
 
             {
@@ -210,14 +211,14 @@ const Header = () => {
           flex
           items-center
           justify-center
-          hover:bg-gray-100
+          hover:bg-white/10
           transition
         ">
 
           <Bell className="
             w-5
             h-5
-            text-gray-600
+            text-gray-300
           " />
 
         </button>

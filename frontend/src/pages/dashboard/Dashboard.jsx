@@ -16,7 +16,7 @@ const Dashboard = () => {
       min-h-screen
       bg-gray-100
       p-5
-      space-y-5
+      space-y-4
     ">
 
       {/* HERO */}

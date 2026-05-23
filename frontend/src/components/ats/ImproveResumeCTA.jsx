@@ -18,8 +18,9 @@ const ImproveResumeCTA = () => {
 
     <div className="
       bg-gradient-to-r
-      from-violet-500
-      to-fuchsia-500
+      from-brand-dark
+via-slate-800
+to-brand-primary
       rounded-2xl
       px-6
       py-4
@@ -28,7 +29,9 @@ const ImproveResumeCTA = () => {
       items-center
       justify-between
       gap-4
-      shadow-sm
+      relative
+overflow-hidden
+shadow-[0_10px_40px_rgba(20,184,166,0.15)]
     ">
 
       {/* LEFT */}
@@ -71,7 +74,7 @@ const ImproveResumeCTA = () => {
 
           <p className="
             text-xs
-            text-violet-100
+            text-teal-100
             mt-1
           ">
             Apply ATS suggestions instantly

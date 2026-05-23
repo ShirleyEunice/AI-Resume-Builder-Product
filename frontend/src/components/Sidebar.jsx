@@ -12,6 +12,7 @@ export default function Sidebar() {
 
   const handleLogout = ()=>{
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
     dispatch(logout());
     navigate("/");
   }
@@ -24,7 +25,7 @@ export default function Sidebar() {
     : "w-56"
   }
 
-  bg-white
+  bg-brand-dark
   border-r
   flex
   flex-col
@@ -70,8 +71,8 @@ export default function Sidebar() {
 
     ${
       isActive
-      ? "bg-violet-100 text-brand-primary"
-      : "text-gray-600 hover:bg-gray-100"
+      ? "bg-brand-primary/20 text-brand-primary"
+      : "text-gray-300 hover:bg-white/10"
     }
     `
   }

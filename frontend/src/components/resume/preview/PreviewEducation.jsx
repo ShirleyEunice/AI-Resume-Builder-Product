@@ -33,7 +33,7 @@ const PreviewEducation = ({ education }) => {
 
           </div>
 
-          <p className="text-gray-600 mt-1">
+          <p className="text-gray-300 mt-1">
             {edu.field}
           </p>
 

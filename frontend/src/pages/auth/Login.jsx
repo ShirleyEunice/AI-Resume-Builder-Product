@@ -110,7 +110,7 @@ const Login = () => {
 
         <p className="text-xs text-center text-gray-500">
           Don't have an account?
-          <Link to="/register" className="text-violet-600 ml-1 font-medium">
+          <Link to="/register" className="text-brand-primary ml-1 font-medium">
             Register
           </Link>
         </p>

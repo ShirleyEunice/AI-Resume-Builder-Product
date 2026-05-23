@@ -41,7 +41,7 @@ const AnalyzeButton = () => {
       onClick={handleAnalyze}
       className="
         bg-brand-primary
-        hover:bg-violet-700
+        hover:bg-teal-700
         text-white
         px-8
         py-4

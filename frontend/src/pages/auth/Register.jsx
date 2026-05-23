@@ -94,7 +94,7 @@ const Register = () => {
         </form>
 
         <p className='text-xs text-center text-gray-500'>Already have an account?
-        <Link to="/login" className='text-violet-600 ml-1 font-medium'>Login</Link>
+        <Link to="/login" className='text-brand-primary ml-1 font-medium'>Login</Link>
         </p>
       </div>
     </AuthLayout>

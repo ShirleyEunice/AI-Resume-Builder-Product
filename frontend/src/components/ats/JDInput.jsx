@@ -34,7 +34,7 @@ const JDInput = () => {
             ${
               activeTab === "paste"
                 ? "bg-brand-primary text-white"
-                : "bg-gray-100 text-gray-600"
+                : "bg-gray-100 text-gray-300"
             }
           `}
         >
@@ -46,7 +46,7 @@ const JDInput = () => {
         <button
         onClick={()=> setActiveTab("url")}
         className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition ${activeTab === "url" 
-          ? "bg-brand-primary text-white" : "bg-gray-100 text-gray-600"
+          ? "bg-brand-primary text-white" : "bg-gray-100 text-gray-300"
         }`}>
           <Link2 className="w-4 h-4"/>
           Job URL

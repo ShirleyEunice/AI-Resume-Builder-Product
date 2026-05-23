@@ -5,6 +5,7 @@ import { rateLimiter } from "../middlewares/rateLimiter.js";
 import { checkCredits } from "../middlewares/creditCheck.js";
 import { analyzeATSController } from "../controllers/atsController.js";
 import multer from "multer";
+import { protect } from "../middlewares/authMiddleware.js";
 
 const upload = multer(); // for parsing multipart/form-data, which is used for file uploads
 
@@ -15,6 +16,6 @@ router.post("/", (req, res)=>{
     res.json({score});
 })
 
-router.post('/analyze-ats', mockAuth, rateLimiter, checkCredits(5), upload.single('file'), analyzeATSController);
+router.post('/analyze-ats', protect, rateLimiter, checkCredits(5), upload.single('file'), analyzeATSController);
 
 export default router;

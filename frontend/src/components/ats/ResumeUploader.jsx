@@ -142,7 +142,7 @@ const ResumeUploader = () => {
                   className="
                     w-5
                     h-5
-                    text-violet-600
+                    text-brand-primary
                   "
                 />
 
@@ -174,7 +174,7 @@ const ResumeUploader = () => {
                 w-16
                 h-16
                 rounded-2xl
-                bg-violet-100
+                bg-brand-primary/20
                 flex
                 items-center
                 justify-center
@@ -183,7 +183,7 @@ const ResumeUploader = () => {
 
                 <UploadCloud
                   className="
-                    text-violet-600
+                    text-brand-primary
                     w-8
                     h-8
                   "

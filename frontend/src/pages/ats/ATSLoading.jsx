@@ -55,8 +55,7 @@ const ATSLoading = () => {
       items-center
       justify-center
       bg-gradient-to-br
-      from-violet-50
-      to-indigo-100
+      from-brand-dark via-slate-800
     ">
 
       <div className="
@@ -80,7 +79,7 @@ const ATSLoading = () => {
             rounded-full
             border-4
             border-violet-200
-            border-t-violet-600
+            border-t-teal-600
             animate-spin
           " />
 

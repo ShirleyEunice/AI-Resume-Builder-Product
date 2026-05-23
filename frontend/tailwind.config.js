@@ -7,23 +7,21 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        brand: {
-        dark: "#0F172A",
 
-        primary: "#14B8A6",
+  colors: {
 
-        accent: "#F59E0B",
+    brand: {
 
-        light: "#F8FAFC",
-      },
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-      },
+      dark: "#0F172A",
+
+      primary: "#14B8A6",
+
+      accent: "#F59E0B",
+
+      light: "#F8FAFC",
     },
+  },
+},
   },
   plugins: [],
 };

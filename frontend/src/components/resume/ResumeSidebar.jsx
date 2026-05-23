@@ -131,7 +131,7 @@ const ResumeSidebar = () => {
                   ${
                     active
                       ? "bg-blue-600 text-white shadow-md"
-                      : "hover:bg-gray-100"
+                      : "hover:bg-white/10"
                   }
                 `}
               >

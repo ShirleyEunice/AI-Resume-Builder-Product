@@ -11,14 +11,15 @@ const UpgradeBanner = () => {
 
     <div className="
       bg-gradient-to-br
-      from-violet-600
-      to-indigo-600
+     from-brand-dark
+via-slate-800
+to-brand-primary
       rounded-3xl
       p-6
       text-white
-      shadow-lg
       overflow-hidden
       relative
+      shadow-[0_10px_50px_rgba(20,184,166,0.18)]
     ">
 
       {/* ICON */}
@@ -47,7 +48,7 @@ const UpgradeBanner = () => {
       </h2>
 
       <p className="
-        text-violet-100
+        text-teal-100
         mt-3
         text-xs
         leading-relaxed
@@ -60,17 +61,19 @@ const UpgradeBanner = () => {
       {/* BUTTON */}
       <button className="
         mt-6
-        bg-white
-        text-brand-primary
-        px-5
-        py-3
-        rounded-2xl
-        font-semibold
-        flex
-        items-center
-        gap-2
-        hover:scale-105
-        transition
+bg-brand-accent
+text-white
+px-5
+py-3
+rounded-2xl
+font-semibold
+flex
+items-center
+gap-2
+hover:scale-105
+hover:bg-amber-500
+transition
+shadow-lg
       ">
 
         Upgrade Plan

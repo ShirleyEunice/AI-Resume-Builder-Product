@@ -364,7 +364,7 @@ Built responsive dashboards improving performance by 30%
 
                       className="
                         text-xs
-                        text-violet-600
+                        text-brand-primary
                         font-medium
                         hover:underline
                       "

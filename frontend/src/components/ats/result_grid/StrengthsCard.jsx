@@ -31,8 +31,8 @@ const StrengthsCard = () => {
       {/* HEADER */}
       <div className="
         bg-gradient-to-r
-        from-green-500
-        to-emerald-500
+        from-brand-primary
+to-emerald-500
         p-5
         text-white
       ">
@@ -92,31 +92,40 @@ const StrengthsCard = () => {
             (item, i) => (
 
             <div
-              key={i}
-
-              className="
-                flex
-                gap-4
-                bg-green-50
-                border
-                border-green-100
-                rounded-2xl
-                p-4
-              "
-            >
+  key={i}
+  className="
+    relative
+    pl-8
+    pb-6
+    border-l-2
+    border-green-200
+  "
+>
 
               {/* ICON */}
               <div className="
-                mt-1
-              ">
+  absolute
+  -left-[11px]
+  top-1
+
+  w-5
+  h-5
+
+  rounded-full
+  bg-green-500
+
+  flex
+  items-center
+  justify-center
+">
 
                 <CheckCircle2
-                  className="
-                    w-5
-                    h-5
-                    text-green-600
-                  "
-                />
+  className="
+    w-3
+    h-3
+    text-white
+  "
+/>
 
               </div>
 
@@ -124,9 +133,9 @@ const StrengthsCard = () => {
               <div>
 
                 <p className="
-                  text-xs
-                  text-green-800
-                  leading-relaxed
+                  text-sm
+leading-relaxed
+text-gray-700
                 ">
                   {item}
                 </p>

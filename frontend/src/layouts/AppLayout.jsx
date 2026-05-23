@@ -26,7 +26,7 @@ const AppLayout = () => {
     ">
 
       {/* PREMIUM BANNER */}
-      <PremiumBanner />
+      {/* <PremiumBanner /> */}
 
       {/* HEADER */}
       <Header />

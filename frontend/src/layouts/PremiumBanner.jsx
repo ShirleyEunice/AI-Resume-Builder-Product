@@ -1,6 +1,6 @@
 const PremiumBanner = () => {
   return (
-    <div className="sticky top-0 z-50 w-full bg-gradient-to-r from-violet-600 to-purple-500 shadow-md">
+    <div className="sticky top-0 z-50 w-full bg-gradient-to-r from-brand-dark to-brand-primary shadow-md">
 
       <div className="flex flex-wrap items-center justify-between px-6 py-3 text-xs text-white">
 
@@ -14,7 +14,7 @@ const PremiumBanner = () => {
             px-4 py-2
             rounded-lg
             bg-white text-brand-primary
-            hover:bg-gray-100
+            hover:bg-white/10
             transition
             active:scale-95
             font-semibold

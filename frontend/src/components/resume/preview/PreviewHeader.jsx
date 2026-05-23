@@ -6,7 +6,7 @@ const PreviewHeader = ({ personalInfo }) => {
         {personalInfo.fullName || "Your Name"}
       </h1>
 
-      <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-600">
+      <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-300">
 
         <p>
           {personalInfo.email || "email@example.com"}

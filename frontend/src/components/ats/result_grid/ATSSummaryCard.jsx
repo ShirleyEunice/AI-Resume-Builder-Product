@@ -28,8 +28,8 @@ const ATSummaryCard = () => {
       {/* TOP HEADER */}
       <div className="
         bg-gradient-to-r
-        from-violet-600
-        to-indigo-600
+        from-brand-dark
+to-brand-primary
         p-5
         text-white
       ">
@@ -81,9 +81,8 @@ const ATSummaryCard = () => {
       <div className="p-6">
 
         <div className="
-          bg-violet-50
           border
-          border-violet-100
+          bg-brand-primary/5 border-brand-primary/10
           rounded-2xl
           p-5
         ">
@@ -91,7 +90,7 @@ const ATSummaryCard = () => {
           <p className="
             text-gray-700
             leading-relaxed
-            text-[15px]
+            text-[15px] border-l-4 border-brand-primary
           ">
 
             {
@@ -116,7 +115,7 @@ const ATSummaryCard = () => {
             items-center
             gap-2
             text-xs
-            text-violet-600
+            text-brand-primary
             font-medium
           ">
 

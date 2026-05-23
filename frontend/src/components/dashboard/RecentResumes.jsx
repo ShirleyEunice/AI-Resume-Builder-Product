@@ -64,7 +64,7 @@ const RecentResumes = () => {
                     w-12
                     h-12
                     rounded-xl
-                    bg-violet-100
+                    bg-brand-primary/20
                     flex
                     items-center
                     justify-center
@@ -72,7 +72,7 @@ const RecentResumes = () => {
               >
                 <FileText
                   className="
-                        text-violet-600
+                        text-brand-primary
                       "
                 />
               </div>
@@ -127,7 +127,7 @@ const RecentResumes = () => {
                 className="
                     p-2
                     rounded-lg
-                    hover:bg-gray-100
+                    hover:bg-white/10
                   "
               >
                 <Pencil
@@ -142,7 +142,7 @@ const RecentResumes = () => {
                 className="
                     p-2
                     rounded-lg
-                    hover:bg-gray-100
+                    hover:bg-white/10
                   "
               >
                 <Download

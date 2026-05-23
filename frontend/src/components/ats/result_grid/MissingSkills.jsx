@@ -12,7 +12,7 @@ const MissingSkills = () => {
       rounded-3xl
       p-6
       border
-      shadow-sm
+      shadow-sm space-y-4
     ">
 
       <h2 className="
@@ -41,24 +41,42 @@ const MissingSkills = () => {
           skills.map((skill, i) => (
 
             <div
-              key={i}
+  key={i}
+  className="
+    bg-red-50
+    border
+    border-red-100
+    rounded-2xl
+    px-4
+    py-3
 
-              className="
-                bg-red-50
-                text-red-600
-                border
-                border-red-100
-                px-4
-                py-2
-                rounded-full
-                text-xs
-                font-medium
-              "
-            >
+    flex
+    items-center
+    justify-between
+  "
+>
 
-              {skill}
+  <span className="
+    text-sm
+    font-medium
+    text-red-600
+  ">
+    {skill}
+  </span>
 
-            </div>
+  <span className="
+    text-[10px]
+    font-semibold
+    bg-red-100
+    text-red-600
+    px-2
+    py-1
+    rounded-full ms-4
+  ">
+    HIGH
+  </span>
+
+</div>
           ))
         }
 

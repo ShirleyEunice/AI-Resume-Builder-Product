@@ -42,7 +42,7 @@ const BuilderTopbar = ({analyzeATSScore, analyzing, atsData}) => {
         </button>
 
         {/* Template */}
-        <button className="flex items-center gap-2 px-4 py-2 rounded-xl border hover:bg-gray-100 dark:hover:bg-gray-800">
+        <button className="flex items-center gap-2 px-4 py-2 rounded-xl border hover:bg-white/10 dark:hover:bg-gray-800">
           <LayoutTemplate size={18} /> Templates
         </button>
 
@@ -53,7 +53,7 @@ const BuilderTopbar = ({analyzeATSScore, analyzing, atsData}) => {
             px-4 py-2
             rounded-xl
             border
-            hover:bg-gray-100
+            hover:bg-white/10
             dark:hover:bg-gray-800
           "
         >

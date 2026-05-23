@@ -65,8 +65,8 @@ const QuickActions = () => {
                         className='group border rounded-2xl p-4 min-h-[180px] text-left hover:border-violet-400 hover:shadow-md transition-all duration-200 flex flex-col justify-between'>
 
                             {/*Icon */}
-                            <div className='w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center mb-4'>
-                                <Icon className='text-violet-600'/>
+                            <div className='w-12 h-12 rounded-xl bg-brand-primary/20 flex items-center justify-center mb-4'>
+                                <Icon className='text-brand-primary'/>
                             </div>
 
                             {/*Content */}
@@ -75,7 +75,7 @@ const QuickActions = () => {
 
                             {/*Arrow */}
                             <div className='flex justify-end mt-4'>
-                                <ArrowRight className='w-5 h-5 text-gray-400 group-hover:text-violet-600 transition'/>
+                                <ArrowRight className='w-5 h-5 text-gray-400 group-hover:text-brand-primary transition'/>
                             </div>
                         </button>
                     )

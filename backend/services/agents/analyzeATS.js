@@ -71,12 +71,26 @@ ${resumeText}
 
   try {
 
-    return JSON.parse(content);
+  // REMOVE ```json ``` wrappers
+  const cleanedContent =
+    content
+      .replace(/```json/g, "")
+      .replace(/```/g, "")
+      .trim();
 
-  } catch {
+  return JSON.parse(
+    cleanedContent
+  );
 
-    throw new Error(
-      "Invalid AI response format"
-    );
-  }
+} catch (error) {
+
+  console.error(
+    "AI RAW RESPONSE:",
+    content
+  );
+
+  throw new Error(
+    "Invalid AI response format"
+  );
+}
 };

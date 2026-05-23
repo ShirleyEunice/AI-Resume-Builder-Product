@@ -60,7 +60,7 @@ const StrengthsCard = () => {
           <div>
 
             <h2 className="
-              text-2xl
+              text-xl
               font-bold
             ">
               Resume Strengths
@@ -68,7 +68,7 @@ const StrengthsCard = () => {
 
             <p className="
               text-green-100
-              text-sm
+              text-xs
               mt-1
             ">
               Strong matching areas identified by AI
@@ -124,7 +124,7 @@ const StrengthsCard = () => {
               <div>
 
                 <p className="
-                  text-sm
+                  text-xs
                   text-green-800
                   leading-relaxed
                 ">

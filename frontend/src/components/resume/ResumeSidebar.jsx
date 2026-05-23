@@ -70,11 +70,11 @@ const ResumeSidebar = () => {
       {/* HEADER */}
       <div className="p-6 border-b bg-white">
 
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-xl font-bold">
           Resume Builder
         </h2>
 
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 mt-1">
           Complete your resume
         </p>
 
@@ -83,7 +83,7 @@ const ResumeSidebar = () => {
       {/* PROGRESS */}
       <div className="px-6 py-4 bg-white border-b">
 
-        <div className="flex justify-between text-sm mb-2">
+        <div className="flex justify-between text-xs mb-2">
 
           <span className="font-medium">
             Completion

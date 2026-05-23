@@ -23,7 +23,7 @@ const MissingSkills = () => {
       </h2>
 
       <p className="
-        text-sm
+        text-xs
         text-gray-500
         mt-1
       ">
@@ -51,7 +51,7 @@ const MissingSkills = () => {
                 px-4
                 py-2
                 rounded-full
-                text-sm
+                text-xs
                 font-medium
               "
             >

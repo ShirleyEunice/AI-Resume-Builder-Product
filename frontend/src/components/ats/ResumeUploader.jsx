@@ -71,7 +71,7 @@ const ResumeUploader = () => {
       </h2>
 
       <p className="
-        text-sm
+        text-xs
         text-gray-500
         mt-1
       ">
@@ -151,7 +151,7 @@ const ResumeUploader = () => {
               </div>
 
               <p className="
-                text-sm
+                text-xs
                 text-gray-500
                 mt-2
               ">
@@ -199,7 +199,7 @@ const ResumeUploader = () => {
               </h3>
 
               <p className="
-                text-sm
+                text-xs
                 text-gray-500
                 mt-2
               ">

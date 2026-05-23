@@ -86,7 +86,7 @@ const PersonalInfoForm = () => {
           Contact Information
         </h2>
 
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 mt-1">
           Basic contact details for your resume
         </p>
 
@@ -150,7 +150,7 @@ const PersonalInfoForm = () => {
           Professional Details
         </h2>
 
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-xs text-gray-500 mt-1">
           Add your professional identity
         </p>
 
@@ -225,7 +225,7 @@ const PersonalInfoForm = () => {
             Professional Summary
           </h2>
 
-          <p className="text-sm text-gray-500 mt-1">
+          <p className="text-xs text-gray-500 mt-1">
             Generate ATS-friendly AI summary
           </p>
 
@@ -235,12 +235,12 @@ const PersonalInfoForm = () => {
           onClick={generateAISummary}
           disabled={loading}
           className="
-            bg-violet-600
+            bg-brand-primary
             hover:bg-violet-700
             text-white
             px-4 py-2
             rounded-xl
-            text-sm
+            text-xs
             font-medium
             transition
           "

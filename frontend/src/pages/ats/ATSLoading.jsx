@@ -132,7 +132,7 @@ const ATSLoading = () => {
 
                   ${
                     i <= step
-                    ? "bg-violet-50 text-violet-700"
+                    ? "bg-violet-50 text-brand-primary"
                     : "bg-gray-50 text-gray-400"
                   }
                 `}
@@ -145,13 +145,13 @@ const ATSLoading = () => {
 
                   ${
                     i <= step
-                    ? "bg-violet-600"
+                    ? "bg-brand-primary"
                     : "bg-gray-300"
                   }
                 `} />
 
                 <p className="
-                  text-sm
+                  text-xs
                   font-medium
                 ">
                   {item}

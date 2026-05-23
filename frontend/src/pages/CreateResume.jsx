@@ -58,8 +58,8 @@ const CreateResume = () => {
   <CardContent className="p-6">
     <h2 className="text-xl font-bold mb-4">Create Resume</h2>
     <div className="mb-4">
-  <p className="text-sm text-gray-500">ATS Score</p>
-  <div className="text-2xl font-bold">
+  <p className="text-xs text-gray-500">ATS Score</p>
+  <div className="text-xl font-bold">
     {atsScore}%
   </div>
 </div>

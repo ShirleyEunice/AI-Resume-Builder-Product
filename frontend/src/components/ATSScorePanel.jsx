@@ -62,7 +62,7 @@ const ATSScorePanel = ({
                     text-green-700
                     px-3 py-1
                     rounded-full
-                    text-sm
+                    text-xs
                   "
                 >
                   {item}
@@ -99,7 +99,7 @@ const ATSScorePanel = ({
                     text-red-700
                     px-3 py-1
                     rounded-full
-                    text-sm
+                    text-xs
                   "
                 >
                   {item}
@@ -126,7 +126,7 @@ const ATSScorePanel = ({
           list-disc
           pl-5
           space-y-2
-          text-sm
+          text-xs
         ">
 
           {

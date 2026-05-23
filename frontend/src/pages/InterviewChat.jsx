@@ -107,7 +107,7 @@ const InterviewChat = () => {
               className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`px-4 py-3 rounded-lg max-w-[70%] text-sm leading-relaxed shadow
+                className={`px-4 py-3 rounded-lg max-w-[70%] text-xs leading-relaxed shadow
         ${
           msg.role === "user"
             ? "bg-blue-500 text-white"

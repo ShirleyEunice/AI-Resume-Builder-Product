@@ -53,7 +53,7 @@ const ATSScoreCard = () => {
             </h1>
 
             <p className="
-              text-sm
+              text-xs
               text-gray-500
               mt-2
             ">

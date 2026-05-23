@@ -57,7 +57,7 @@ const ATSummaryCard = () => {
           <div>
 
             <h2 className="
-              text-2xl
+              text-xl
               font-bold
             ">
               AI Resume Summary
@@ -65,7 +65,7 @@ const ATSummaryCard = () => {
 
             <p className="
               text-violet-100
-              text-sm
+              text-xs
               mt-1
             ">
               AI-generated professional overview
@@ -115,7 +115,7 @@ const ATSummaryCard = () => {
             flex
             items-center
             gap-2
-            text-sm
+            text-xs
             text-violet-600
             font-medium
           ">
@@ -124,7 +124,7 @@ const ATSummaryCard = () => {
               w-2
               h-2
               rounded-full
-              bg-violet-600
+              bg-brand-primary
               animate-pulse
             " />
 

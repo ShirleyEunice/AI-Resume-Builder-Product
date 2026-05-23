@@ -50,7 +50,7 @@ const QuickActions = () => {
         <div className='flex items-center justify-between mb-3'>
             <div>
                 <h2 className='text-xl font-bold'>Quick Actions</h2>
-                <p className='text-gray-500 text-sm mt-1'>Jump into your AI workflows</p>
+                <p className='text-gray-500 text-xs mt-1'>Jump into your AI workflows</p>
             </div>
         </div>
 
@@ -71,7 +71,7 @@ const QuickActions = () => {
 
                             {/*Content */}
                             <h3 className='text-semibold text-lg'>{action.title}</h3>
-                            <p className='text-sm text-gray-500 mt-2 leading-relaxed'>{action.description}</p>
+                            <p className='text-xs text-gray-500 mt-2 leading-relaxed'>{action.description}</p>
 
                             {/*Arrow */}
                             <div className='flex justify-end mt-4'>

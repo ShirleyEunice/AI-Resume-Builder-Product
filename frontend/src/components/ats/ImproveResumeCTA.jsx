@@ -70,7 +70,7 @@ const ImproveResumeCTA = () => {
           </h2>
 
           <p className="
-            text-sm
+            text-xs
             text-violet-100
             mt-1
           ">
@@ -90,11 +90,11 @@ const ImproveResumeCTA = () => {
 
         className="
           bg-white
-          text-violet-700
+          text-brand-primary
           px-4
           py-2.5
           rounded-xl
-          text-sm
+          text-xs
           font-semibold
           flex
           items-center

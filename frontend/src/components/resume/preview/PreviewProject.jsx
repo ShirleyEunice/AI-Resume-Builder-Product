@@ -21,7 +21,7 @@ const PreviewProject = ({projects}) => {
           <a
             href={project.link}
             target="_blank"
-            className="text-blue-600 text-sm"
+            className="text-blue-600 text-xs"
           >
             View Project
           </a>

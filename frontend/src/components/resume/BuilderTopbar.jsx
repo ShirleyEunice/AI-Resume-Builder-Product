@@ -6,8 +6,8 @@ const BuilderTopbar = ({analyzeATSScore, analyzing, atsData}) => {
     <div className="sticky border-t bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b px-6 py-3 flex items-center justify-between">
       {/* Left */}
       <div>
-        <h1 className="text-2xl font-bold">Software Engineer Resume</h1>
-        <p className="text-sm text-gray-500">Last edited Just Now</p>
+        <h1 className="text-xl font-bold">Software Engineer Resume</h1>
+        <p className="text-xs text-gray-500">Last edited Just Now</p>
       </div>
 
       {/* Right */}
@@ -32,7 +32,7 @@ const BuilderTopbar = ({analyzeATSScore, analyzing, atsData}) => {
     flex items-center gap-2
     px-4 py-2
     rounded-xl
-    bg-violet-600
+    bg-brand-primary
     text-white
     hover:bg-violet-700
     transition

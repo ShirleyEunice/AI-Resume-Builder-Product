@@ -6,7 +6,7 @@ const PreviewHeader = ({ personalInfo }) => {
         {personalInfo.fullName || "Your Name"}
       </h1>
 
-      <div className="flex flex-wrap gap-4 mt-3 text-sm text-gray-600">
+      <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-600">
 
         <p>
           {personalInfo.email || "email@example.com"}
@@ -22,7 +22,7 @@ const PreviewHeader = ({ personalInfo }) => {
 
       </div>
 
-      <div className="flex flex-wrap gap-4 mt-2 text-sm text-blue-600">
+      <div className="flex flex-wrap gap-4 mt-2 text-xs text-blue-600">
 
         {personalInfo.linkedin && (
           <p>{personalInfo.linkedin}</p>

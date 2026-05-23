@@ -1,34 +1,60 @@
-import Header from '@/components/Header'
-import Sidebar from '@/components/Sidebar'
-import React from 'react'
-import PremiumBanner from './PremiumBanner'
-import { Outlet } from 'react-router-dom'
+import React from "react";
+
+import {
+  Outlet,
+} from "react-router-dom";
+
+import Sidebar
+from "@/components/Sidebar";
+
+import Header
+from "@/components/Header";
+
+import PremiumBanner
+from "./PremiumBanner";
 
 const AppLayout = () => {
-  return (
-    <div className="h-screen overflow-hidden bg-gray-100 dark:bg-black">
 
-      {/* Premium Banner */}
+  return (
+
+    <div className="
+      h-screen
+      overflow-hidden
+      bg-gray-100
+      flex
+      flex-col
+    ">
+
+      {/* PREMIUM BANNER */}
       <PremiumBanner />
 
-      {/* Header */}
+      {/* HEADER */}
       <Header />
 
-      {/* MAIN APP */}
-      <div className="flex h-[calc(100vh-104px)]">
+      {/* MAIN */}
+      <div className="
+        flex
+        flex-1
+        overflow-hidden
+      ">
 
-        {/* Sidebar */}
+        {/* SIDEBAR */}
         <Sidebar />
 
-        {/* Main Content */}
-        <main className="flex-1 overflow-hidden">
+        {/* PAGE CONTENT */}
+        <main className="
+          flex-1
+          overflow-y-auto
+        ">
+
           <Outlet />
+
         </main>
 
       </div>
 
     </div>
-  )
-}
+  );
+};
 
-export default AppLayout
+export default AppLayout;

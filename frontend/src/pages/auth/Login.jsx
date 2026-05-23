@@ -71,7 +71,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-violet-600 hover:bg-violet-700 text-white rounded-xl p-3 font-medium"
+            className="w-full bg-brand-primary hover:bg-violet-700 text-white rounded-xl p-3 font-medium"
           >
             {loading ? "Logging in..." : "Login"}
           </button>
@@ -108,7 +108,7 @@ const Login = () => {
           />
         </div>
 
-        <p className="text-sm text-center text-gray-500">
+        <p className="text-xs text-center text-gray-500">
           Don't have an account?
           <Link to="/register" className="text-violet-600 ml-1 font-medium">
             Register

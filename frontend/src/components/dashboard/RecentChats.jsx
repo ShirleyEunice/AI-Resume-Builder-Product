@@ -83,7 +83,7 @@ const RecentChats = () => {
           </h2>
 
           <p className="
-            text-sm
+            text-xs
             text-gray-500
             mt-1
           ">
@@ -167,7 +167,7 @@ const RecentChats = () => {
                       </h3>
 
                       <p className="
-                        text-sm
+                        text-xs
                         text-gray-500
                         mt-2
                         leading-relaxed
@@ -221,7 +221,7 @@ const RecentChats = () => {
           border-gray-300
           rounded-2xl
           py-3
-          text-sm
+          text-xs
           font-medium
           text-gray-600
           hover:border-violet-400

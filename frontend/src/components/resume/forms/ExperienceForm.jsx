@@ -190,7 +190,7 @@ updated[expIndex]
                 Experience {index + 1}
               </h2>
 
-              <p className="text-sm text-gray-500">
+              <p className="text-xs text-gray-500">
                 Add your role details
               </p>
 
@@ -306,7 +306,7 @@ updated[expIndex]
               }
             />
 
-            <label className="text-sm font-medium">
+            <label className="text-xs font-medium">
               I currently work here
             </label>
 
@@ -363,7 +363,7 @@ Built responsive dashboards improving performance by 30%
                       }
 
                       className="
-                        text-sm
+                        text-xs
                         text-violet-600
                         font-medium
                         hover:underline
@@ -395,7 +395,7 @@ Built responsive dashboards improving performance by 30%
               }
               className="
                 text-blue-600
-                text-sm
+                text-xs
                 font-medium
               "
             >

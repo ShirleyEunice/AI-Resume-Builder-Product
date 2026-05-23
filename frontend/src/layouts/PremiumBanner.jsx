@@ -2,7 +2,7 @@ const PremiumBanner = () => {
   return (
     <div className="sticky top-0 z-50 w-full bg-gradient-to-r from-violet-600 to-purple-500 shadow-md">
 
-      <div className="flex flex-wrap items-center justify-between px-6 py-3 text-sm text-white">
+      <div className="flex flex-wrap items-center justify-between px-6 py-3 text-xs text-white">
 
         <p className="font-medium">
           🚀 Unlock Premium AI Resume Features & Unlimited Credits
@@ -13,7 +13,7 @@ const PremiumBanner = () => {
             flex items-center gap-2
             px-4 py-2
             rounded-lg
-            bg-white text-violet-700
+            bg-white text-brand-primary
             hover:bg-gray-100
             transition
             active:scale-95

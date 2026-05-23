@@ -65,7 +65,7 @@ const ImprovementSuggestions = () => {
           <div>
 
             <h2 className="
-              text-2xl
+              text-xl
               font-bold
             ">
               AI Suggestions
@@ -73,7 +73,7 @@ const ImprovementSuggestions = () => {
 
             <p className="
               text-orange-100
-              text-sm
+              text-xs
               mt-1
             ">
               Actionable resume improvements
@@ -124,7 +124,7 @@ const ImprovementSuggestions = () => {
 
               {/* TEXT */}
               <p className="
-                text-sm
+                text-xs
                 text-orange-900
                 leading-relaxed
               ">

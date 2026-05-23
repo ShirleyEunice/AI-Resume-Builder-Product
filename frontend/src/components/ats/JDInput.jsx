@@ -11,7 +11,7 @@ const JDInput = () => {
   return (
     <div className="bg-white rounded-3xl p-6 border shadow-sm h-full">
       <h2 className="text-xl font-bold">Job Description</h2>
-      <p className="text-sm text-gray-500 mt-1">
+      <p className="text-xs text-gray-500 mt-1">
         Paste the job description or import using job URL
       </p>
 
@@ -27,13 +27,13 @@ const JDInput = () => {
             px-4
             py-2
             rounded-xl
-            text-sm
+            text-xs
             font-medium
             transition
 
             ${
               activeTab === "paste"
-                ? "bg-violet-600 text-white"
+                ? "bg-brand-primary text-white"
                 : "bg-gray-100 text-gray-600"
             }
           `}
@@ -45,8 +45,8 @@ const JDInput = () => {
         {/*URL tab */}
         <button
         onClick={()=> setActiveTab("url")}
-        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition ${activeTab === "url" 
-          ? "bg-violet-600 text-white" : "bg-gray-100 text-gray-600"
+        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium transition ${activeTab === "url" 
+          ? "bg-brand-primary text-white" : "bg-gray-100 text-gray-600"
         }`}>
           <Link2 className="w-4 h-4"/>
           Job URL
@@ -72,7 +72,7 @@ const JDInput = () => {
 
               {/*Help box */}
               <div className="mt-5 bg-violet-50 border border-violet-100 rounded-2xl p-4">
-                <p className="text-sm text-violet-700 leading-relaxed">Supported platforms:
+                <p className="text-xs text-brand-primary leading-relaxed">Supported platforms:
                   LinkedIn Jobs,
                   Greenhouse,
                   Lever,

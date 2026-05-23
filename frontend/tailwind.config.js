@@ -8,15 +8,20 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+        dark: "#0F172A",
+
+        primary: "#14B8A6",
+
+        accent: "#F59E0B",
+
+        light: "#F8FAFC",
+      },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
       },
     },
   },

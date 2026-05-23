@@ -18,7 +18,7 @@
 //   return (
 //     <div>
 //   <div className="flex justify-between items-center mb-6">
-//     <h1 className="text-2xl font-bold">My Resumes</h1>
+//     <h1 className="text-xl font-bold">My Resumes</h1>
 
 //     <Button onClick={() => navigate("/create")}>
 //       + Create Resume
@@ -36,12 +36,12 @@
 //       <Card key={resume._id} className="hover:shadow-lg transition">
 //         <CardContent className="p-4">
 //           <h2 className="text-lg font-semibold">{resume.title}</h2>
-//           <p className="text-sm text-gray-500">
+//           <p className="text-xs text-gray-500">
 //             {resume.personalInfo?.name}
 //           </p>
 
 //           <div className="flex justify-between items-center mt-4">
-//             {/* <span className="text-green-500 text-sm">
+//             {/* <span className="text-green-500 text-xs">
 //               ATS: 70%
 //             </span> */}
 

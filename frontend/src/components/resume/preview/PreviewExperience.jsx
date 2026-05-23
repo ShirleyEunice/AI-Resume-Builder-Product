@@ -30,7 +30,7 @@ const PreviewExperience = ({experience}) => {
 
             </div>
 
-            <p className="text-sm text-gray-500">
+            <p className="text-xs text-gray-500">
 
               {exp.startDate}
               {" — "}

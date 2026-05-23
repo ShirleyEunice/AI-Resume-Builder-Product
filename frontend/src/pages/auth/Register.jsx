@@ -90,10 +90,10 @@ const Register = () => {
           <button
           type='submit'
           disabled={loading}
-          className='w-full bg-violet-600 hover:bg-violet-700 rounded-xl p-3 font-medium'>{loading ? "Registering..." : "Register"}</button>
+          className='w-full bg-brand-primary hover:bg-violet-700 rounded-xl p-3 font-medium'>{loading ? "Registering..." : "Register"}</button>
         </form>
 
-        <p className='text-sm text-center text-gray-500'>Already have an account?
+        <p className='text-xs text-center text-gray-500'>Already have an account?
         <Link to="/login" className='text-violet-600 ml-1 font-medium'>Login</Link>
         </p>
       </div>

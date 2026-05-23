@@ -39,7 +39,7 @@ const UpgradeBanner = () => {
 
       {/* CONTENT */}
       <h2 className="
-        text-2xl
+        text-xl
         font-bold
         leading-snug
       ">
@@ -49,7 +49,7 @@ const UpgradeBanner = () => {
       <p className="
         text-violet-100
         mt-3
-        text-sm
+        text-xs
         leading-relaxed
       ">
         Unlock GPT-4 powered resume optimization,
@@ -61,7 +61,7 @@ const UpgradeBanner = () => {
       <button className="
         mt-6
         bg-white
-        text-violet-700
+        text-brand-primary
         px-5
         py-3
         rounded-2xl

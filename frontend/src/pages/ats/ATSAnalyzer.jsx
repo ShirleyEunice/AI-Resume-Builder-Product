@@ -1,14 +1,17 @@
 import AnalyzeButton from "@/components/ats/AnalyzeButton";
 import ATSHero from "@/components/ats/ATSHero";
-import ImproveResumeCTA from "@/components/ats/ImproveResumeCTA";
 import JDInput from "@/components/ats/JDInput";
-import ATSScoreCard from "@/components/ats/result_grid/ATSScoreCard";
-import ImprovementSuggestions from "@/components/ats/result_grid/ImprovementSuggestions";
-import MissingSkills from "@/components/ats/result_grid/MissingSkills";
 import ResumeUploader from "@/components/ats/ResumeUploader";
-import React from "react";
+import { resetATSState } from "@/redux/slices/atsSlice";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const ATSAnalyzer = () => {
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(resetATSState());
+  }, [])
   return (
     <div
       className="

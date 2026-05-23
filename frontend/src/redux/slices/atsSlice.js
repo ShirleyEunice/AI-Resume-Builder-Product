@@ -26,9 +26,16 @@ const atsSlice = createSlice({
         },
         setATSError:(state, action)=>{
             state.error = action.payload;
+        },
+        resetATSState: (state)=>{
+            state.resumeFile = null;
+            state.jdText = "";
+            state.loading = false;
+            state.result = null;
+            state.error = null;
         }
     }
 })
 
-export const {setResumeFile, setJDtext, setATSLoading, setATSResult, setATSError} = atsSlice.actions;
+export const {setResumeFile, setJDtext, setATSLoading, setATSResult, setATSError, resetATSState} = atsSlice.actions;
 export default atsSlice.reducer;

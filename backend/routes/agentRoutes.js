@@ -1,7 +1,6 @@
 import express from 'express';
 import multer from 'multer';
 import { parsePDF } from '../services/parser/pdfParser.js';
-import { jdMatcher } from '../services/agents/jdMatcher.js';
 import { generateCoverLetter } from '../services/agents/coverLetter.js';
 import { checkCredits } from '../middlewares/creditCheck.js';
 import { mockAuth } from '../middlewares/mockAuth.js';

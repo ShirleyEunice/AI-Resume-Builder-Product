@@ -1,3 +1,4 @@
+import ATSAnalysis from "../models/ATSAnalysis.js";
 import { analyzeATS } from "../services/agents/analyzeATS.js";
 import { parsePDF } from "../services/parser/pdfParser.js";
 
@@ -28,7 +29,33 @@ export const analyzeATSController = async (req, res) => {
     req.user.credits -= 5;
 
     await req.user.save();
+    
+    await ATSAnalysis.create({
 
+  userId: req.user._id,
+
+  resumeName:
+    req.file.originalname,
+
+  resumeText,
+
+  jdText,
+
+  score:
+    result.score,
+
+  missingSkills:
+    result.missingSkills,
+
+  strengths:
+    result.strengths,
+
+  suggestions:
+    result.suggestions,
+
+  summary:
+    result.summary,
+});
     res.json(result);
   } catch (error) {
     console.error(error);

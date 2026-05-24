@@ -1,5 +1,4 @@
 import express from "express";
-import { calculateATSScore } from "../services/ats/scorer.js";
 import { mockAuth } from "../middlewares/mockAuth.js";
 import { rateLimiter } from "../middlewares/rateLimiter.js";
 import { checkCredits } from "../middlewares/creditCheck.js";
@@ -11,10 +10,6 @@ const upload = multer(); // for parsing multipart/form-data, which is used for f
 
 const router = express.Router();
 
-router.post("/", (req, res)=>{
-    const score = calculateATSScore(req.body);
-    res.json({score});
-})
 
 router.post('/analyze-ats', protect, rateLimiter, checkCredits(5), upload.single('file'), analyzeATSController);
 

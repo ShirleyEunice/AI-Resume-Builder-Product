@@ -8,7 +8,7 @@ const initialState = {
     token: token || null,
     user: user || null,
     isAuthenticated: !!token,
-    loadind: false,
+    loading: false,
 };
 
 const authSlice = createSlice({

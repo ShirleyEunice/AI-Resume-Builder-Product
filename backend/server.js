@@ -8,7 +8,6 @@ import atsRoutes from "./routes/atsRoutes.js";
 import agentRoutes from "./routes/agentRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import webhookRoutes from "./routes/webhook.js";
-import resumeAnalyzerRoutes from "./routes/resumeManagerRoutes.js";
 
 dotenv.config({ path: "./.env" });
 const app = express();
@@ -28,7 +27,6 @@ app.use("/api/resume", resumeRoutes);
 app.use("/api/ats", atsRoutes);
 app.use("/api/agent", agentRoutes);
 app.use('/api/payment', paymentRoutes);
-app.use("/api/resume-manager", resumeAnalyzerRoutes);
 
 const PORT = process.env.PORT || 5000;
 

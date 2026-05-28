@@ -1,5 +1,5 @@
 import { title } from "framer-motion/client";
-import { FileText, FolderKanban, LayoutDashboard, MessageSquare, ScanSearch, Settings, ShieldCheck } from "lucide-react";
+import { FileText, FolderKanban, History, LayoutDashboard, MessageSquare, ScanSearch, Settings, ShieldCheck } from "lucide-react";
 
 export const sidebarLinks = [
     {
@@ -24,6 +24,12 @@ export const sidebarLinks = [
         title: "Resume Manager",
         icon: FolderKanban,
         path: "/resume-manager",
+        role: ["admin", "user"]
+    },
+    {
+        title: "Scan History",
+        icon: History,
+        path: "/ats-manager",
         role: ["admin", "user"]
     },
     {

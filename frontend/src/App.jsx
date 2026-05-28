@@ -8,6 +8,7 @@ import ATSAnalyzer from "./pages/ats/ATSAnalyzer";
 import ATSLoading from "./pages/ats/ATSLoading";
 import ATSResults from "./pages/ats/ATSResults";
 import AppLayout from "./layouts/AppLayout";
+import ATSHistory from "./pages/ats/history/ATSHistory";
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
           <Route path="/ats/loading" element={<ATSLoading />} />
 
           <Route path="/ats/results" element={<ATSResults />} />
+
+          <Route path="/ats-manager" element={<ATSHistory/>}/>
 
           <Route path="/resume-builder" element={<ResumeBuilder />} />
         </Route>

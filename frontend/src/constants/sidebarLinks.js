@@ -17,7 +17,7 @@ export const sidebarLinks = [
     {
         title: "Resume Builder",
         icon: FileText,
-        path: "/resume-builder",
+        path: "/resume/start",
         role: ["admin", "user"]
     },
     {

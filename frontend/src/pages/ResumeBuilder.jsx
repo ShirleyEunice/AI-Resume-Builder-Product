@@ -74,10 +74,6 @@ const ResumeBuilder = () => {
 
       {/* MAIN CONTENT */}
       <div className="flex h-[calc(100vh-120px)]">
-        {/* SIDEBAR */}
-        <div className="w-64 overflow-y-auto border-r bg-white">
-          <ResumeSidebar />
-        </div>
 
         {/* FORM PANEL */}
         <div className="flex-1 overflow-y-auto p-6">{renderSection()}</div>

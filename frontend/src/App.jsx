@@ -9,6 +9,9 @@ import ATSLoading from "./pages/ats/ATSLoading";
 import ATSResults from "./pages/ats/ATSResults";
 import AppLayout from "./layouts/AppLayout";
 import ATSHistory from "./pages/ats/history/ATSHistory";
+import ResumeStartPage from "./pages/resume/ResumeStartPage";
+import TemplateSelectionPage from "./pages/resume/TemplateSelectionPage";
+import ResumeWizardPage from "./pages/resume/ResumeWizardPage";
 
 function App() {
   return (
@@ -43,6 +46,12 @@ function App() {
           <Route path="/ats/results/:id" element={<ATSResults/>}/>
 
           <Route path="/ats-manager" element={<ATSHistory/>}/>
+
+          <Route path="/resume/start" element={<ResumeStartPage/>}/>
+
+          <Route path="/resume/templates" element={<TemplateSelectionPage/>}/>
+
+          <Route path="/resume/builder" element={<ResumeWizardPage/>}/>
 
           <Route path="/resume-builder" element={<ResumeBuilder />} />
         </Route>

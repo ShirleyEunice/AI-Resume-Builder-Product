@@ -8,9 +8,6 @@ import PersonalInfoForm from "@/components/resume/forms/PersonalInfoForm";
 import ProjectsForm from "@/components/resume/forms/ProjectsForm";
 import SkillsForm from "@/components/resume/forms/SkillsForm";
 import ResumePreview from "@/components/resume/ResumePreview";
-import ResumeSidebar from "@/components/resume/ResumeSidebar";
-import AppLayout from "@/layouts/AppLayout";
-import PremiumBanner from "@/layouts/PremiumBanner";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 

@@ -1,57 +1,43 @@
-import { useSelector } from "react-redux";
+import React from "react";
 
-import PreviewHeader from "./preview/PreviewHeader";
-import PreviewSummary from "./preview/PreviewSummary";
-import PreviewEducation from "./preview/PreviewEducation";
-import PreviewProject from "./preview/PreviewProject";
-import PreviewExperience from "./preview/PreviewExperience";
+import { useSelector }
+from "react-redux";
+import ModernTemplate from "./templates/preview/ModernTemplate";
+import MinimalTemplate from "./templates/preview/MinimalTemplate";
+import ClassicTemplate from "./templates/preview/ClassicTemplate";
+import CreativeTemplate from "./templates/preview/CreativeTemplate";
 
 const ResumePreview = () => {
-  const { currentResume } = useSelector(
-    (state) => state.resume
+
+  const {
+    template,
+  } = useSelector(
+    (state) =>
+      state.resume.currentResume
   );
 
-  const personalInfo =
-    currentResume.personalInfo || {};
+  const renderTemplate = () => {
 
-  return (
-    <div className="flex justify-center py-10">
+    switch(template){
 
-      <div
-        className="
-          bg-white
-          w-[794px]
-          h-fit
-          shadow-2xl
-          rounded-sm
-          scale-[0.8]
-          origin-top
-          px-16 py-14
-          text-gray-900
-        "
-      >
+      case "modern":
+        return <ModernTemplate />;
 
-        <PreviewHeader personalInfo={personalInfo} />
+      case "minimal":
+        return <MinimalTemplate />;
 
-        <PreviewSummary
-          summary={personalInfo.summary}
-        />
+      case "classic":
+        return <ClassicTemplate />;
 
-        <PreviewEducation
-          education={currentResume.education}
-        />
+      case "creative":
+        return <CreativeTemplate />;
 
-        <PreviewExperience
-        experience={currentResume.experience}/>
+      default:
+        return <ModernTemplate />;
+    }
+  };
 
-        <PreviewProject
-          projects={currentResume.projects}
-        />
-
-      </div>
-
-    </div>
-  );
+  return renderTemplate();
 };
 
 export default ResumePreview;

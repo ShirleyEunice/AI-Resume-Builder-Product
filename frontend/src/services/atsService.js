@@ -11,3 +11,18 @@ export const atsAnalyzer = async (resumeFile, jdText)=>{
     }})
     return response.data;
 }
+
+export const getATSHistory = async ()=>{
+    const response = await API.get("/ats/history");
+    return response.data;
+}
+
+export const deleteATSScan = async (id)=>{
+    const response = await API.delete(`/ats/${id}`);
+    return response.data;
+}
+
+export const getATSById = async(id)=>{
+    const response = await API.get(`/ats/${id}`);
+    return response.data;
+}

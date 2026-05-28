@@ -5,12 +5,7 @@ const ATSHistoryHeader = () => {
   return (
 
     <div className="
-      bg-gradient-to-r
-      from-brand-dark via-slate-800 to-brand-primary
       rounded-3xl
-      p-8
-      text-white
-      shadow-lg
     ">
 
       <h1 className="
@@ -22,7 +17,7 @@ const ATSHistoryHeader = () => {
 
       <p className="
         mt-3
-        text-violet-100
+        text-gray-700
         max-w-2xl
       ">
 

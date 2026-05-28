@@ -1,6 +1,6 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import { logout } from "@/redux/slices/authSlice";
-import { LogOut, Settings } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 

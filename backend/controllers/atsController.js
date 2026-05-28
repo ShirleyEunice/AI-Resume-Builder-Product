@@ -69,7 +69,7 @@ export const analyzeATSController = async (req, res) => {
 export const getATSHistory = async(req, res)=>{
     try {
         const analyses = await ATSAnalysis.find({
-            userId: req.user_id,
+            userId: req.user._id,
         })
         .sort({createdAt: -1});
         res.json(analyses);

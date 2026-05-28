@@ -40,6 +40,8 @@ function App() {
 
           <Route path="/ats/results" element={<ATSResults />} />
 
+          <Route path="/ats/results/:id" element={<ATSResults/>}/>
+
           <Route path="/ats-manager" element={<ATSHistory/>}/>
 
           <Route path="/resume-builder" element={<ResumeBuilder />} />

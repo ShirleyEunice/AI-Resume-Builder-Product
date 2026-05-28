@@ -1,17 +1,11 @@
 import React from "react";
+import {ArrowUpDown, Search,} from "lucide-react";
 
-import {
-
-  Search,
-  ArrowUpDown,
-
-} from "lucide-react";
-
-const ATSHistoryToolbar = () => {
+const ATSHistoryToolbar = ({search, setSearch, sortBy, setSortBy}) => {
 
   return (
-
-    <div className="
+    <div
+      className="
       mt-6
       bg-white
       rounded-3xl
@@ -21,11 +15,12 @@ const ATSHistoryToolbar = () => {
       items-center
       justify-between
       gap-4
-    ">
-
+    "
+    >
       {/* SEARCH */}
 
-      <div className="
+      <div
+        className="
         flex
         items-center
         gap-3
@@ -34,21 +29,23 @@ const ATSHistoryToolbar = () => {
         px-4
         py-3
         w-[350px]
-      ">
-
-        <Search className="
+      "
+      >
+        <Search
+          className="
           w-5
           h-5
           text-gray-400
-        " />
+        "
+        />
 
         <input
           type="text"
-
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           placeholder="
 Search resume or job title...
           "
-
           className="
             bg-transparent
             outline-none
@@ -56,32 +53,41 @@ Search resume or job title...
             text-sm
           "
         />
-
       </div>
 
       {/* SORT */}
 
-      <button className="
-        flex
-        items-center
-        gap-2
-        px-5
-        py-3
-        rounded-2xl
-        border
-        hover:bg-gray-50
-        transition
-      ">
+      <div
+        className="
+  flex
+  items-center
+  gap-3
+"
+      >
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="
+      border
+      rounded-2xl
+      px-5
+      py-3
+      text-sm
+      font-medium
+      outline-none
+      bg-white
+      hover:border-violet-400
+      transition
+      cursor-pointer
+    "
+        >
+          <option value="latest">Latest</option>
 
-        <ArrowUpDown className="
-          w-4
-          h-4
-        " />
+          <option value="highest">Highest Score</option>
 
-        Sort By Score
-
-      </button>
-
+          <option value="lowest">Lowest Score</option>
+        </select>
+      </div>
     </div>
   );
 };

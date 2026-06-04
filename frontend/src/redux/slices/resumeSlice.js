@@ -4,7 +4,6 @@ const initialState = {
   resumes: [],
 
   currentResume: {
-    _id: null,
     title: "Untitled Resume",
 
     // PERSONAL INFO

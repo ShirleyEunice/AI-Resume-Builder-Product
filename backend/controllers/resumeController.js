@@ -3,16 +3,23 @@ import Resume from "../models/Resume.js";
 // Create Resume
 export const createResume = async (req, res) => {
   try {
-
     //FIRST create
-    const resume = new Resume(req.body);
+    const resumeData = {
+      ...req.body,
+    };
+
+    delete resumeData._id;
+
+    const resume = new Resume(resumeData);
 
     //THEN use it
     console.log("Before save:", resume);
 
     const saved = await resume.save();
 
-    console.log("After save:", saved);
+    console.log("AFTER SAVE");
+    console.log(saved._id);
+    console.log(saved);
 
     res.status(201).json(saved);
   } catch (error) {

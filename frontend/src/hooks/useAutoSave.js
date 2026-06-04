@@ -7,9 +7,13 @@ const useAutoSave = ()=>{
     const currentResume = useSelector((state)=> state.resume.currentResume);
 
     useEffect(()=>{
+        console.log("AUTO SAVE HOOK RUNNING");
+        
+        if(!currentResume._id) 
+            return;
 
-        if(!currentResume._id) return;
 
+        console.log("RESUME ID:", currentResume._id);
         const debouncedSave = debounce(async ()=>{
             try{
                 await updateResumeById(currentResume._id, currentResume);

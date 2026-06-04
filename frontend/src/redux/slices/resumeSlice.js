@@ -4,10 +4,8 @@ const initialState = {
   resumes: [],
 
   currentResume: {
+    _id: null,
     title: "Untitled Resume",
-
-    // WIZARD STEP
-    wizardStep: 1,
 
     // PERSONAL INFO
     personalInfo: {
@@ -63,6 +61,9 @@ const initialState = {
     atsScore: 0,
   },
 
+  // WIZARD STEP
+    wizardStep: 1,
+
   // OLD SIDEBAR SUPPORT
   activeSection: "personalInfo",
 
@@ -76,7 +77,6 @@ const resumeSlice = createSlice({
   initialState,
 
   reducers: {
-
     // =========================================
     // SIDEBAR SECTION
     // =========================================
@@ -90,26 +90,23 @@ const resumeSlice = createSlice({
     // =========================================
 
     setWizardStep: (state, action) => {
-      state.currentResume.wizardStep =
-        action.payload;
+      state.wizardStep = action.payload;
     },
 
     nextStep: (state) => {
-
-      if (
-        state.currentResume.wizardStep < 5
-      ) {
-        state.currentResume.wizardStep += 1;
+      if (state.wizardStep < 5) {
+        state.wizardStep += 1;
       }
     },
 
     previousStep: (state) => {
-
-      if (
-        state.currentResume.wizardStep > 1
-      ) {
-        state.currentResume.wizardStep -= 1;
+      if (state.wizardStep > 1) {
+        state.wizardStep -= 1;
       }
+    },
+
+    setResumeId: (state, action) => {
+      state.currentResume._id = action.payload;
     },
 
     // =========================================
@@ -117,12 +114,9 @@ const resumeSlice = createSlice({
     // =========================================
 
     updateResume: (state, action) => {
+      const { section, data } = action.payload;
 
-      const { section, data } =
-        action.payload;
-
-      state.currentResume[section] =
-        data;
+      state.currentResume[section] = data;
     },
 
     // =========================================
@@ -130,8 +124,7 @@ const resumeSlice = createSlice({
     // =========================================
 
     updateExperience: (state, action) => {
-      state.currentResume.experience =
-        action.payload;
+      state.currentResume.experience = action.payload;
     },
 
     // =========================================
@@ -139,8 +132,7 @@ const resumeSlice = createSlice({
     // =========================================
 
     updateEducation: (state, action) => {
-      state.currentResume.education =
-        action.payload;
+      state.currentResume.education = action.payload;
     },
 
     // =========================================
@@ -148,8 +140,7 @@ const resumeSlice = createSlice({
     // =========================================
 
     updateProjects: (state, action) => {
-      state.currentResume.projects =
-        action.payload;
+      state.currentResume.projects = action.payload;
     },
 
     // =========================================
@@ -157,20 +148,15 @@ const resumeSlice = createSlice({
     // =========================================
 
     updateSkills: (state, action) => {
-      state.currentResume.skills =
-        action.payload;
+      state.currentResume.skills = action.payload;
     },
 
     // =========================================
     // CERTIFICATIONS
     // =========================================
 
-    updateCertifications: (
-      state,
-      action
-    ) => {
-      state.currentResume.certifications =
-        action.payload;
+    updateCertifications: (state, action) => {
+      state.currentResume.certifications = action.payload;
     },
 
     // =========================================
@@ -178,19 +164,14 @@ const resumeSlice = createSlice({
     // =========================================
 
     updateTemplate: (state, action) => {
-      state.currentResume.template =
-        action.payload;
+      state.currentResume.template = action.payload;
     },
 
     // =========================================
     // LAYOUT SETTINGS
     // =========================================
 
-    updateLayoutSettings: (
-      state,
-      action
-    ) => {
-
+    updateLayoutSettings: (state, action) => {
       state.currentResume.layoutSettings = {
         ...state.currentResume.layoutSettings,
         ...action.payload,
@@ -202,8 +183,7 @@ const resumeSlice = createSlice({
     // =========================================
 
     resetResume: (state) => {
-      state.currentResume =
-        initialState.currentResume;
+      state.currentResume = initialState.currentResume;
     },
   },
 });
@@ -231,6 +211,7 @@ export const {
 
   // layout
   updateLayoutSettings,
+  setResumeId,
 
   // reset
   resetResume,

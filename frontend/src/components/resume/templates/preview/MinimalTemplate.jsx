@@ -1,83 +1,37 @@
 import React from "react";
 
-import {
-  useSelector,
-} from "react-redux";
-
-import TemplateWrapper
-from "./TemplateWrapper";
+import TemplateWrapper from "./TemplateWrapper";
+import SummarySection from "../../preview/SummarySection";
+import ExperienceSection from "../../preview/ExperienceSection";
+import EducationSection from "../../preview/EducationSection";
+import ProjectsSection from "../../preview/ProjectsSection";
+import SkillsSection from "../../preview/SkillsSection";
+import MinimalHeader from "../../preview/header/MinimalHeader";
 
 const MinimalTemplate = () => {
-
-  const resume =
-    useSelector(
-      (state) =>
-        state.resume.currentResume
-    );
-
-  const info =
-    resume.personalInfo;
 
   return (
 
     <TemplateWrapper>
 
-      <div className="
-        text-center
-        border-b
-        pb-6
-        mb-8
-      ">
+      <MinimalHeader />
 
-        <h1 className="
-          text-4xl
-          font-light
-        ">
+      <div className="space-y-5 mt-5">
 
-          {
-            info.fullName ||
-            "Your Name"
-          }
+        <SummarySection />
 
-        </h1>
+        <ExperienceSection />
 
-        <p className="
-          mt-2
-          text-gray-500
-        ">
+        <EducationSection />
 
-          {info.headLine}
+        <ProjectsSection />
 
-        </p>
+        <SkillsSection />
 
       </div>
 
-      <section>
-
-        <h2 className="
-          uppercase
-          tracking-widest
-          text-sm
-          text-gray-500
-          mb-4
-        ">
-
-          Summary
-
-        </h2>
-
-        <p>
-
-          {
-            info.summary ||
-            "Minimal professional summary"
-          }
-
-        </p>
-
-      </section>
-
     </TemplateWrapper>
+
   );
 };
 

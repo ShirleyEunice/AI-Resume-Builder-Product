@@ -1,104 +1,33 @@
-import React from "react";
+import TemplateWrapper from "./TemplateWrapper";
 
-import {
-  useSelector,
-} from "react-redux";
-
-import TemplateWrapper
-from "./TemplateWrapper";
+import ResumeHeader from "../../preview/header/ModernHeader";
+import SummarySection from "../../preview/SummarySection";
+import ExperienceSection from "../../preview/ExperienceSection";
+import EducationSection from "../../preview/EducationSection";
+import ProjectsSection from "../../preview/ProjectsSection";
+import SkillsSection from "../../preview/SkillsSection";
+import ModernHeader from "../../preview/header/ModernHeader";
 
 const ModernTemplate = () => {
-
-  const resume =
-    useSelector(
-      (state) =>
-        state.resume.currentResume
-    );
-
-  const info =
-    resume.personalInfo;
 
   return (
 
     <TemplateWrapper>
 
-      {/* HEADER */}
+      <ModernHeader />
 
-      <div className="mb-8">
+      <SummarySection />
 
-        <h1 className="
-          text-5xl
-          font-bold
-          text-gray-900
-        ">
+      <ExperienceSection />
 
-          {
-            info.fullName ||
-            "Your Name"
-          }
+      <EducationSection />
 
-        </h1>
+      <ProjectsSection />
 
-        <p className="
-          text-xl
-          text-violet-600
-          mt-2
-        ">
-
-          {
-            info.headLine ||
-            "Software Engineer"
-          }
-
-        </p>
-
-        <div className="
-          flex
-          gap-4
-          mt-4
-          text-sm
-          text-gray-600
-          flex-wrap
-        ">
-
-          <span>{info.email}</span>
-          <span>{info.phone}</span>
-          <span>{info.location}</span>
-
-        </div>
-
-      </div>
-
-      {/* SUMMARY */}
-
-      <section className="mb-8">
-
-        <h2 className="
-          text-2xl
-          font-bold
-          border-b
-          pb-2
-          mb-4
-        ">
-
-          Professional Summary
-
-        </h2>
-
-        <p className="
-          text-gray-700
-        ">
-
-          {
-            info.summary ||
-            "Professional summary appears here."
-          }
-
-        </p>
-
-      </section>
+      <SkillsSection />
 
     </TemplateWrapper>
+
   );
 };
 

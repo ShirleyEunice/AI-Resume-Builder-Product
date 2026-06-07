@@ -1,5 +1,6 @@
 import { Plus, Trash2 } from "lucide-react";
 import Field from "./Field";
+import DateField from "./DateField";
 
 /**
  * Config-driven list of repeatable entries (jobs, schools, certificates...).
@@ -73,18 +74,27 @@ const RepeatableSection = ({
                 key={field.name}
                 className={field.half ? "col-span-1" : "col-span-2"}
               >
-                <Field
-                  label={field.label}
-                  placeholder={field.placeholder}
-                  type={field.type}
-                  textarea={field.textarea}
-                  rows={field.rows}
-                  maxLength={field.maxLength}
-                  value={entry[field.name]}
-                  onChange={(e) =>
-                    updateField(index, field.name, e.target.value)
-                  }
-                />
+                {field.type === "date" ? (
+                  <DateField
+                    label={field.label}
+                    value={entry[field.name]}
+                    disabled={field.name === "endDate" && entry.current} // greys out End when "I currently work here"
+                    onChange={(val) => updateField(index, field.name, val)}
+                  />
+                ) : (
+                  <Field
+                    label={field.label}
+                    placeholder={field.placeholder}
+                    type={field.type}
+                    textarea={field.textarea}
+                    rows={field.rows}
+                    maxLength={field.maxLength}
+                    value={entry[field.name]}
+                    onChange={(e) =>
+                      updateField(index, field.name, e.target.value)
+                    }
+                  />
+                )}
               </div>
             ))}
           </div>

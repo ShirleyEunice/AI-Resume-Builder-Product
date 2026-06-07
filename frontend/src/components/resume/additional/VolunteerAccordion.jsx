@@ -14,8 +14,8 @@ const NEW_VOLUNTEER = {
 const FIELDS = [
   { name: "organization", label: "Organization", half: true },
   { name: "role", label: "Role", half: true },
-  { name: "startDate", label: "Start Date", placeholder: "MM YYYY", half: true },
-  { name: "endDate", label: "End Date", placeholder: "MM YYYY", half: true },
+  { name: "startDate", label: "Start Date", type: "date", half: true },
+  { name: "endDate", label: "End Date", type: "date", half: true },
   { name: "description", label: "Description", textarea: true, rows: 3 },
 ];
 

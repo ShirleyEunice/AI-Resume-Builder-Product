@@ -11,6 +11,8 @@ import { rateLimiter } from '../middlewares/rateLimiter.js';
 import { generateSummary } from '../services/agents/summaryGenerator.js';
 import { enhanceBullet } from '../services/agents/bulletEnhancer.js';
 import { analyzeATSController } from '../controllers/atsController.js';
+import { parseResumeToJSON } from '../services/agents/resumeParser.js';
+import { protect } from "../middlewares/authMiddleware.js";
 
 
 const router = express.Router();
@@ -102,4 +104,33 @@ router.post('/enhance-bullet', mockAuth, checkCredits(2), async (req, res)=>{
         res.status(500).json({ error: error.message });
     }
 })
+
+router.post(
+  "/import-resume",protect,
+  checkCredits(5),
+  upload.single("file"),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "Resume PDF Required" });
+      }
+      const resumeText = await parsePDF(req.file.buffer);
+
+      if (!resumeText || !resumeText.trim()) {
+        return res.status(422).json({
+          error: "Could not read text from this PDF (it may be scanned/image-based).",
+        });
+      }
+
+      const source = req.body.source === "linkedin" ? "linkedin" : "resume";
+      const parsed = await parseResumeToJSON(resumeText, source);
+      req.user.credits -= 5;
+      await req.user.save();
+      res.json(parsed);
+    } catch (error) {
+      console.error("IMPORT RESUME ERROR:", error);
+      res.status(500).json({ error: error.message });
+    }
+  },
+);
 export default router;

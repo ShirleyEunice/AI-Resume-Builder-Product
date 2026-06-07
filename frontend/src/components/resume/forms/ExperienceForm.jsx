@@ -26,8 +26,8 @@ const FIELDS = [
   { name: "employer", label: "Employer", half: true },
   { name: "location", label: "Location", placeholder: "City, State, Country", half: true },
   { name: "url", label: "URL", half: true },
-  { name: "startDate", label: "Start Date", placeholder: "MM YYYY", half: true },
-  { name: "endDate", label: "End Date", placeholder: "MM YYYY", half: true },
+  { name: "startDate", label: "Start Date", type: "date", half: true },
+  { name: "endDate", label: "End Date", type: "date", half: true },
 ];
 
 const ExperienceForm = () => {

@@ -88,6 +88,15 @@ const resumeSlice = createSlice({
       }
     },
 
+    setResume: (state, action)=>{
+      state.currentResume = {
+        ...initialState.currentResume,
+        ...action.payload
+      };
+      delete state.currentResume._id;
+      state.wizardStep = 1;
+    },
+
     setResumeId: (state, action) => {
       state.currentResume._id = action.payload;
     },
@@ -136,6 +145,7 @@ export const {
 
   // reset
   resetResume,
+  setResume,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

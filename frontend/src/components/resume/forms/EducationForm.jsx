@@ -24,8 +24,8 @@ const FIELDS = [
   { name: "location", label: "Location", placeholder: "City, State, Country" },
   { name: "degreeType", label: "Degree type", half: true },
   { name: "areaOfStudy", label: "Area of study", half: true },
-  { name: "startDate", label: "Start Date", placeholder: "MM YYYY", half: true },
-  { name: "endDate", label: "End Date", placeholder: "MM YYYY", half: true },
+  { name: "startDate", label: "Start Date", type: "date", half: true },
+  { name: "endDate", label: "End Date", type: "date", half: true },
   {
     name: "gpa",
     label: "GPA / Score",

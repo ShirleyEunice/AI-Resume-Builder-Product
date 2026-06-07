@@ -12,42 +12,43 @@ const resumeSchema = new mongoose.Schema(
     },
     personalInfo: {
       fullName: { type: String },
+      jobTitle: { type: String },
       email: { type: String },
       phone: { type: String },
-      headLine: {type: String},
-      location: { type: String },
       linkedin: { type: String },
-      github: { type: String },
-      portfolio: { type: String },
+      websites: [String],
       summary: { type: String },
+      address: { type: String },
+      city: { type: String },
+      state: { type: String },
+      postalCode: { type: String },
+      country: { type: String },
     },
     education: [
       {
         institution: String,
-        degree: String,
-        field: String,
+        location: String,
+        degreeType: String,
+        areaOfStudy: String,
         startDate: String,
         endDate: String,
-        cgpa: String,
+        gpa: String,
+        url: String,
+        minor: [String],
+        coursework: [String],
       },
     ],
     experience: [
       {
-        company: String,
-        role: String,
+        jobTitle: String,
+        employer: String,
         location: String,
+        url: String,
         startDate: String,
         endDate: String,
         current: Boolean,
-        description: [String],
-      },
-    ],
-    projects: [
-      {
-        title: String,
-        techStack: [String],
-        link: String,
-        description: [String],
+        summary: String,
+        highlights: [String],
       },
     ],
     skills: {
@@ -60,13 +61,61 @@ const resumeSchema = new mongoose.Schema(
         name: String,
         issuer: String,
         year: String,
+        url: String,
       },
     ],
-    achievements: [String],
-    languages: [String],
+    awards: [
+      {
+        title: String,
+        issuer: String,
+        year: String,
+      },
+    ],
+    volunteer: [
+      {
+        organization: String,
+        role: String,
+        startDate: String,
+        endDate: String,
+        description: String,
+      },
+    ],
+    projects: [
+      {
+        title: String,
+        techStack: [String],
+        link: String,
+        description: String,
+      },
+    ],
+    languages: [
+      {
+        name: String,
+        proficiency: String,
+      },
+    ],
+    publications: [
+      {
+        title: String,
+        publisher: String,
+        year: String,
+        url: String,
+      },
+    ],
+    interests: [String],
+    additional: [
+      {
+        title: String,
+        description: String,
+      },
+    ],
     template: {
       type: String,
       default: "modern",
+    },
+    layoutSettings: {
+      lineSpacing: { type: String, default: "1.15" },
+      margin: { type: String, default: "0.75" },
     },
     atsScore: {
       type: Number,

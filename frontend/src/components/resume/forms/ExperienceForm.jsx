@@ -1,415 +1,193 @@
-import { useDispatch, useSelector } from "react-redux";
-import { updateExperience } from "@/redux/slices/resumeSlice";
-
-import { Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Plus, Sparkles, X } from "lucide-react";
+
+import { updateResume } from "@/redux/slices/resumeSlice";
 import API from "@/api/axios";
 
+import StepHeader from "./ui/StepHeader";
+import Field from "./ui/Field";
+import RepeatableSection from "./ui/RepeatableSection";
+
+const NEW_EXPERIENCE = {
+  jobTitle: "",
+  employer: "",
+  location: "",
+  url: "",
+  startDate: "",
+  endDate: "",
+  current: false,
+  summary: "",
+  highlights: [],
+};
+
+const FIELDS = [
+  { name: "jobTitle", label: "Job Title", half: true },
+  { name: "employer", label: "Employer", half: true },
+  { name: "location", label: "Location", placeholder: "City, State, Country", half: true },
+  { name: "url", label: "URL", half: true },
+  { name: "startDate", label: "Start Date", placeholder: "MM YYYY", half: true },
+  { name: "endDate", label: "End Date", placeholder: "MM YYYY", half: true },
+];
+
 const ExperienceForm = () => {
-
   const dispatch = useDispatch();
-
-  const [enhancingIndex, setEnhancingIndex] =
-    useState(null);
-
   const experiences =
-    useSelector(
-      (state) =>
-        state.resume.currentResume.experience
-    ) || [];
+    useSelector((state) => state.resume.currentResume.experience) || [];
 
-  // ADD EXPERIENCE
-  const addExperience = () => {
+  const [enhancingKey, setEnhancingKey] = useState(null);
 
-    dispatch(
-      updateExperience([
-        ...experiences,
-        {
-          role: "",
-          company: "",
-          startDate: "",
-          endDate: "",
-          current: false,
-          description: [""],
-        },
-      ])
+  const save = (next) =>
+    dispatch(updateResume({ section: "experience", data: next }));
+
+  // Ensure the first entry is always visible, matching the design.
+  const entries = experiences.length ? experiences : [{ ...NEW_EXPERIENCE }];
+
+  const updateHighlights = (index, highlights) => {
+    const next = entries.map((exp, i) =>
+      i === index ? { ...exp, highlights } : exp,
     );
+    save(next);
   };
 
-  // REMOVE EXPERIENCE
-  const removeExperience = (index) => {
-
-    const updated =
-      experiences.filter((_, i) => i !== index);
-
-    dispatch(updateExperience(updated));
-  };
-
-  // UPDATE FIELD
-  const handleChange = (
-    index,
-    field,
-    value
-  ) => {
-
-    const updated =
-      JSON.parse(JSON.stringify(experiences));
-
-    updated[index][field] = value;
-
-    dispatch(updateExperience(updated));
-  };
-
-  // UPDATE BULLET
-  const handleBulletChange = (
-    expIndex,
-    bulletIndex,
-    value
-  ) => {
-
-    const updated =
-      JSON.parse(JSON.stringify(experiences));
-
-    updated[expIndex]
-      .description[bulletIndex] = value;
-
-    dispatch(updateExperience(updated));
-  };
-
-  // ADD BULLET
-  const addBullet = (index) => {
-
-    const updated =
-      JSON.parse(JSON.stringify(experiences));
-
-    updated[index].description.push("");
-
-    dispatch(updateExperience(updated));
-  };
-
-  // AI ENHANCE
-  const enhanceWithAI = async (
-    expIndex,
-    bulletIndex,
-    bullet
-  ) => {
-
+  const enhanceHighlight = async (index, hIndex, value) => {
     try {
+      setEnhancingKey(`${index}-${hIndex}`);
 
-      setEnhancingIndex(
-        `${expIndex}-${bulletIndex}`
-      );
+      const res = await API.post("/agent/enhance-bullet", {
+        bullet: value,
+        role: entries[index].jobTitle,
+      });
 
-      const res = await API.post(
-        "/agent/enhance-bullet",
-        {
-          bullet,
+      const cleaned = res.data.enhancedBullet
+        .replace(/^[-•*]\s*/, "")
+        .trim();
 
-          role:
-            experiences[expIndex].role,
-        }
-      );
-
-      const updated = JSON.parse(JSON.stringify(experiences));
-
-      const cleanedBullet =
-  res.data.enhancedBullet
-    .replace(/^[-•*]\s*/, "")
-    .trim();
-
-updated[expIndex]
-  .description[bulletIndex] =
-    cleanedBullet;
-
-      dispatch(updateExperience(updated));
-
-    } catch (err) {
-
-      console.error(err);
-
+      const highlights = [...(entries[index].highlights || [])];
+      highlights[hIndex] = cleaned;
+      updateHighlights(index, highlights);
+    } catch (error) {
+      console.error(error);
     } finally {
-
-      setEnhancingIndex(null);
+      setEnhancingKey(null);
     }
   };
 
-  return (
+  const renderExtra = (entry, index, updateField) => {
+    const highlights = entry.highlights || [];
+    const wordCount = (entry.summary || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean).length;
 
-    <div className="space-y-6">
+    return (
+      <div className="space-y-4">
+        <label className="flex items-center gap-2 text-sm text-gray-600">
+          <input
+            type="checkbox"
+            checked={entry.current || false}
+            onChange={(e) => updateField("current", e.target.checked)}
+            className="accent-brand-primary"
+          />
+          I currently work here
+        </label>
 
-      {/* HEADER */}
-      <div className="flex items-center justify-between">
+        <Field
+          label="Summary"
+          textarea
+          rows={4}
+          value={entry.summary}
+          onChange={(e) => updateField("summary", e.target.value)}
+          hint={`${wordCount} / 40`}
+        />
 
         <div>
+          <label className="mb-2 block text-sm font-semibold text-brand-dark">
+            Highlights
+          </label>
 
-          <h1 className="text-3xl font-bold">
-            Experience
-          </h1>
+          <div className="space-y-3">
+            {highlights.map((highlight, hIndex) => {
+              const key = `${index}-${hIndex}`;
 
-          <p className="text-gray-500 mt-1">
-            Add your professional experience
-          </p>
-
-        </div>
-
-        <button
-          onClick={addExperience}
-          className="
-            flex items-center gap-2
-            bg-blue-600 text-white
-            px-4 py-2 rounded-xl
-          "
-        >
-
-          <Plus size={18} />
-          Add Experience
-
-        </button>
-
-      </div>
-
-      {/* EXPERIENCE LIST */}
-      {experiences.map((exp, index) => (
-
-        <div
-          key={index}
-          className="
-            bg-white dark:bg-gray-900
-            border rounded-2xl
-            p-6 shadow-sm
-            space-y-5
-          "
-        >
-
-          {/* TOP */}
-          <div className="flex justify-between items-center">
-
-            <div>
-
-              <h2 className="text-xl font-semibold">
-                Experience {index + 1}
-              </h2>
-
-              <p className="text-xs text-gray-500">
-                Add your role details
-              </p>
-
-            </div>
-
-            <button
-              onClick={() =>
-                removeExperience(index)
-              }
-              className="
-                text-red-500
-                hover:bg-red-50
-                p-2 rounded-lg
-              "
-            >
-
-              <Trash2 size={18} />
-
-            </button>
-
-          </div>
-
-          {/* ROLE + COMPANY */}
-          <div className="grid md:grid-cols-2 gap-4">
-
-            <input
-              placeholder="Frontend Developer"
-              value={exp.role}
-              onChange={(e) =>
-                handleChange(
-                  index,
-                  "role",
-                  e.target.value
-                )
-              }
-              className="
-                w-full border
-                p-3 rounded-xl
-              "
-            />
-
-            <input
-              placeholder="Google"
-              value={exp.company}
-              onChange={(e) =>
-                handleChange(
-                  index,
-                  "company",
-                  e.target.value
-                )
-              }
-              className="
-                w-full border
-                p-3 rounded-xl
-              "
-            />
-
-          </div>
-
-          {/* DATES */}
-          <div className="grid md:grid-cols-2 gap-4">
-
-            <input
-              placeholder="Start Date"
-              value={exp.startDate}
-              onChange={(e) =>
-                handleChange(
-                  index,
-                  "startDate",
-                  e.target.value
-                )
-              }
-              className="
-                border
-                p-3 rounded-xl
-              "
-            />
-
-            {!exp.current && (
-
-              <input
-                placeholder="End Date"
-                value={exp.endDate}
-                onChange={(e) =>
-                  handleChange(
-                    index,
-                    "endDate",
-                    e.target.value
-                  )
-                }
-                className="
-                  border
-                  p-3 rounded-xl
-                "
-              />
-
-            )}
-
-          </div>
-
-          {/* CURRENT */}
-          <div className="flex items-center gap-3">
-
-            <input
-              type="checkbox"
-              checked={exp.current || false}
-              onChange={(e) =>
-                handleChange(
-                  index,
-                  "current",
-                  e.target.checked
-                )
-              }
-            />
-
-            <label className="text-xs font-medium">
-              I currently work here
-            </label>
-
-          </div>
-
-          {/* RESPONSIBILITIES */}
-          <div className="space-y-4">
-
-            <h3 className="font-medium">
-              Responsibilities
-            </h3>
-
-            {exp.description.map(
-              (bullet, bulletIndex) => (
-
-                <div
-                  key={bulletIndex}
-                  className="space-y-2"
-                >
-
-                  <textarea
-                    value={bullet}
-                    onChange={(e) =>
-                      handleBulletChange(
-                        index,
-                        bulletIndex,
-                        e.target.value
-                      )
-                    }
-                    placeholder="
-Built responsive dashboards improving performance by 30%
-                    "
-                    className="
-                      w-full border
-                      p-4 rounded-xl
-                      h-24 resize-none
-                    "
-                  />
-
-                  <div className="flex justify-end">
-
+              return (
+                <div key={hIndex} className="space-y-1">
+                  <div className="flex items-start gap-2">
+                    <textarea
+                      value={highlight}
+                      onChange={(e) => {
+                        const next = [...highlights];
+                        next[hIndex] = e.target.value;
+                        updateHighlights(index, next);
+                      }}
+                      rows={2}
+                      placeholder="Built responsive dashboards improving performance by 30%"
+                      className="w-full resize-none rounded-md border border-gray-300 px-3 py-2
+                        text-sm text-brand-dark placeholder-gray-400 outline-none transition
+                        focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
+                    />
                     <button
+                      type="button"
                       onClick={() =>
-                        enhanceWithAI(
+                        updateHighlights(
                           index,
-                          bulletIndex,
-                          bullet
+                          highlights.filter((_, i) => i !== hIndex),
                         )
                       }
-
-                      disabled={
-                        enhancingIndex ===
-                        `${index}-${bulletIndex}`
-                      }
-
-                      className="
-                        text-xs
-                        text-brand-primary
-                        font-medium
-                        hover:underline
-                      "
+                      className="rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-red-500"
                     >
-
-                      {
-                        enhancingIndex ===
-                        `${index}-${bulletIndex}`
-
-                          ? "Enhancing..."
-
-                          : "✨ Enhance with AI"
-                      }
-
+                      <X size={16} />
                     </button>
-
                   </div>
 
+                  <button
+                    type="button"
+                    onClick={() => enhanceHighlight(index, hIndex, highlight)}
+                    disabled={enhancingKey === key}
+                    className="flex items-center gap-1 text-xs font-medium text-brand-primary
+                      hover:underline disabled:opacity-50"
+                  >
+                    <Sparkles size={12} />
+                    {enhancingKey === key ? "Enhancing..." : "Enhance with AI"}
+                  </button>
                 </div>
-
-              )
-            )}
-
-            {/* ADD BULLET */}
-            <button
-              onClick={() =>
-                addBullet(index)
-              }
-              className="
-                text-blue-600
-                text-xs
-                font-medium
-              "
-            >
-
-              + Add Responsibility
-
-            </button>
-
+              );
+            })}
           </div>
 
+          <button
+            type="button"
+            onClick={() => updateHighlights(index, [...highlights, ""])}
+            className="mt-3 flex items-center gap-1 text-sm font-medium text-brand-primary hover:underline"
+          >
+            <Plus size={16} />
+            Add Highlights
+          </button>
         </div>
+      </div>
+    );
+  };
 
-      ))}
+  return (
+    <div className="max-w-2xl">
+      <StepHeader
+        title="Tell us where you worked"
+        subtitle="Let hiring managers know where you worked and what you accomplished"
+      />
 
+      <p className="-mt-5 mb-6 text-xs text-gray-400">
+        Promotions within the company should be entered separately.
+      </p>
+
+      <RepeatableSection
+        entries={entries}
+        onChange={save}
+        newEntry={NEW_EXPERIENCE}
+        fields={FIELDS}
+        entryLabel="Experience"
+        addLabel="Add another experience"
+        renderExtra={renderExtra}
+      />
     </div>
   );
 };

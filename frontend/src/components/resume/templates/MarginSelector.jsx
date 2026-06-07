@@ -13,8 +13,7 @@ const options = [
 
 const MarginSelector = () => {
 
-  const dispatch =
-    useDispatch();
+  const dispatch = useDispatch();
 
   const margin =
     useSelector(

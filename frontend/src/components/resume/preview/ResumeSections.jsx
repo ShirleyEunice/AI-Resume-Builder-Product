@@ -1,0 +1,317 @@
+import { useSelector } from "react-redux";
+
+/**
+ * Data-driven body of the resume preview. Reads every section from Redux so
+ * anything typed in the wizard shows up live. The `variant` prop controls the
+ * heading styling so each template looks distinct while sharing this renderer.
+ *
+ * Core sections (summary/experience/education/skills) fall back to sample data
+ * when empty so a fresh resume still looks complete; optional sections render
+ * only once the user adds data.
+ */
+
+const titleClass = {
+  modern:
+    "text-sm font-bold uppercase text-brand-primary border-b-2 border-brand-primary pb-1 mb-2",
+  classic:
+    "text-sm font-bold uppercase tracking-wide text-gray-900 border-b border-gray-800 pb-1 mb-2",
+  minimal:
+    "text-[11px] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-2",
+};
+
+const SectionTitle = ({ variant, children }) => (
+  <h2 className={titleClass[variant] || titleClass.modern}>{children}</h2>
+);
+
+const accentText = {
+  modern: "text-brand-primary",
+  classic: "text-gray-700",
+  minimal: "text-gray-500",
+};
+
+const dateRange = (start, end, current) => {
+  if (!start && !end && !current) return "";
+  const tail = current ? "Present" : end || "";
+  return [start, tail].filter(Boolean).join(" – ");
+};
+
+const join = (...parts) => parts.filter(Boolean).join(", ");
+
+const ResumeSections = ({ variant = "modern" }) => {
+  const resume = useSelector((state) => state.resume.currentResume);
+  const accent = accentText[variant] || accentText.modern;
+
+  const {
+    personalInfo = {},
+    experience = [],
+    education = [],
+    skills = {},
+    projects = [],
+    certifications = [],
+    awards = [],
+    volunteer = [],
+    publications = [],
+    languages = [],
+    interests = [],
+    additional = [],
+  } = resume;
+
+  const mergedSkills = [
+    ...(skills.technical || []),
+    ...(skills.tools || []),
+    ...(skills.soft || []),
+  ];
+
+  const experienceItems = experience.length
+    ? experience
+    : [
+        {
+          jobTitle: "Frontend Developer",
+          employer: "Acme Corp",
+          startDate: "2022",
+          current: true,
+          highlights: ["Built and shipped customer-facing features."],
+        },
+      ];
+
+  const educationItems = education.length
+    ? education
+    : [
+        {
+          degreeType: "Bachelor of Computer Science",
+          institution: "University of Kansas",
+          startDate: "2018",
+          endDate: "2022",
+        },
+      ];
+
+  const skillItems = mergedSkills.length
+    ? mergedSkills
+    : ["React", "Node.js", "MongoDB", "JavaScript", "Tailwind CSS"];
+
+  return (
+    <div className="space-y-4">
+      {/* SUMMARY */}
+      <section>
+        <SectionTitle variant={variant}>Professional Summary</SectionTitle>
+        <p className="text-xs text-gray-700">
+          {personalInfo.summary ||
+            "Motivated and detail-oriented professional seeking to contribute to organizational success while developing professional expertise."}
+        </p>
+      </section>
+
+      {/* EXPERIENCE */}
+      <section>
+        <SectionTitle variant={variant}>Experience</SectionTitle>
+        {experienceItems.map((exp, i) => (
+          <div key={i} className="mb-3">
+            <div className="flex justify-between">
+              <h3 className="text-xs font-semibold">
+                {exp.jobTitle || exp.role}
+              </h3>
+              <span className="text-[11px] text-gray-500">
+                {dateRange(exp.startDate, exp.endDate, exp.current)}
+              </span>
+            </div>
+            <p className={`text-xs ${accent}`}>
+              {join(exp.employer || exp.company, exp.location)}
+            </p>
+            {exp.summary && (
+              <p className="mt-1 text-xs text-gray-700">{exp.summary}</p>
+            )}
+            {(exp.highlights || exp.bullets || []).filter(Boolean).length > 0 && (
+              <ul className="ml-4 mt-1 list-disc text-xs text-gray-700">
+                {(exp.highlights || exp.bullets || [])
+                  .filter(Boolean)
+                  .map((h, hi) => (
+                    <li key={hi}>{h}</li>
+                  ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </section>
+
+      {/* EDUCATION */}
+      <section>
+        <SectionTitle variant={variant}>Education</SectionTitle>
+        {educationItems.map((edu, i) => (
+          <div key={i} className="mb-3">
+            <div className="flex justify-between">
+              <h3 className="text-xs font-semibold">
+                {join(edu.degreeType || edu.degree, edu.areaOfStudy || edu.field)}
+              </h3>
+              <span className="text-[11px] text-gray-500">
+                {dateRange(edu.startDate, edu.endDate)}
+              </span>
+            </div>
+            <p className={`text-xs ${accent}`}>
+              {join(edu.institution, edu.location)}
+            </p>
+            {edu.gpa && (
+              <p className="text-[11px] text-gray-500">GPA: {edu.gpa}</p>
+            )}
+            {(edu.minor || []).length > 0 && (
+              <p className="text-[11px] text-gray-600">
+                Minor: {edu.minor.join(", ")}
+              </p>
+            )}
+            {(edu.coursework || []).length > 0 && (
+              <p className="text-[11px] text-gray-600">
+                Coursework: {edu.coursework.join(", ")}
+              </p>
+            )}
+          </div>
+        ))}
+      </section>
+
+      {/* SKILLS */}
+      <section>
+        <SectionTitle variant={variant}>Skills</SectionTitle>
+        <div className="flex flex-wrap gap-2">
+          {skillItems.map((skill, i) => (
+            <span
+              key={i}
+              className="rounded border bg-gray-100 px-2 py-1 text-[11px] text-gray-700"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      {/* PROJECTS */}
+      {projects.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Projects</SectionTitle>
+          {projects.map((p, i) => (
+            <div key={i} className="mb-3">
+              <h3 className="text-xs font-semibold">{p.title}</h3>
+              {(p.techStack || []).length > 0 && (
+                <p className={`text-[11px] ${accent}`}>
+                  {p.techStack.join(", ")}
+                </p>
+              )}
+              {p.description && (
+                <p className="mt-1 text-xs text-gray-700">{p.description}</p>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* CERTIFICATIONS */}
+      {certifications.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Certifications</SectionTitle>
+          {certifications.map((c, i) => (
+            <div key={i} className="mb-1 flex justify-between">
+              <span className="text-xs text-gray-700">
+                {join(c.name, c.issuer)}
+              </span>
+              <span className="text-[11px] text-gray-500">{c.year}</span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* AWARDS */}
+      {awards.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Awards</SectionTitle>
+          {awards.map((a, i) => (
+            <div key={i} className="mb-1 flex justify-between">
+              <span className="text-xs text-gray-700">
+                {join(a.title, a.issuer)}
+              </span>
+              <span className="text-[11px] text-gray-500">{a.year}</span>
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* VOLUNTEERING */}
+      {volunteer.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Volunteering</SectionTitle>
+          {volunteer.map((v, i) => (
+            <div key={i} className="mb-2">
+              <div className="flex justify-between">
+                <h3 className="text-xs font-semibold">
+                  {join(v.role, v.organization)}
+                </h3>
+                <span className="text-[11px] text-gray-500">
+                  {dateRange(v.startDate, v.endDate)}
+                </span>
+              </div>
+              {v.description && (
+                <p className="text-xs text-gray-700">{v.description}</p>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* PUBLICATIONS */}
+      {publications.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Publications</SectionTitle>
+          {publications.map((p, i) => (
+            <div key={i} className="mb-1">
+              <span className="text-xs text-gray-700">
+                {join(p.title, p.publisher)}
+              </span>
+              {p.year && (
+                <span className="text-[11px] text-gray-500"> ({p.year})</span>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {/* LANGUAGES */}
+      {languages.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Languages</SectionTitle>
+          <div className="flex flex-wrap gap-x-4 gap-y-1">
+            {languages.map((l, i) => (
+              <span key={i} className="text-xs text-gray-700">
+                {l.name}
+                {l.proficiency && (
+                  <span className="text-gray-500"> — {l.proficiency}</span>
+                )}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* INTERESTS */}
+      {interests.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Interests</SectionTitle>
+          <p className="text-xs text-gray-700">{interests.join(", ")}</p>
+        </section>
+      )}
+
+      {/* ADDITIONAL */}
+      {additional.length > 0 && (
+        <section>
+          <SectionTitle variant={variant}>Additional</SectionTitle>
+          {additional.map((a, i) => (
+            <div key={i} className="mb-1">
+              {a.title && (
+                <span className="text-xs font-semibold text-gray-800">
+                  {a.title}:{" "}
+                </span>
+              )}
+              <span className="text-xs text-gray-700">{a.description}</span>
+            </div>
+          ))}
+        </section>
+      )}
+    </div>
+  );
+};
+
+export default ResumeSections;

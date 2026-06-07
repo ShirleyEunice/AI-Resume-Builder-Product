@@ -10,7 +10,7 @@ const actions = [
 
     icon: FileText,
 
-    path: "/resume-builder",
+    path: "/resume/start",
   },
 
   {

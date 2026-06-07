@@ -55,45 +55,34 @@ const CreateResume = () => {
 
   return (
     <Card className="max-w-xl mx-auto">
-  <CardContent className="p-6">
-    <h2 className="text-xl font-bold mb-4">Create Resume</h2>
-    <div className="mb-4">
-  <p className="text-xs text-gray-500">ATS Score</p>
-  <div className="text-xl font-bold">
-    {atsScore}%
-  </div>
-</div>
+      <CardContent className="p-6">
+        <h2 className="text-xl font-bold mb-4">Create Resume</h2>
+        <div className="mb-4">
+          <p className="text-xs text-gray-500">ATS Score</p>
+          <div className="text-xl font-bold">{atsScore}%</div>
+        </div>
 
-    <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <Input
+            placeholder="Resume Title"
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+          />
 
-      <Input
-        placeholder="Resume Title"
-        onChange={(e) =>
-          setForm({ ...form, title: e.target.value })
-        }
-      />
+          <Input
+            placeholder="Full Name"
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+          />
 
-      <Input
-        placeholder="Full Name"
-        onChange={(e) =>
-          setForm({ ...form, name: e.target.value })
-        }
-      />
+          <Input
+            placeholder="Email"
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+          />
 
-      <Input
-        placeholder="Email"
-        onChange={(e) =>
-          setForm({ ...form, email: e.target.value })
-        }
-      />
-
-      <Button className="w-full">
-        Save Resume
-      </Button>
-    </form>
-  </CardContent>
-</Card>
-  )
+          <Button className="w-full">Save Resume</Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
 }
 
 export default CreateResume

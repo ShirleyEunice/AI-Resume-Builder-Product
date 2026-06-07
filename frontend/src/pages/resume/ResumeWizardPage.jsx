@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PersonalInfoForm from "@/components/resume/forms/PersonalInfoForm";
 import ExperienceForm from "@/components/resume/forms/ExperienceForm";
 import EducationForm from "@/components/resume/forms/EducationForm";
-import SkillsForm from "@/components/resume/forms/SkillsForm";
-import CertificationForm from "@/components/resume/forms/CertificationForm";
+import AdditionalSection from "@/components/resume/additional/AdditionalSection";
 import DonePage from "@/components/resume/forms/DonePage";
 
 import ResumePreview from "@/components/resume/ResumePreview";
@@ -44,12 +43,6 @@ const ResumeWizardPage = () => {
         const { _id, ...resumeData } = currentResume;
 
         const data = await createResume(resumeData);
-
-        console.log("FULL DATA");
-        console.log(data);
-
-        console.log("ID");
-        console.log(data._id);
 
         dispatch(
           setResumeId(data._id)
@@ -91,12 +84,7 @@ const ResumeWizardPage = () => {
         return <EducationForm />;
 
       case 4:
-        return (
-          <div className="space-y-10">
-            <SkillsForm />
-            <CertificationForm />
-          </div>
-        );
+        return <AdditionalSection />;
 
       case 5:
         return <DonePage />;

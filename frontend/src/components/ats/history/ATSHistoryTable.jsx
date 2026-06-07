@@ -421,7 +421,7 @@ const sortedHistory =
                   hover:bg-blue-200
                   transition
                 "
-                onClick={()=> navigate("/resume-builder")}>
+                onClick={()=> navigate("/resume/start")}>
 
                   <WandSparkles className="
                     w-4

@@ -20,7 +20,7 @@ const CreateResumeCard = () => {
             <Plus className='w-10 h-10 text-violet-700'/>
         </div>
         <h2 className='mt-6 text-2xl font-bold'>Create Resume</h2>
-        <p className='mt-3 text-gray-500'>Strat building your resume from scratch</p>
+        <p className='mt-3 text-gray-500'>Start building your resume from scratch</p>
     </button>
   )
 }

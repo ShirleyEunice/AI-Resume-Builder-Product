@@ -88,7 +88,7 @@ shadow-[0_10px_40px_rgba(20,184,166,0.15)]
       {/* BUTTON */}
       <button
         onClick={() =>
-          navigate("/resume-builder")
+          navigate("/resume/start")
         }
 
         className="

@@ -1,54 +1,18 @@
-import React from "react";
 import TemplateWrapper from "./TemplateWrapper";
-
-import ResumeHeader from "../../preview/header/ModernHeader";
-import SummarySection from "../../preview/SummarySection";
-import ExperienceSection from "../../preview/ExperienceSection";
-import EducationSection from "../../preview/EducationSection";
-import ProjectsSection from "../../preview/ProjectsSection";
-import SkillsSection from "../../preview/SkillsSection";
 import ClassicHeader from "../../preview/header/ClassicHeader";
+import ResumeSections from "../../preview/ResumeSections";
 
 const ClassicTemplate = () => {
-
   return (
-
     <TemplateWrapper>
+      <div className="font-serif">
+        <div className="mb-4 border-b-2 border-gray-800 pb-3">
+          <ClassicHeader />
+        </div>
 
-      {/* CLASSIC HEADER */}
-
-      <div
-        className="
-          text-center
-          border-b-2
-          border-gray-700
-          pb-3
-          mb-4
-        "
-      >
-
-        <ClassicHeader />
-
+        <ResumeSections variant="classic" />
       </div>
-
-      {/* CONTENT */}
-
-      <div className="space-y-4">
-
-        <SummarySection />
-
-        <ExperienceSection />
-
-        <EducationSection />
-
-        <ProjectsSection />
-
-        <SkillsSection />
-
-      </div>
-
     </TemplateWrapper>
-
   );
 };
 

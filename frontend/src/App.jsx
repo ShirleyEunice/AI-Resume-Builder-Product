@@ -3,7 +3,6 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Dashboard from "./pages/dashboard/Dashboard";
-import ResumeBuilder from "./pages/ResumeBuilder";
 import ATSAnalyzer from "./pages/ats/ATSAnalyzer";
 import ATSLoading from "./pages/ats/ATSLoading";
 import ATSResults from "./pages/ats/ATSResults";
@@ -52,8 +51,6 @@ function App() {
           <Route path="/resume/templates" element={<TemplateSelectionPage/>}/>
 
           <Route path="/resume/builder" element={<ResumeWizardPage/>}/>
-
-          <Route path="/resume-builder" element={<ResumeBuilder />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 const TemplateSelectionPage = () => {
   const navigate = useNavigate();
   return (
-    <div className='h-screen overflow-hidden bg-gray-100 flex'>
+    <div className='h-full overflow-hidden bg-gray-100 flex'>
       {/* left panel */}
       <div className='w-[45%] overflow-y-auto bg-white p-10'>
         <h1 className='text-4xl font-bold'>Choose your template</h1>

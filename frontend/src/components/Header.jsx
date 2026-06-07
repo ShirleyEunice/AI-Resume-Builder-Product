@@ -47,7 +47,9 @@ const Header = () => {
       case "/ats/results":
         return "ATS Results";
 
-      case "/resume-builder":
+      case "/resume/start":
+      case "/resume/templates":
+      case "/resume/builder":
         return "Resume Builder";
 
       case "/resume-manager":

@@ -1,413 +1,264 @@
-import React from "react";
 import { useSelector } from "react-redux";
 
 import TemplateWrapper from "./TemplateWrapper";
 
-const CreativeTemplate = () => {
+const join = (...parts) => parts.filter(Boolean).join(", ");
 
-  const resume = useSelector(
-    (state) => state.resume.currentResume
-  );
+const dateRange = (start, end, current) => {
+  if (!start && !end && !current) return "";
+  const tail = current ? "Present" : end || "";
+  return [start, tail].filter(Boolean).join(" – ");
+};
+
+const SideTitle = ({ children }) => (
+  <h2 className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-white/80">
+    {children}
+  </h2>
+);
+
+const MainTitle = ({ children }) => (
+  <h2 className="mb-2 text-sm font-bold text-brand-primary">{children}</h2>
+);
+
+const CreativeTemplate = () => {
+  const resume = useSelector((state) => state.resume.currentResume);
 
   const {
-    personalInfo,
-    skills,
-    experience,
-    education,
-    projects,
+    personalInfo = {},
+    experience = [],
+    education = [],
+    skills = {},
+    projects = [],
+    certifications = [],
+    awards = [],
+    volunteer = [],
+    publications = [],
+    languages = [],
+    interests = [],
+    additional = [],
   } = resume;
 
-  const previewInfo = {
-
-    fullName:
-      personalInfo.fullName ||
-      "Jennifer Jobscan",
-
-    headLine:
-      personalInfo.headLine ||
-      "Creative Product Manager",
-
-    email:
-      personalInfo.email ||
-      "jennifer@resume.com",
-
-    phone:
-      personalInfo.phone ||
-      "(123) 456-7890",
-
-    location:
-      personalInfo.location ||
-      "Seattle, WA",
-
-    linkedin:
-      personalInfo.linkedin ||
-      "linkedin.com/in/jennifer",
-
-    summary:
-      personalInfo.summary ||
-      "Creative and detail-oriented professional passionate about building innovative products and delivering exceptional user experiences.",
-  };
+  const location =
+    join(personalInfo.city, personalInfo.state, personalInfo.country) ||
+    personalInfo.location;
 
   const mergedSkills = [
-    ...(skills?.technical || []),
-    ...(skills?.tools || []),
-    ...(skills?.soft || []),
+    ...(skills.technical || []),
+    ...(skills.tools || []),
+    ...(skills.soft || []),
   ];
 
-  const previewSkills =
-    mergedSkills.length
-      ? mergedSkills
-      : [
-          "React",
-          "Node.js",
-          "MongoDB",
-          "Figma",
-          "Product Strategy",
-        ];
+  const skillItems = mergedSkills.length
+    ? mergedSkills
+    : ["React", "Node.js", "Figma"];
 
   return (
-
     <TemplateWrapper>
-
-      <div className="flex min-h-full">
-
+      <div className="-m-[0.75in] flex min-h-full font-sans">
         {/* SIDEBAR */}
-
-        <div
-          className="
-            w-[30%]
-            bg-violet-700
-            text-white
-            p-4
-          "
-        >
-
-          <div
-            className="
-              w-16
-              h-16
-              rounded-full
-              bg-violet-500
-              mx-auto
-              mb-4
-            "
-          />
-
-          <h1
-            className="
-              text-lg
-              font-bold
-              text-center
-            "
-          >
-            {previewInfo.fullName}
-          </h1>
-
-          <p
-            className="
-              text-center
-              text-[11px]
-              text-violet-200
-              mt-1
-            "
-          >
-            {previewInfo.headLine}
-          </p>
-
-          {/* CONTACT */}
-
-          <div className="mt-6">
-
-            <h2
-              className="
-                text-xs
-                uppercase
-                tracking-wider
-                font-semibold
-                mb-2
-              "
-            >
-              Contact
-            </h2>
-
-            <div
-              className="
-                text-[11px]
-                space-y-2
-              "
-            >
-
-              <p>{previewInfo.email}</p>
-
-              <p>{previewInfo.phone}</p>
-
-              <p>{previewInfo.location}</p>
-
-              <p>{previewInfo.linkedin}</p>
-
-            </div>
-
-          </div>
-
-          {/* SKILLS */}
-
-          <div className="mt-6">
-
-            <h2
-              className="
-                text-xs
-                uppercase
-                tracking-wider
-                font-semibold
-                mb-2
-              "
-            >
-              Skills
-            </h2>
-
-            <div
-              className="
-                flex
-                flex-wrap
-                gap-1
-              "
-            >
-
-              {previewSkills.map(
-                (skill, index) => (
-
-                  <span
-                    key={index}
-                    className="
-                      px-2
-                      py-1
-                      rounded-full
-                      bg-violet-500
-                      text-[10px]
-                    "
-                  >
-                    {skill}
-                  </span>
-                )
-              )}
-
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* MAIN CONTENT */}
-
-        <div
-          className="
-            flex-1
-            p-5
-          "
-        >
-
-          {/* SUMMARY */}
-
-          <section className="mb-4">
-
-            <h2
-              className="
-                text-sm
-                font-bold
-                text-violet-700
-                mb-2
-              "
-            >
-              About Me
-            </h2>
-
-            <p
-              className="
-                text-xs
-                text-gray-700
-              "
-            >
-              {previewInfo.summary}
+        <div className="w-[32%] space-y-6 bg-brand-primary p-5 text-white">
+          <div>
+            <h1 className="text-lg font-bold leading-tight">
+              {personalInfo.fullName || "Jennifer Jobscan"}
+            </h1>
+            <p className="mt-1 text-[11px] text-white/80">
+              {personalInfo.jobTitle || "Creative Product Manager"}
             </p>
+          </div>
 
-          </section>
+          <div>
+            <SideTitle>Contact</SideTitle>
+            <div className="space-y-1 text-[11px] text-white/90">
+              {personalInfo.email && <p>{personalInfo.email}</p>}
+              {personalInfo.phone && <p>{personalInfo.phone}</p>}
+              {location && <p>{location}</p>}
+              {personalInfo.linkedin && <p>{personalInfo.linkedin}</p>}
+              {(personalInfo.websites || []).map((w, i) => (
+                <p key={i}>{w}</p>
+              ))}
+            </div>
+          </div>
 
-          {/* EXPERIENCE */}
-
-          <section className="mb-4">
-
-            <h2
-              className="
-                text-sm
-                font-bold
-                text-violet-700
-                mb-2
-              "
-            >
-              Experience
-            </h2>
-
-            {(experience?.length
-              ? experience
-              : [{
-                  jobTitle:
-                    "Product Manager",
-                  company:
-                    "Creative Studio",
-                  startDate:
-                    "2022",
-                  endDate:
-                    "Present",
-                  bullets: [
-                    "Led cross-functional teams to launch products.",
-                    "Improved user engagement by 35%.",
-                  ],
-                }]
-            ).map((exp, index) => (
-
-              <div
-                key={index}
-                className="
-                  border-l-2
-                  border-violet-500
-                  pl-3
-                  mb-3
-                "
-              >
-
-                <h3
-                  className="
-                    text-xs
-                    font-semibold
-                  "
+          <div>
+            <SideTitle>Skills</SideTitle>
+            <div className="flex flex-wrap gap-1">
+              {skillItems.map((s, i) => (
+                <span
+                  key={i}
+                  className="rounded-full bg-white/20 px-2 py-1 text-[10px]"
                 >
-                  {exp.jobTitle}
-                </h3>
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
 
-                <p
-                  className="
-                    text-[11px]
-                    text-violet-600
-                  "
-                >
-                  {exp.company} • {exp.startDate} - {exp.endDate}
-                </p>
-
+          {languages.length > 0 && (
+            <div>
+              <SideTitle>Languages</SideTitle>
+              <div className="space-y-1 text-[11px] text-white/90">
+                {languages.map((l, i) => (
+                  <p key={i}>
+                    {l.name}
+                    {l.proficiency && (
+                      <span className="text-white/70"> — {l.proficiency}</span>
+                    )}
+                  </p>
+                ))}
               </div>
+            </div>
+          )}
 
-            ))}
-
-          </section>
-
-          {/* EDUCATION */}
-
-          <section className="mb-4">
-
-            <h2
-              className="
-                text-sm
-                font-bold
-                text-violet-700
-                mb-2
-              "
-            >
-              Education
-            </h2>
-
-            {(education?.length
-              ? education
-              : [{
-                  degree:
-                    "Bachelor of Computer Science",
-                  institution:
-                    "University of Kansas",
-                }]
-            ).map((edu, index) => (
-
-              <div key={index}>
-
-                <h3
-                  className="
-                    text-xs
-                    font-semibold
-                  "
-                >
-                  {edu.degree}
-                </h3>
-
-                <p
-                  className="
-                    text-[11px]
-                    text-gray-600
-                  "
-                >
-                  {edu.institution}
-                </p>
-
-              </div>
-
-            ))}
-
-          </section>
-
-          {/* PROJECTS */}
-
-          <section>
-
-            <h2
-              className="
-                text-sm
-                font-bold
-                text-violet-700
-                mb-2
-              "
-            >
-              Projects
-            </h2>
-
-            {(projects?.length
-              ? projects
-              : [{
-                  title:
-                    "AI Resume Builder",
-                  description:
-                    "Built a full-stack AI resume builder using React and OpenAI.",
-                }]
-            ).map((project, index) => (
-
-              <div
-                key={index}
-                className="mb-2"
-              >
-
-                <h3
-                  className="
-                    text-xs
-                    font-semibold
-                  "
-                >
-                  {project.title}
-                </h3>
-
-                <p
-                  className="
-                    text-[11px]
-                    text-gray-700
-                  "
-                >
-                  {project.description}
-                </p>
-
-              </div>
-
-            ))}
-
-          </section>
-
+          {interests.length > 0 && (
+            <div>
+              <SideTitle>Interests</SideTitle>
+              <p className="text-[11px] text-white/90">
+                {interests.join(", ")}
+              </p>
+            </div>
+          )}
         </div>
 
-      </div>
+        {/* MAIN */}
+        <div className="flex-1 space-y-4 p-5">
+          <section>
+            <MainTitle>About Me</MainTitle>
+            <p className="text-xs text-gray-700">
+              {personalInfo.summary ||
+                "Creative and detail-oriented professional passionate about building innovative products and delivering exceptional user experiences."}
+            </p>
+          </section>
 
+          {experience.length > 0 && (
+            <section>
+              <MainTitle>Experience</MainTitle>
+              {experience.map((exp, i) => (
+                <div
+                  key={i}
+                  className="mb-3 border-l-2 border-brand-primary pl-3"
+                >
+                  <h3 className="text-xs font-semibold">
+                    {exp.jobTitle || exp.role}
+                  </h3>
+                  <p className="text-[11px] text-brand-primary">
+                    {join(exp.employer || exp.company, exp.location)}
+                    {dateRange(exp.startDate, exp.endDate, exp.current) &&
+                      ` • ${dateRange(exp.startDate, exp.endDate, exp.current)}`}
+                  </p>
+                  {exp.summary && (
+                    <p className="mt-1 text-xs text-gray-700">{exp.summary}</p>
+                  )}
+                  {(exp.highlights || []).filter(Boolean).length > 0 && (
+                    <ul className="ml-4 mt-1 list-disc text-xs text-gray-700">
+                      {(exp.highlights || [])
+                        .filter(Boolean)
+                        .map((h, hi) => (
+                          <li key={hi}>{h}</li>
+                        ))}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </section>
+          )}
+
+          {education.length > 0 && (
+            <section>
+              <MainTitle>Education</MainTitle>
+              {education.map((edu, i) => (
+                <div key={i} className="mb-2">
+                  <h3 className="text-xs font-semibold">
+                    {join(
+                      edu.degreeType || edu.degree,
+                      edu.areaOfStudy || edu.field,
+                    )}
+                  </h3>
+                  <p className="text-[11px] text-gray-600">
+                    {join(edu.institution, edu.location)}
+                  </p>
+                </div>
+              ))}
+            </section>
+          )}
+
+          {projects.length > 0 && (
+            <section>
+              <MainTitle>Projects</MainTitle>
+              {projects.map((p, i) => (
+                <div key={i} className="mb-2">
+                  <h3 className="text-xs font-semibold">{p.title}</h3>
+                  {p.description && (
+                    <p className="text-xs text-gray-700">{p.description}</p>
+                  )}
+                </div>
+              ))}
+            </section>
+          )}
+
+          {certifications.length > 0 && (
+            <section>
+              <MainTitle>Certifications</MainTitle>
+              {certifications.map((c, i) => (
+                <p key={i} className="text-xs text-gray-700">
+                  {join(c.name, c.issuer)} {c.year && `(${c.year})`}
+                </p>
+              ))}
+            </section>
+          )}
+
+          {awards.length > 0 && (
+            <section>
+              <MainTitle>Awards</MainTitle>
+              {awards.map((a, i) => (
+                <p key={i} className="text-xs text-gray-700">
+                  {join(a.title, a.issuer)} {a.year && `(${a.year})`}
+                </p>
+              ))}
+            </section>
+          )}
+
+          {volunteer.length > 0 && (
+            <section>
+              <MainTitle>Volunteering</MainTitle>
+              {volunteer.map((v, i) => (
+                <div key={i} className="mb-2">
+                  <h3 className="text-xs font-semibold">
+                    {join(v.role, v.organization)}
+                  </h3>
+                  {v.description && (
+                    <p className="text-xs text-gray-700">{v.description}</p>
+                  )}
+                </div>
+              ))}
+            </section>
+          )}
+
+          {publications.length > 0 && (
+            <section>
+              <MainTitle>Publications</MainTitle>
+              {publications.map((p, i) => (
+                <p key={i} className="text-xs text-gray-700">
+                  {join(p.title, p.publisher)} {p.year && `(${p.year})`}
+                </p>
+              ))}
+            </section>
+          )}
+
+          {additional.length > 0 && (
+            <section>
+              <MainTitle>Additional</MainTitle>
+              {additional.map((a, i) => (
+                <p key={i} className="text-xs text-gray-700">
+                  {a.title && (
+                    <span className="font-semibold">{a.title}: </span>
+                  )}
+                  {a.description}
+                </p>
+              ))}
+            </section>
+          )}
+        </div>
+      </div>
     </TemplateWrapper>
   );
 };

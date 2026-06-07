@@ -1,74 +1,34 @@
-import {
-  useDispatch,
-  useSelector,
-} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import {
-  nextStep,
-  previousStep,
-} from "@/redux/slices/resumeSlice";
+import { nextStep, previousStep } from "@/redux/slices/resumeSlice";
 
 const WizardNavigation = () => {
+  const dispatch = useDispatch();
+  const step = useSelector((state) => state.resume.wizardStep);
 
-  const dispatch =
-    useDispatch();
-
-  const step =
-    useSelector(
-      (state) =>
-        state.resume.wizardStep
-    );
+  // Step 5 (Done) renders its own Back / Download controls.
+  if (step === 5) return null;
 
   return (
-
-    <div className="
-      flex
-      justify-between
-      mt-16
-    ">
-
+    <div className="mt-10 flex items-center justify-end gap-6">
       <button
-
-        onClick={() =>
-          dispatch(previousStep())
-        }
-
+        type="button"
+        onClick={() => dispatch(previousStep())}
         disabled={step === 1}
-
-        className="
-          px-6
-          py-3
-          rounded-xl
-          border
-        "
+        className="text-sm font-medium text-gray-600 transition
+          hover:text-brand-dark disabled:opacity-40"
       >
-
         Back
-
       </button>
 
       <button
-
-        onClick={() =>
-          dispatch(nextStep())
-        }
-
-        disabled={step === 5}
-
-        className="
-          px-8
-          py-3
-          rounded-xl
-          bg-violet-600
-          text-white
-          font-semibold
-        "
+        type="button"
+        onClick={() => dispatch(nextStep())}
+        className="rounded-md bg-brand-primary px-6 py-2.5 text-sm font-semibold
+          text-white transition hover:opacity-90"
       >
-
         Continue
-
       </button>
-
     </div>
   );
 };

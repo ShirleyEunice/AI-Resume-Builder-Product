@@ -1,114 +1,54 @@
-import {
-  useSelector,
-} from "react-redux";
+import { useSelector } from "react-redux";
+import { Check } from "lucide-react";
 
-const steps = [
-  "Profile",
-  "Experience",
-  "Education",
-  "Additional",
-  "Done",
-];
+const steps = ["Profile", "Experience", "Education", "Additional", "Done"];
 
 const WizardStepper = () => {
-
-  const wizardStep =
-    useSelector(
-      (state) =>
-        state.resume.wizardStep
-    );
+  const wizardStep = useSelector((state) => state.resume.wizardStep);
 
   return (
+    <div className="flex items-center justify-between">
+      {steps.map((step, index) => {
+        const stepNumber = index + 1;
+        const completed = wizardStep > stepNumber;
+        const active = wizardStep === stepNumber;
+        const isLast = index === steps.length - 1;
 
-    <div className="
-      flex
-      items-center
-      justify-between ms-16
-    ">
-
-      {
-        steps.map((step, index) => {
-
-          const stepNumber =
-            index + 1;
-
-          const active =
-            wizardStep >= stepNumber;
-
-          return (
-
-            <div
-              key={step}
-              className="
-                flex
-                items-center
-                flex-1
-              "
-            >
-
-              <div className="
-                flex
-                flex-col
-                items-center
-              ">
-
-                <div className={`
-                  w-10
-                  h-10
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                  text-sm
-                  font-bold
-
+        return (
+          <div key={step} className="flex flex-1 items-center last:flex-none">
+            <div className="flex flex-col items-center">
+              <div
+                className={`flex h-8 w-8 items-center justify-center rounded-full border-2 text-xs font-bold transition
                   ${
-                    active
-                    ? "bg-violet-600 text-white"
-                    : "bg-gray-200 text-gray-500"
-                  }
-                `}>
-
-                  {stepNumber}
-
-                </div>
-
-                <p className="
-                  mt-2
-                  text-sm
-                  font-medium
-                ">
-
-                  {step}
-
-                </p>
-
+                    completed
+                      ? "border-brand-primary bg-brand-primary text-white"
+                      : active
+                        ? "border-brand-primary bg-brand-primary text-white"
+                        : "border-gray-300 bg-white text-gray-400"
+                  }`}
+              >
+                {completed ? <Check size={16} /> : stepNumber}
               </div>
 
-              {
-                index !==
-                steps.length - 1 && (
-
-                  <div className={`
-                    flex-1
-                    h-[2px]
-                    mx-4
-
-                    ${
-                      wizardStep >
-                      stepNumber
-                      ? "bg-violet-600"
-                      : "bg-gray-200"
-                    }
-                  `}/>
-                )
-              }
-
+              <p
+                className={`mt-1.5 text-xs font-medium ${
+                  active || completed ? "text-brand-dark" : "text-gray-400"
+                }`}
+              >
+                {step}
+              </p>
             </div>
-          );
-        })
-      }
 
+            {!isLast && (
+              <div
+                className={`mx-2 mb-5 h-[2px] flex-1 ${
+                  completed ? "bg-brand-primary" : "bg-gray-200"
+                }`}
+              />
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 };

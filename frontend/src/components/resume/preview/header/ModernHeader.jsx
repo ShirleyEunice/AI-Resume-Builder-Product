@@ -1,11 +1,9 @@
 import { useSelector } from "react-redux";
 
 const ModernHeader = () => {
-  const { personalInfo, layoutSettings } = useSelector(
+  const { personalInfo } = useSelector(
     (state) => state.resume.currentResume,
   );
-
-  const accentColor = layoutSettings?.accentColor || "#0d9488";
 
   const location =
     [personalInfo.city, personalInfo.state, personalInfo.country]
@@ -18,7 +16,7 @@ const ModernHeader = () => {
         {personalInfo.fullName || "Jennifer"}
       </h1>
 
-      <p className="text-sm font-medium mt-1" style={{ color: accentColor }}>
+      <p className="text-sm text-brand-primary font-medium mt-1">
         {personalInfo.jobTitle || personalInfo.headLine || "Product Manager"}
       </p>
 

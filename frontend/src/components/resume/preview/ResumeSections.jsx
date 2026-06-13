@@ -1,5 +1,34 @@
 import { useSelector } from "react-redux";
 
+/**
+ * Data-driven body of the resume preview. Reads every section from Redux so
+ * anything typed in the wizard shows up live. The `variant` prop controls the
+ * heading styling so each template looks distinct while sharing this renderer.
+ *
+ * Core sections (summary/experience/education/skills) fall back to sample data
+ * when empty so a fresh resume still looks complete; optional sections render
+ * only once the user adds data.
+ */
+
+const titleClass = {
+  modern:
+    "text-sm font-bold uppercase text-brand-primary border-b-2 border-brand-primary pb-1 mb-2",
+  classic:
+    "text-sm font-bold uppercase tracking-wide text-gray-900 border-b border-gray-800 pb-1 mb-2",
+  minimal:
+    "text-[11px] font-semibold uppercase tracking-[0.25em] text-gray-500 mb-2",
+};
+
+const SectionTitle = ({ variant, children }) => (
+  <h2 className={titleClass[variant] || titleClass.modern}>{children}</h2>
+);
+
+const accentText = {
+  modern: "text-brand-primary",
+  classic: "text-gray-700",
+  minimal: "text-gray-500",
+};
+
 const dateRange = (start, end, current) => {
   if (!start && !end && !current) return "";
   const tail = current ? "Present" : end || "";
@@ -8,52 +37,9 @@ const dateRange = (start, end, current) => {
 
 const join = (...parts) => parts.filter(Boolean).join(", ");
 
-// Section heading — styling differs per template variant; accent color is applied via inline style
-const SectionTitle = ({ variant, children, color }) => {
-  if (variant === "classic") {
-    return (
-      <h2
-        className="text-sm font-bold uppercase tracking-wide pb-1 mb-2 border-b"
-        style={{ color, borderColor: color }}
-      >
-        {children}
-      </h2>
-    );
-  }
-  if (variant === "minimal") {
-    return (
-      <h2
-        className="text-[11px] font-semibold uppercase tracking-[0.25em] mb-2"
-        style={{ color }}
-      >
-        {children}
-      </h2>
-    );
-  }
-  // modern (default)
-  return (
-    <h2
-      className="text-sm font-bold uppercase pb-1 mb-2 border-b-2"
-      style={{ color, borderColor: color }}
-    >
-      {children}
-    </h2>
-  );
-};
-
 const ResumeSections = ({ variant = "modern" }) => {
   const resume = useSelector((state) => state.resume.currentResume);
-
-  const accentColor =
-    resume.layoutSettings?.accentColor || "#0d9488";
-
-  // Classic and minimal use subdued accent text; modern uses the full accent color
-  const accentStyle =
-    variant === "modern"
-      ? { color: accentColor }
-      : variant === "classic"
-      ? { color: "#374151" }
-      : { color: "#6b7280" };
+  const accent = accentText[variant] || accentText.modern;
 
   const {
     personalInfo = {},
@@ -107,9 +93,7 @@ const ResumeSections = ({ variant = "modern" }) => {
     <div className="space-y-4">
       {/* SUMMARY */}
       <section>
-        <SectionTitle variant={variant} color={accentColor}>
-          Professional Summary
-        </SectionTitle>
+        <SectionTitle variant={variant}>Professional Summary</SectionTitle>
         <p className="text-xs text-gray-700">
           {personalInfo.summary ||
             "Motivated and detail-oriented professional seeking to contribute to organizational success while developing professional expertise."}
@@ -118,9 +102,7 @@ const ResumeSections = ({ variant = "modern" }) => {
 
       {/* EXPERIENCE */}
       <section>
-        <SectionTitle variant={variant} color={accentColor}>
-          Experience
-        </SectionTitle>
+        <SectionTitle variant={variant}>Experience</SectionTitle>
         {experienceItems.map((exp, i) => (
           <div key={i} className="mb-3">
             <div className="flex justify-between">
@@ -131,7 +113,7 @@ const ResumeSections = ({ variant = "modern" }) => {
                 {dateRange(exp.startDate, exp.endDate, exp.current)}
               </span>
             </div>
-            <p className="text-xs" style={accentStyle}>
+            <p className={`text-xs ${accent}`}>
               {join(exp.employer || exp.company, exp.location)}
             </p>
             {exp.summary && (
@@ -152,9 +134,7 @@ const ResumeSections = ({ variant = "modern" }) => {
 
       {/* EDUCATION */}
       <section>
-        <SectionTitle variant={variant} color={accentColor}>
-          Education
-        </SectionTitle>
+        <SectionTitle variant={variant}>Education</SectionTitle>
         {educationItems.map((edu, i) => (
           <div key={i} className="mb-3">
             <div className="flex justify-between">
@@ -165,7 +145,7 @@ const ResumeSections = ({ variant = "modern" }) => {
                 {dateRange(edu.startDate, edu.endDate)}
               </span>
             </div>
-            <p className="text-xs" style={accentStyle}>
+            <p className={`text-xs ${accent}`}>
               {join(edu.institution, edu.location)}
             </p>
             {edu.gpa && (
@@ -187,9 +167,7 @@ const ResumeSections = ({ variant = "modern" }) => {
 
       {/* SKILLS */}
       <section>
-        <SectionTitle variant={variant} color={accentColor}>
-          Skills
-        </SectionTitle>
+        <SectionTitle variant={variant}>Skills</SectionTitle>
         <div className="flex flex-wrap gap-2">
           {skillItems.map((skill, i) => (
             <span
@@ -205,14 +183,12 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* PROJECTS */}
       {projects.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Projects
-          </SectionTitle>
+          <SectionTitle variant={variant}>Projects</SectionTitle>
           {projects.map((p, i) => (
             <div key={i} className="mb-3">
               <h3 className="text-xs font-semibold">{p.title}</h3>
               {(p.techStack || []).length > 0 && (
-                <p className="text-[11px]" style={accentStyle}>
+                <p className={`text-[11px] ${accent}`}>
                   {p.techStack.join(", ")}
                 </p>
               )}
@@ -227,9 +203,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* CERTIFICATIONS */}
       {certifications.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Certifications
-          </SectionTitle>
+          <SectionTitle variant={variant}>Certifications</SectionTitle>
           {certifications.map((c, i) => (
             <div key={i} className="mb-1 flex justify-between">
               <span className="text-xs text-gray-700">
@@ -244,9 +218,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* AWARDS */}
       {awards.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Awards
-          </SectionTitle>
+          <SectionTitle variant={variant}>Awards</SectionTitle>
           {awards.map((a, i) => (
             <div key={i} className="mb-1 flex justify-between">
               <span className="text-xs text-gray-700">
@@ -261,9 +233,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* VOLUNTEERING */}
       {volunteer.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Volunteering
-          </SectionTitle>
+          <SectionTitle variant={variant}>Volunteering</SectionTitle>
           {volunteer.map((v, i) => (
             <div key={i} className="mb-2">
               <div className="flex justify-between">
@@ -285,9 +255,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* PUBLICATIONS */}
       {publications.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Publications
-          </SectionTitle>
+          <SectionTitle variant={variant}>Publications</SectionTitle>
           {publications.map((p, i) => (
             <div key={i} className="mb-1">
               <span className="text-xs text-gray-700">
@@ -304,9 +272,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* LANGUAGES */}
       {languages.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Languages
-          </SectionTitle>
+          <SectionTitle variant={variant}>Languages</SectionTitle>
           <div className="flex flex-wrap gap-x-4 gap-y-1">
             {languages.map((l, i) => (
               <span key={i} className="text-xs text-gray-700">
@@ -323,9 +289,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* INTERESTS */}
       {interests.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Interests
-          </SectionTitle>
+          <SectionTitle variant={variant}>Interests</SectionTitle>
           <p className="text-xs text-gray-700">{interests.join(", ")}</p>
         </section>
       )}
@@ -333,9 +297,7 @@ const ResumeSections = ({ variant = "modern" }) => {
       {/* ADDITIONAL */}
       {additional.length > 0 && (
         <section>
-          <SectionTitle variant={variant} color={accentColor}>
-            Additional
-          </SectionTitle>
+          <SectionTitle variant={variant}>Additional</SectionTitle>
           {additional.map((a, i) => (
             <div key={i} className="mb-1">
               {a.title && (

@@ -38,10 +38,6 @@ const RepeatableSection = ({
   };
 
   const multiple = entries.length > 1;
-  // In bare (accordion) mode show a remove button even for a single entry so
-  // the user can clear a section they accidentally opened without needing to
-  // delete the whole section from the parent.
-  const showEntryRemove = multiple || bare;
 
   return (
     <div className="space-y-6">
@@ -56,17 +52,16 @@ const RepeatableSection = ({
                 : "space-y-4 rounded-lg border border-gray-200 bg-white p-5"
           }
         >
-          {showEntryRemove && (
-            <div className={`flex items-center ${multiple ? "justify-between" : "justify-end"}`}>
-              {multiple && (
-                <h3 className="text-sm font-semibold text-gray-500">
-                  {entryLabel} {index + 1}
-                </h3>
-              )}
+          {multiple && (
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-gray-500">
+                {entryLabel} {index + 1}
+              </h3>
+
               <button
                 type="button"
                 onClick={() => removeEntry(index)}
-                className="rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors"
+                className="rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-500"
               >
                 <Trash2 size={16} />
               </button>

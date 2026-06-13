@@ -53,7 +53,6 @@ const initialState = {
     layoutSettings: {
       lineSpacing: "1.15",
       margin: "0.75",
-      accentColor: "#0d9488",
     },
 
     // ATS

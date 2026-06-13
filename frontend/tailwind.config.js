@@ -8,10 +8,6 @@ export default {
   theme: {
     extend: {
 
-  fontFamily: {
-    sans: ['"Geist Variable"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
-  },
-
   colors: {
 
     brand: {

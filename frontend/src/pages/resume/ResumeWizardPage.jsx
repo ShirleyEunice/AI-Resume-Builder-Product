@@ -28,7 +28,6 @@ const ResumeWizardPage = () => {
     (state) => state.resume.wizardStep
   );
 
-  // Prevent duplicate draft creation
   const draftCreated = useRef(false);
 
   useEffect(() => {
@@ -37,37 +36,29 @@ const ResumeWizardPage = () => {
 
       try {
 
-        // Already exists
         if (currentResume._id) return;
 
         const { _id, ...resumeData } = currentResume;
 
-        const data = await createResume(resumeData);
+        const data = await createResume({
+          ...resumeData,
+          title: resumeData.title?.trim() || "Untitled Resume",
+        });
 
-        dispatch(
-          setResumeId(data._id)
-        );
+        dispatch(setResumeId(data._id));
 
       } catch (error) {
-
-        console.error(
-          "Create Draft Error:",
-          error
-        );
+        console.error("Create Draft Error:", error);
       }
     };
 
-    // React StrictMode protection
     if (!draftCreated.current) {
-
       draftCreated.current = true;
-
       createDraft();
     }
 
   }, []);
 
-  // Auto Save Hook
   useAutoSave();
 
   const renderStep = () => {
@@ -95,7 +86,7 @@ const ResumeWizardPage = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden flex bg-gray-100">
+    <div className="h-full overflow-hidden flex bg-gray-100">
 
       {/* LEFT PANEL */}
       <div className="w-[55%] bg-white overflow-y-auto p-8">

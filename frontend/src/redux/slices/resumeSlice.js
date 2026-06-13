@@ -6,7 +6,6 @@ const initialState = {
   currentResume: {
     title: "Untitled Resume",
 
-    // PERSONAL INFO
     personalInfo: {
       fullName: "",
       jobTitle: "",
@@ -20,18 +19,12 @@ const initialState = {
       state: "",
       postalCode: "",
       country: "",
-
-      // AI helper field (not shown as an input, used by Generate Summary)
       yearsOfExperience: "",
     },
 
-    // EXPERIENCE
     experience: [],
-
-    // EDUCATION
     education: [],
 
-    // ADDITIONAL SECTIONS
     skills: {
       technical: [],
       soft: [],
@@ -46,20 +39,17 @@ const initialState = {
     interests: [],
     additional: [],
 
-    // TEMPLATE
     template: "modern",
 
-    // LAYOUT SETTINGS
     layoutSettings: {
       lineSpacing: "1.15",
       margin: "0.75",
+      accentColor: "#0d9488",
     },
 
-    // ATS
     atsScore: 0,
   },
 
-  // WIZARD STEP
   wizardStep: 1,
 
   loading: false,
@@ -88,10 +78,10 @@ const resumeSlice = createSlice({
       }
     },
 
-    setResume: (state, action)=>{
+    setResume: (state, action) => {
       state.currentResume = {
         ...initialState.currentResume,
-        ...action.payload
+        ...action.payload,
       };
       delete state.currentResume._id;
       state.wizardStep = 1;
@@ -129,21 +119,14 @@ const resumeSlice = createSlice({
 });
 
 export const {
-  // wizard
   setWizardStep,
   nextStep,
   previousStep,
   setResumeId,
   setResumeTitle,
-
-  // resume
   updateResume,
-
-  // template / layout
   updateTemplate,
   updateLayoutSettings,
-
-  // reset
   resetResume,
   setResume,
 } = resumeSlice.actions;

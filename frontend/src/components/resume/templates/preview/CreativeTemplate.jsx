@@ -16,12 +16,13 @@ const SideTitle = ({ children }) => (
   </h2>
 );
 
-const MainTitle = ({ children }) => (
-  <h2 className="mb-2 text-sm font-bold text-brand-primary">{children}</h2>
+const MainTitle = ({ children, color }) => (
+  <h2 className="mb-2 text-sm font-bold" style={{ color }}>{children}</h2>
 );
 
 const CreativeTemplate = () => {
   const resume = useSelector((state) => state.resume.currentResume);
+  const accentColor = resume.layoutSettings?.accentColor || "#0d9488";
 
   const {
     personalInfo = {},
@@ -56,7 +57,7 @@ const CreativeTemplate = () => {
     <TemplateWrapper>
       <div className="-m-[0.75in] flex min-h-full font-sans">
         {/* SIDEBAR */}
-        <div className="w-[32%] space-y-6 bg-brand-primary p-5 text-white">
+        <div className="w-[32%] space-y-6 p-5 text-white" style={{ backgroundColor: accentColor }}>
           <div>
             <h1 className="text-lg font-bold leading-tight">
               {personalInfo.fullName || "Jennifer Jobscan"}
@@ -122,7 +123,7 @@ const CreativeTemplate = () => {
         {/* MAIN */}
         <div className="flex-1 space-y-4 p-5">
           <section>
-            <MainTitle>About Me</MainTitle>
+            <MainTitle color={accentColor}>About Me</MainTitle>
             <p className="text-xs text-gray-700">
               {personalInfo.summary ||
                 "Creative and detail-oriented professional passionate about building innovative products and delivering exceptional user experiences."}
@@ -131,16 +132,17 @@ const CreativeTemplate = () => {
 
           {experience.length > 0 && (
             <section>
-              <MainTitle>Experience</MainTitle>
+              <MainTitle color={accentColor}>Experience</MainTitle>
               {experience.map((exp, i) => (
                 <div
                   key={i}
-                  className="mb-3 border-l-2 border-brand-primary pl-3"
+                  className="mb-3 border-l-2 pl-3"
+                  style={{ borderColor: accentColor }}
                 >
                   <h3 className="text-xs font-semibold">
                     {exp.jobTitle || exp.role}
                   </h3>
-                  <p className="text-[11px] text-brand-primary">
+                  <p className="text-[11px]" style={{ color: accentColor }}>
                     {join(exp.employer || exp.company, exp.location)}
                     {dateRange(exp.startDate, exp.endDate, exp.current) &&
                       ` • ${dateRange(exp.startDate, exp.endDate, exp.current)}`}
@@ -164,7 +166,7 @@ const CreativeTemplate = () => {
 
           {education.length > 0 && (
             <section>
-              <MainTitle>Education</MainTitle>
+              <MainTitle color={accentColor}>Education</MainTitle>
               {education.map((edu, i) => (
                 <div key={i} className="mb-2">
                   <h3 className="text-xs font-semibold">
@@ -183,7 +185,7 @@ const CreativeTemplate = () => {
 
           {projects.length > 0 && (
             <section>
-              <MainTitle>Projects</MainTitle>
+              <MainTitle color={accentColor}>Projects</MainTitle>
               {projects.map((p, i) => (
                 <div key={i} className="mb-2">
                   <h3 className="text-xs font-semibold">{p.title}</h3>
@@ -197,7 +199,7 @@ const CreativeTemplate = () => {
 
           {certifications.length > 0 && (
             <section>
-              <MainTitle>Certifications</MainTitle>
+              <MainTitle color={accentColor}>Certifications</MainTitle>
               {certifications.map((c, i) => (
                 <p key={i} className="text-xs text-gray-700">
                   {join(c.name, c.issuer)} {c.year && `(${c.year})`}
@@ -208,7 +210,7 @@ const CreativeTemplate = () => {
 
           {awards.length > 0 && (
             <section>
-              <MainTitle>Awards</MainTitle>
+              <MainTitle color={accentColor}>Awards</MainTitle>
               {awards.map((a, i) => (
                 <p key={i} className="text-xs text-gray-700">
                   {join(a.title, a.issuer)} {a.year && `(${a.year})`}
@@ -219,7 +221,7 @@ const CreativeTemplate = () => {
 
           {volunteer.length > 0 && (
             <section>
-              <MainTitle>Volunteering</MainTitle>
+              <MainTitle color={accentColor}>Volunteering</MainTitle>
               {volunteer.map((v, i) => (
                 <div key={i} className="mb-2">
                   <h3 className="text-xs font-semibold">
@@ -235,7 +237,7 @@ const CreativeTemplate = () => {
 
           {publications.length > 0 && (
             <section>
-              <MainTitle>Publications</MainTitle>
+              <MainTitle color={accentColor}>Publications</MainTitle>
               {publications.map((p, i) => (
                 <p key={i} className="text-xs text-gray-700">
                   {join(p.title, p.publisher)} {p.year && `(${p.year})`}
@@ -246,7 +248,7 @@ const CreativeTemplate = () => {
 
           {additional.length > 0 && (
             <section>
-              <MainTitle>Additional</MainTitle>
+              <MainTitle color={accentColor}>Additional</MainTitle>
               {additional.map((a, i) => (
                 <p key={i} className="text-xs text-gray-700">
                   {a.title && (

@@ -2,19 +2,6 @@ import { Plus, Trash2 } from "lucide-react";
 import Field from "./Field";
 import DateField from "./DateField";
 
-/**
- * Config-driven list of repeatable entries (jobs, schools, certificates...).
- *
- * Props:
- *  - entries:    array of objects
- *  - onChange:   (nextArray) => void
- *  - newEntry:   object template used when adding a new entry
- *  - fields:     [{ name, label, placeholder, type, textarea, rows, half, maxLength }]
- *  - entryLabel: singular label, e.g. "Experience" -> "Experience 1"
- *  - addLabel:   text for the add button
- *  - renderExtra(entry, index, updateField): optional custom controls per entry
- *  - bare:       when true, drops the per-entry card chrome (used inside accordions)
- */
 const RepeatableSection = ({
   entries = [],
   onChange,
@@ -38,6 +25,10 @@ const RepeatableSection = ({
   };
 
   const multiple = entries.length > 1;
+  // In bare (accordion) mode show a remove button even for a single entry so
+  // the user can clear a section they accidentally opened without needing to
+  // delete the whole section from the parent.
+  const showEntryRemove = multiple || bare;
 
   return (
     <div className="space-y-6">
@@ -52,16 +43,17 @@ const RepeatableSection = ({
                 : "space-y-4 rounded-lg border border-gray-200 bg-white p-5"
           }
         >
-          {multiple && (
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-gray-500">
-                {entryLabel} {index + 1}
-              </h3>
-
+          {showEntryRemove && (
+            <div className={`flex items-center ${multiple ? "justify-between" : "justify-end"}`}>
+              {multiple && (
+                <h3 className="text-sm font-semibold text-gray-500">
+                  {entryLabel} {index + 1}
+                </h3>
+              )}
               <button
                 type="button"
                 onClick={() => removeEntry(index)}
-                className="rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-500"
+                className="rounded-md p-1.5 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors"
               >
                 <Trash2 size={16} />
               </button>
@@ -78,7 +70,7 @@ const RepeatableSection = ({
                   <DateField
                     label={field.label}
                     value={entry[field.name]}
-                    disabled={field.name === "endDate" && entry.current} // greys out End when "I currently work here"
+                    disabled={field.name === "endDate" && entry.current}
                     onChange={(val) => updateField(index, field.name, val)}
                   />
                 ) : (

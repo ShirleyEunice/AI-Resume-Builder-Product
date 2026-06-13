@@ -6,6 +6,7 @@ export const createResume = async (req, res) => {
     //FIRST create
     const resumeData = {
       ...req.body,
+      title: req.body.title?.trim() || "Untitled Resume",
     };
 
     delete resumeData._id;

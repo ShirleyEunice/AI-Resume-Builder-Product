@@ -11,7 +11,10 @@ import webhookRoutes from "./routes/webhook.js";
 
 dotenv.config({ path: "./.env" });
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  credentials: true,
+}));
 app.use(express.raw())
 
 app.use("/api/webhook", express.raw({type:'application/json'}), webhookRoutes);

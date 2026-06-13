@@ -1,14 +1,19 @@
 import { sidebarLinks } from "@/constants/sidebarLinks";
 import { logout } from "@/redux/slices/authSlice";
+import { closeMobileSidebar } from "@/redux/slices/uiSlice";
 import { LogOut } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
-  const {user} = useSelector((state)=> state.auth);
-  const {sidebarCollapsed} = useSelector((state)=> state.ui);
+  const { user } = useSelector((state) => state.auth);
+  const { sidebarCollapsed } = useSelector((state) => state.ui);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleNavClick = () => {
+    dispatch(closeMobileSidebar());
+  };
 
   const handleLogout = ()=>{
     localStorage.removeItem("token");
@@ -50,6 +55,8 @@ export default function Sidebar() {
   key={i}
 
   to={link.path}
+
+  onClick={handleNavClick}
 
   className={({isActive})=>
 

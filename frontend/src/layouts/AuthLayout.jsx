@@ -88,8 +88,15 @@ const AuthLayout = ({ children }) => {
       </div>
 
       {/* Right Side */}
-      <div className='flex items-center justify-center p-8 bg-gray-50 min-h-screen'>
+      <div className='flex items-center justify-center p-5 sm:p-8 bg-gray-50 min-h-screen'>
         <div className='w-full max-w-md'>
+          {/* Mobile-only logo */}
+          <div className='flex items-center gap-2 mb-6 lg:hidden'>
+            <div className='w-8 h-8 rounded-xl flex items-center justify-center bg-brand-primary'>
+              <Sparkles className='w-4 h-4 text-white' />
+            </div>
+            <span className='font-bold text-gray-900'>AI Career Platform</span>
+          </div>
           {children}
         </div>
       </div>

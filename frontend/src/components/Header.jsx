@@ -18,6 +18,7 @@ import {
 
 import {
   toggleSidebar,
+  toggleMobileSidebar,
 } from "@/redux/slices/uiSlice";
 
 const Header = () => {
@@ -86,11 +87,10 @@ const Header = () => {
         {/* SIDEBAR TOGGLE */}
         <button
 
-          onClick={()=>
-            dispatch(
-              toggleSidebar()
-            )
-          }
+          onClick={() => {
+            dispatch(toggleSidebar());
+            dispatch(toggleMobileSidebar());
+          }}
 
           className="
             w-11
@@ -116,11 +116,11 @@ const Header = () => {
         <div>
 
           <h1 className="
-            text-2xl
+            text-base
+            sm:text-2xl
             font-bold
             text-gray-800
           ">
-
             AI Resume
           </h1>
         </div>
@@ -171,7 +171,7 @@ const Header = () => {
 
         {/* PLAN */}
         <div className="
-          px-4
+          px-3
           py-2
           rounded-2xl
           bg-brand-accent/10
@@ -186,20 +186,17 @@ const Header = () => {
             w-4
             h-4
             text-brand-accent
+            shrink-0
           " />
 
           <span className="
+            hidden
+            sm:inline
             text-sm
             font-semibold
             text-brand-accent
           ">
-
-            {
-              user?.isPremium
-              ? "Premium Plan"
-              : "Free Plan"
-            }
-
+            {user?.isPremium ? "Premium Plan" : "Free Plan"}
           </span>
 
         </div>

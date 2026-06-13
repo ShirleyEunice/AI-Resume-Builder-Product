@@ -15,7 +15,8 @@ const Dashboard = () => {
     <div className="
       min-h-screen
       bg-gray-100
-      p-5
+      p-3
+      sm:p-5
       space-y-4
     ">
 

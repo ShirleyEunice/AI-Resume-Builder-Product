@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import PersonalInfoForm from "@/components/resume/forms/PersonalInfoForm";
@@ -29,6 +29,7 @@ const ResumeWizardPage = () => {
   );
 
   const draftCreated = useRef(false);
+  const [mobileTab, setMobileTab] = useState("form");
 
   useEffect(() => {
 
@@ -86,30 +87,57 @@ const ResumeWizardPage = () => {
   };
 
   return (
-    <div className="h-full overflow-hidden flex bg-gray-100">
+    <div className="h-full overflow-hidden flex flex-col bg-gray-100">
 
-      {/* LEFT PANEL */}
-      <div className="w-[55%] bg-white overflow-y-auto p-8">
-
-        <WizardStepper />
-
-        <div className="mt-10">
-          {renderStep()}
-        </div>
-
-        <WizardNavigation />
-
+      {/* Mobile tab toggle */}
+      <div className="flex md:hidden border-b bg-white shrink-0">
+        <button
+          onClick={() => setMobileTab("form")}
+          className={`flex-1 py-3 text-sm font-semibold transition ${
+            mobileTab === "form"
+              ? "text-brand-primary border-b-2 border-brand-primary"
+              : "text-gray-400"
+          }`}
+        >
+          Edit
+        </button>
+        <button
+          onClick={() => setMobileTab("preview")}
+          className={`flex-1 py-3 text-sm font-semibold transition ${
+            mobileTab === "preview"
+              ? "text-brand-primary border-b-2 border-brand-primary"
+              : "text-gray-400"
+          }`}
+        >
+          Preview
+        </button>
       </div>
 
-      {/* RIGHT PANEL */}
-      <div className="flex-1 bg-gray-200 overflow-y-auto p-10">
+      <div className="flex flex-1 overflow-hidden">
 
-        <div className="flex justify-center">
+        {/* LEFT PANEL — form */}
+        <div className={`
+          bg-white overflow-y-auto p-5 md:p-8
+          md:w-[55%] md:block
+          ${mobileTab === "form" ? "block w-full" : "hidden"}
+        `}>
+          <WizardStepper />
+          <div className="mt-8">
+            {renderStep()}
+          </div>
+          <WizardNavigation />
+        </div>
+
+        {/* RIGHT PANEL — preview */}
+        <div className={`
+          bg-gray-200 overflow-y-auto p-5 md:p-10
+          md:flex md:flex-1 md:justify-center
+          ${mobileTab === "preview" ? "flex flex-1 justify-center" : "hidden"}
+        `}>
           <ResumePreview />
         </div>
 
       </div>
-
     </div>
   );
 };

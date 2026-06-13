@@ -1,4 +1,5 @@
 import MarginSelector from '@/components/resume/templates/MarginSelector'
+import ColorSelector from '@/components/resume/templates/ColorSelector'
 import ClassicTemplate from '@/components/resume/templates/preview/ClassicTemplate'
 import CreativeTemplate from '@/components/resume/templates/preview/CreativeTemplate'
 import MinimalTemplate from '@/components/resume/templates/preview/MinimalTemplate'
@@ -18,6 +19,13 @@ const TemplateSelectionPage = () => {
       <div className='w-[45%] overflow-y-auto bg-white p-10'>
         <h1 className='text-4xl font-bold'>Choose your template</h1>
         <p className='mt-3 text-gray-500'>Customize spacing, margins and template.</p>
+        {/* Accent Color */}
+        <div className='mt-10'>
+          <h2 className='text-xl font-semibold'>Accent color</h2>
+          <p className='mt-1 text-sm text-gray-500'>Choose a color that reflects your style — it appears in headings and highlights.</p>
+          <ColorSelector />
+        </div>
+
         {/* Spacing */}
         <div className='mt-10'>
           <h2 className='text-xl font-semibold'>Line spacing</h2>

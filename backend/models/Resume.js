@@ -8,7 +8,7 @@ const resumeSchema = new mongoose.Schema(
     },
     title: {
       type: String,
-      required: true,
+      default: "Untitled Resume",
     },
     personalInfo: {
       fullName: { type: String },
@@ -116,6 +116,7 @@ const resumeSchema = new mongoose.Schema(
     layoutSettings: {
       lineSpacing: { type: String, default: "1.15" },
       margin: { type: String, default: "0.75" },
+      accentColor: { type: String, default: "#0d9488" },
     },
     atsScore: {
       type: Number,

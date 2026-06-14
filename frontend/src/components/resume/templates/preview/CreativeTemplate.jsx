@@ -23,6 +23,7 @@ const MainTitle = ({ children, color }) => (
 const CreativeTemplate = () => {
   const resume = useSelector((state) => state.resume.currentResume);
   const accentColor = resume.layoutSettings?.accentColor || "#0d9488";
+  const margin = parseFloat(resume.layoutSettings?.margin || "0.75");
 
   const {
     personalInfo = {},
@@ -55,9 +56,12 @@ const CreativeTemplate = () => {
 
   return (
     <TemplateWrapper>
-      <div className="-m-[0.75in] flex min-h-full font-sans">
+      <div style={{ margin: `-${margin}in` }} className="flex min-h-full font-sans">
         {/* SIDEBAR */}
-        <div className="w-[32%] space-y-6 p-5 text-white" style={{ backgroundColor: accentColor }}>
+        <div
+          className="w-[32%] space-y-6 text-white"
+          style={{ backgroundColor: accentColor, padding: `${margin * 0.8}in ${margin * 0.55}in` }}
+        >
           <div>
             <h1 className="text-lg font-bold leading-tight">
               {personalInfo.fullName || "Jennifer Jobscan"}
@@ -121,7 +125,10 @@ const CreativeTemplate = () => {
         </div>
 
         {/* MAIN */}
-        <div className="flex-1 space-y-4 p-5">
+        <div
+          className="flex-1 space-y-4"
+          style={{ padding: `${margin * 0.8}in ${margin}in ${margin * 0.8}in ${margin * 0.5}in` }}
+        >
           <section>
             <MainTitle color={accentColor}>About Me</MainTitle>
             <p className="text-xs text-gray-700">

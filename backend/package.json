@@ -24,6 +24,7 @@
     "openai": "^6.34.0",
     "pdf-parse": "^1.1.4",
     "redis": "^5.12.1",
+    "resend": "^6.12.4",
     "stripe": "^22.1.0"
   },
   "devDependencies": {

@@ -6,7 +6,7 @@ const TemplateWrapper = ({children}) => {
     const linespacing = layout?.lineSpacing || "1.15";
     const margin = layout?.margin || "0.75";
   return (
-    <div className='bg-white shadow-2xl w-[210mm] min-h-[297mm]'
+    <div className='bg-white shadow-2xl w-[210mm] min-h-[297mm]' id='resume-template'
     style={{lineHeight: linespacing, padding: `${margin}in`}}>{children}</div>
   )
 }

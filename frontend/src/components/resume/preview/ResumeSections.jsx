@@ -115,18 +115,24 @@ const ResumeSections = ({ variant = "modern" }) => {
 
       <section>
         <SectionTitle variant={variant} color={accentColor}>Education</SectionTitle>
-        {educationItems.map((edu, i) => (
-          <div key={i} className="mb-3">
-            <div className="flex justify-between">
-              <h3 className="text-xs font-semibold">{join(edu.degreeType || edu.degree, edu.areaOfStudy || edu.field)}</h3>
-              <span className="text-[11px] text-gray-500">{dateRange(edu.startDate, edu.endDate)}</span>
+        {educationItems.map((edu, i) => {
+          const degreeTitle = join(edu.degreeType || edu.degree, edu.areaOfStudy || edu.field);
+          const institutionLine = join(edu.institution, edu.location);
+          return (
+            <div key={i} className="mb-3">
+              <div className="flex justify-between items-start gap-2">
+                <h3 className="text-xs font-semibold">{degreeTitle || institutionLine}</h3>
+                <span className="text-[11px] text-gray-500 shrink-0">{dateRange(edu.startDate, edu.endDate)}</span>
+              </div>
+              {degreeTitle && institutionLine && (
+                <p className="text-xs" style={accentStyle}>{institutionLine}</p>
+              )}
+              {edu.gpa && <p className="text-[11px] text-gray-500">GPA: {edu.gpa}</p>}
+              {(edu.minor || []).length > 0 && <p className="text-[11px] text-gray-600">Minor: {edu.minor.join(", ")}</p>}
+              {(edu.coursework || []).length > 0 && <p className="text-[11px] text-gray-600">Coursework: {edu.coursework.join(", ")}</p>}
             </div>
-            <p className="text-xs" style={accentStyle}>{join(edu.institution, edu.location)}</p>
-            {edu.gpa && <p className="text-[11px] text-gray-500">GPA: {edu.gpa}</p>}
-            {(edu.minor || []).length > 0 && <p className="text-[11px] text-gray-600">Minor: {edu.minor.join(", ")}</p>}
-            {(edu.coursework || []).length > 0 && <p className="text-[11px] text-gray-600">Coursework: {edu.coursework.join(", ")}</p>}
-          </div>
-        ))}
+          );
+        })}
       </section>
 
       <section>
@@ -155,9 +161,9 @@ const ResumeSections = ({ variant = "modern" }) => {
         <section>
           <SectionTitle variant={variant} color={accentColor}>Certifications</SectionTitle>
           {certifications.map((c, i) => (
-            <div key={i} className="mb-1 flex justify-between">
+            <div key={i} className="mb-1 flex justify-between items-start gap-3">
               <span className="text-xs text-gray-700">{join(c.name, c.issuer)}</span>
-              <span className="text-[11px] text-gray-500">{c.year}</span>
+              <span className="text-[11px] text-gray-500 shrink-0">{c.year}</span>
             </div>
           ))}
         </section>

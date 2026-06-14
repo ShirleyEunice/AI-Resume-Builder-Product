@@ -1,13 +1,14 @@
 import express from 'express';
 import { createResume, deleteResume, getResumeById, getResumes, updateResume } from '../controllers/resumeController.js';
+import {protect} from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.post('/', createResume);
-router.get('/', getResumes);
-router.get('/:id', getResumeById);
-router.put('/:id', updateResume);
-router.delete('/:id', deleteResume);
+router.post('/', protect, createResume);
+router.get('/', protect, getResumes);
+router.get('/:id', protect, getResumeById);
+router.put('/:id', protect, updateResume);
+router.delete('/:id', protect, deleteResume);
 
 
 export default router;

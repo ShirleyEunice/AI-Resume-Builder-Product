@@ -1,4 +1,5 @@
 import Resume from "../models/Resume.js";
+import { fetchResumes, invalidateResumeCache } from "../services/resume/resumeService.js";
 // Route -> POST -> /api/resume
 // Create Resume
 export const createResume = async (req, res) => {
@@ -12,16 +13,9 @@ export const createResume = async (req, res) => {
     delete resumeData._id;
 
     const resume = new Resume(resumeData);
-
-    //THEN use it
-    console.log("Before save:", resume);
-
     const saved = await resume.save();
 
-    console.log("AFTER SAVE");
-    console.log(saved._id);
-    console.log(saved);
-
+    await invalidateResumeCache(saved.userId);
     res.status(201).json(saved);
   } catch (error) {
     console.error(error);
@@ -35,8 +29,17 @@ export const createResume = async (req, res) => {
 // Get all resumes
 export const getResumes = async(req, res)=>{
     try {
-        const resumes = await Resume.find().sort({createdAt:-1});
-        res.json(resumes);
+        const page = Math.max(1, parseInt(req.query.page) || 1);
+        const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 10));
+        const sort = ["createdAt", "updatedAt", "title", "atsScore"].includes(req.query.sort)
+        ? req.query.sort : "updatedAt";
+        const order = req.query.order === "asc" ? "asc" : "desc";
+        const search = req.query.search?.trim() || "";
+        const userId = req.user?._id || req.query.userId;
+        if(!userId) return res.status(400).json({message: "userId is Required"});
+
+        const result = await fetchResumes(userId, {page, limit, sort, order, search});
+        res.json(result);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Error fetching resumes" });
@@ -67,6 +70,7 @@ export const updateResume = async(req, res)=>{
         if(!resume){
             return res.status(404).json({message: "Resume not found"});
         }
+        await invalidateResumeCache(resume.userId);
         res.json(resume);
     } catch (error) {
         console.error(error);
@@ -82,6 +86,7 @@ export const deleteResume = async(req, res)=>{
         if(!resume){
             return res.status(404).json({message: "Resume not found"});
         }
+        await invalidateResumeCache(resume.userId);
         res.json({message: "Resume deleted successfully"});
     } catch (error) {
         console.error(error);

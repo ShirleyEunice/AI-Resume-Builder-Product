@@ -83,7 +83,6 @@ const resumeSlice = createSlice({
         ...initialState.currentResume,
         ...action.payload,
       };
-      delete state.currentResume._id;
       state.wizardStep = 1;
     },
 

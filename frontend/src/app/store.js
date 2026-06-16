@@ -4,6 +4,7 @@ import agentReducer from "../redux/slices/atsSlice.js";
 import authReducer from "../redux/slices/authSlice.js";
 import atsReducer from "../redux/slices/atsSlice.js";
 import uiReducer from "../redux/slices/uiSlice.js";
+import resumeManagerReducer from "../redux/slices/resumeManagerSlice.js";
 
 export const store = configureStore({
     reducer:{
@@ -11,6 +12,7 @@ export const store = configureStore({
         agent: agentReducer,
         auth: authReducer,
         ats: atsReducer,
-        ui: uiReducer
+        ui: uiReducer,
+        resumeManager: resumeManagerReducer,
     }
 })

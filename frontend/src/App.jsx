@@ -11,6 +11,7 @@ import ATSHistory from "./pages/ats/history/ATSHistory";
 import ResumeStartPage from "./pages/resume/ResumeStartPage";
 import TemplateSelectionPage from "./pages/resume/TemplateSelectionPage";
 import ResumeWizardPage from "./pages/resume/ResumeWizardPage";
+import ResumeManagerPage from "./pages/resume/ResumeManagerPage";
 
 function App() {
   return (
@@ -51,6 +52,8 @@ function App() {
           <Route path="/resume/templates" element={<TemplateSelectionPage/>}/>
 
           <Route path="/resume/builder" element={<ResumeWizardPage/>}/>
+
+          <Route path="/resume-manager" element={<ResumeManagerPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -17,3 +17,19 @@ export const importResume = async (file, source = "resume")=>{
     const response = await API.post("/agent/import-resume", formData);
     return response.data;
 }
+
+export const getResumes = async ({page, limit, sort, order, search})=>{
+    const params = new URLSearchParams({page,limit, sort, order, search});
+    const response = await API.get(`/resume?${params}`);
+    return response.data;
+}
+
+export const getResumeById = async (id) => {
+    const response = await API.get(`/resume/${id}`);
+    return response.data;
+};
+
+export const deleteResumeById = async (id)=>{
+    const response = await API.delete(`/resume/${id}`);
+    return response.data;
+}

@@ -34,7 +34,7 @@ const BuilderTopbar = ({analyzeATSScore, analyzing, atsData}) => {
     rounded-xl
     bg-brand-primary
     text-white
-    hover:bg-violet-700
+    hover:bg-teal-700
     transition
   "
         >

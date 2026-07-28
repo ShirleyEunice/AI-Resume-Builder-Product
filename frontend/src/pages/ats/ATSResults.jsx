@@ -1,10 +1,10 @@
-import ATSHero from "@/components/ats/ATSHero";
 import ImproveResumeCTA from "@/components/ats/ImproveResumeCTA";
 import ATSScoreCard from "@/components/ats/result_grid/ATSScoreCard";
 import ATSSummaryCard from "@/components/ats/result_grid/ATSSummaryCard";
 import ImprovementSuggestions from "@/components/ats/result_grid/ImprovementSuggestions";
 import MissingSkills from "@/components/ats/result_grid/MissingSkills";
 import StrengthsCard from "@/components/ats/result_grid/StrengthsCard";
+import { PageLoader } from "@/components/ui/Loader";
 import { setATSResult, setJDtext, setResumeFile } from "@/redux/slices/atsSlice";
 import { getATSById } from "@/services/atsService";
 import { ArrowLeft } from "lucide-react";
@@ -15,117 +15,73 @@ import { useNavigate, useParams } from "react-router-dom";
 const ATSResults = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {id} = useParams();
-  const {result} = useSelector((state)=> state.ats);
+  const { id } = useParams();
+  const { result } = useSelector((state) => state.ats);
 
-  useEffect(()=>{
-    const fetchResult = async ()=>{
+  useEffect(() => {
+    const fetchResult = async () => {
       try {
         const data = await getATSById(id);
         dispatch(setATSResult(data));
       } catch (error) {
         console.error(error);
       }
-    }
-    if(id){
-      fetchResult();
-    }
-  }, [id])
+    };
+    if (id) fetchResult();
+  }, [id]);
 
-  const handleBack = async () => {
+  const handleBack = () => {
     dispatch(setResumeFile(null));
     dispatch(setJDtext(""));
-    setATSResult(null);
+    dispatch(setATSResult(null));
     navigate("/ats");
   };
 
   if (!result) {
-
-  return (
-
-    <div className="
-      h-screen
-      flex
-      items-center
-      justify-center
-    ">
-
-      <div className="
-        text-center
-      ">
-
-        <div className="
-          w-14
-          h-14
-          border-4
-          border-violet-200
-          border-t-violet-600
-          rounded-full
-          animate-spin
-          mx-auto
-        " />
-
-        <p className="
-          mt-5
-          text-gray-500
-        ">
-
-          Loading ATS Results...
-
-        </p>
-
+    return (
+      <div className="h-full flex items-center justify-center bg-gray-100">
+        <PageLoader label="Loading ATS results…" />
       </div>
+    );
+  }
 
-    </div>
-  );
-}
   return (
-    <div className="
-  h-full
-  overflow-y-auto
-  bg-gray-100
-  p-5
-    ">
-      {
-        /* <ArrowLeft className="my-4
-    cursor-pointer
-    hover:text-brand-primary
-    transition" onClick={handleBack}/> */
-      }
+    <div className="h-full overflow-y-auto bg-gray-100 p-5">
+      <div className="space-y-6 pb-10">
+        {/* Header */}
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <h1 className="font-display text-2xl font-semibold text-brand-ink">Analysis Results</h1>
+            <p className="text-sm text-gray-500 mt-1">
+              How your resume scores against the job description.
+            </p>
+          </div>
+          <button
+            onClick={handleBack}
+            className="flex items-center gap-2 rounded-2xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium hover:bg-gray-50 transition shrink-0"
+          >
+            <ArrowLeft className="w-4 h-4" /> New analysis
+          </button>
+        </div>
 
-      <div className="space-y-6">
+        {/* Top analysis */}
+        <div className="grid lg:grid-cols-[320px_1fr] gap-6 items-stretch">
+          <ATSScoreCard />
+          <ATSSummaryCard />
+        </div>
 
-  {/* TOP ANALYSIS */}
-  <div className="
-    grid
-    lg:grid-cols-[320px_1fr]
-    gap-6
-    items-stretch
-  ">
+        {/* Secondary analysis */}
+        <div className="grid lg:grid-cols-2 gap-6 items-start">
+          <MissingSkills />
+          <StrengthsCard />
+        </div>
 
-    <ATSScoreCard />
+        {/* Roadmap */}
+        <ImprovementSuggestions />
 
-    <ATSSummaryCard />
-
-  </div>
-
-  {/* SECONDARY ANALYSIS */}
-  <div className="
-    grid
-    lg:grid-cols-2
-    gap-6
-  ">
-
-    <MissingSkills />
-
-    <StrengthsCard />
-
-  </div>
-
-  {/* ROADMAP */}
-  <ImprovementSuggestions />
-
-</div>
+        {/* CTA */}
+        <ImproveResumeCTA />
+      </div>
     </div>
   );
 };

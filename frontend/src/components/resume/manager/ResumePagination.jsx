@@ -18,7 +18,7 @@ const ResumePagination = ({page, totalPages, onPageChange}) => {
         onClick={()=> onPageChange(p)}
         className={`w-9 h-9 rounded-xl text-sm font-medium transition ${
               p === page
-                ? "bg-violet-600 text-white"
+                ? "bg-teal-600 text-white"
                 : "border border-gray-200 text-gray-600 hover:bg-gray-50"
             }`}>
               {p}

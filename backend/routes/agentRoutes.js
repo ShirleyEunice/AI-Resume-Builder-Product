@@ -1,7 +1,6 @@
 import express from 'express';
 import multer from 'multer';
 import { parsePDF } from '../services/parser/pdfParser.js';
-import { generateCoverLetter } from '../services/agents/coverLetter.js';
 import { checkCredits } from '../middlewares/creditCheck.js';
 import { mockAuth } from '../middlewares/mockAuth.js';
 import User from '../models/User.js';
@@ -23,18 +22,6 @@ router.post('/match', async (req, res)=>{
         const {resumeText, jdText} = req.body;
         const result = await jdMatcher(resumeText, jdText);
         res.json(result);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-})
-
-router.post('/cover-letter',mockAuth, checkCredits(10), async (req, res)=>{
-    try {
-        const {resumeText, jdText, tone} = req.body;
-        const result = await generateCoverLetter(resumeText, jdText, tone);
-        req.user.credits -= 10;
-        await req.user.save();
-        res.json({coverLetter: result});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

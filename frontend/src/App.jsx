@@ -12,6 +12,8 @@ import ResumeStartPage from "./pages/resume/ResumeStartPage";
 import TemplateSelectionPage from "./pages/resume/TemplateSelectionPage";
 import ResumeWizardPage from "./pages/resume/ResumeWizardPage";
 import ResumeManagerPage from "./pages/resume/ResumeManagerPage";
+import CoverLetterGenerator from "./pages/cover-letter/CoverLetterGenerator";
+import CoverLetterHistory from "./pages/cover-letter/history/CoverLetterHistory";
 
 function App() {
   return (
@@ -54,6 +56,10 @@ function App() {
           <Route path="/resume/builder" element={<ResumeWizardPage/>}/>
 
           <Route path="/resume-manager" element={<ResumeManagerPage/>}/>
+
+          <Route path="/cover-letter" element={<CoverLetterGenerator/>}/>
+
+          <Route path="/cover-letter/history" element={<CoverLetterHistory/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

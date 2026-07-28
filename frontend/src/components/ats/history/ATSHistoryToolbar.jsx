@@ -1,93 +1,31 @@
 import React from "react";
-import {ArrowUpDown, Search,} from "lucide-react";
+import { Search } from "lucide-react";
 
-const ATSHistoryToolbar = ({search, setSearch, sortBy, setSortBy}) => {
-
+const ATSHistoryToolbar = ({ search, setSearch, sortBy, setSortBy }) => {
   return (
-    <div
-      className="
-      mt-6
-      bg-white
-      rounded-3xl
-      border
-      p-5
-      flex
-      items-center
-      justify-between
-      gap-4
-    "
-    >
-      {/* SEARCH */}
-
-      <div
-        className="
-        flex
-        items-center
-        gap-3
-        bg-gray-100
-        rounded-2xl
-        px-4
-        py-3
-        w-[350px]
-      "
-      >
-        <Search
-          className="
-          w-5
-          h-5
-          text-gray-400
-        "
-        />
-
+    <div className="flex items-center gap-3 mb-4">
+      {/* Search */}
+      <div className="relative flex-1 max-w-sm">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="
-Search resume or job title...
-          "
-          className="
-            bg-transparent
-            outline-none
-            w-full
-            text-sm
-          "
+          placeholder="Search resume or job title..."
+          className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary/25"
         />
       </div>
 
-      {/* SORT */}
-
-      <div
-        className="
-  flex
-  items-center
-  gap-3
-"
+      {/* Sort */}
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-brand-primary/25 bg-white"
       >
-        <select
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="
-      border
-      rounded-2xl
-      px-5
-      py-3
-      text-sm
-      font-medium
-      outline-none
-      bg-white
-      hover:border-violet-400
-      transition
-      cursor-pointer
-    "
-        >
-          <option value="latest">Latest</option>
-
-          <option value="highest">Highest Score</option>
-
-          <option value="lowest">Lowest Score</option>
-        </select>
-      </div>
+        <option value="latest">Latest</option>
+        <option value="highest">Highest Score</option>
+        <option value="lowest">Lowest Score</option>
+      </select>
     </div>
   );
 };

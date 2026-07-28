@@ -26,14 +26,14 @@ const ResumeManagerToolbar = ({search, onSearchChange, sort, order, onSortChange
         placeholder='Search resumes...'
         value={search}
         onChange={(e)=> onSearchChange(e.target.value)}
-        className='w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-500'/>
+        className='w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500'/>
       </div>
 
       {/* Sort */}
       <select
       value={currentValue}
       onChange={handleSortChange}
-      className='px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-violet-500 bg-white'>
+      className='px-4 py-2.5 border border-gray-200 rounded-xl text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-teal-500 bg-white'>
         {
           SORT_OPTIONS.map((opt)=>(
             <option key={`${opt.value}:desc`}

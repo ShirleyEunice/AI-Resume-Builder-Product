@@ -55,7 +55,7 @@ const MarginSelector = () => {
 
               ${
                 margin === item
-                  ? "border-violet-600 bg-violet-50"
+                  ? "border-teal-600 bg-teal-50"
                   : "bg-white"
               }
             `}

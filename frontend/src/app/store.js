@@ -5,6 +5,7 @@ import authReducer from "../redux/slices/authSlice.js";
 import atsReducer from "../redux/slices/atsSlice.js";
 import uiReducer from "../redux/slices/uiSlice.js";
 import resumeManagerReducer from "../redux/slices/resumeManagerSlice.js";
+import coverLetterReducer from "../redux/slices/coverLetterSlice.js";
 
 export const store = configureStore({
     reducer:{
@@ -14,5 +15,6 @@ export const store = configureStore({
         ats: atsReducer,
         ui: uiReducer,
         resumeManager: resumeManagerReducer,
+        coverLetter: coverLetterReducer
     }
 })

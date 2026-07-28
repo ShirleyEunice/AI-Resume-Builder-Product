@@ -4,12 +4,13 @@ import ATSHistoryToolbar from '@/components/ats/history/ATSHistoryToolbar'
 import { setATSHistory, setHistoryLoading } from '@/redux/slices/atsSlice'
 import { getATSHistory } from '@/services/atsService'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ATSHistory = () => {
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const [sortBy, setSortBy] = useState("latest");
+  const { history } = useSelector((state) => state.ats);
 
   const fetchATSHistory = async ()=>{
     try {
@@ -27,9 +28,10 @@ const ATSHistory = () => {
   useEffect(()=>{
     fetchATSHistory();
   }, []);
+
   return (
     <div className='h-full overflow-y-auto bg-gray-100 p-6'>
-      <ATSHistoryHeader/>
+      <ATSHistoryHeader total={history.length}/>
       <ATSHistoryToolbar
       search={search}
       setSearch={setSearch}
@@ -37,8 +39,7 @@ const ATSHistory = () => {
       setSortBy={setSortBy}/>
       <ATSHistoryTable
       search={search}
-      sortBy={sortBy}
-      setSortBy={setSortBy}/>
+      sortBy={sortBy}/>
     </div>
   )
 }

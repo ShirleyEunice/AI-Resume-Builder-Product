@@ -39,13 +39,17 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-        <div className="mb-7">
-          <div className="w-10 h-10 rounded-xl bg-brand-primary/10 flex items-center justify-center mb-4">
-            <Lock className="w-5 h-5 text-brand-primary" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900">Welcome back</h2>
-          <p className="text-gray-500 mt-1 text-sm">Sign in to your account to continue</p>
+      <div className="bg-white rounded-3xl shadow-soft border border-gray-100 p-8 sm:p-9">
+        <div className="mb-8">
+          <span className="inline-block text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-primary mb-3">
+            Welcome back
+          </span>
+          <h2 className="font-display text-3xl font-semibold text-brand-ink leading-tight">
+            Sign in to CareerForge
+          </h2>
+          <p className="text-gray-500 mt-2 text-sm">
+            Pick up where you left off and keep building.
+          </p>
         </div>
 
         <form className="space-y-5" onSubmit={handleLogin}>
@@ -60,7 +64,7 @@ const Login = () => {
                 placeholder="you@example.com"
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-colors"
+                className="w-full border border-gray-200 rounded-xl pl-10 pr-4 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/25 focus:border-brand-primary transition-colors"
               />
             </div>
           </div>
@@ -81,7 +85,7 @@ const Login = () => {
                 placeholder="••••••••"
                 onChange={handleChange}
                 required
-                className="w-full border border-gray-200 rounded-xl pl-10 pr-11 py-2.5 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary transition-colors"
+                className="w-full border border-gray-200 rounded-xl pl-10 pr-11 py-3 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/25 focus:border-brand-primary transition-colors"
               />
               <button
                 type="button"
@@ -96,7 +100,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-brand-primary hover:bg-teal-600 text-white rounded-xl py-2.5 font-semibold text-sm transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full bg-brand-primary hover:bg-teal-600 text-white rounded-xl py-3 font-semibold text-sm transition-all duration-200 shadow-brand hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {loading && <Loader2 className="w-4 h-4 animate-spin" />}
             {loading ? "Signing in..." : "Sign in"}
@@ -131,10 +135,10 @@ const Login = () => {
           />
         </div>
 
-        <p className="text-xs text-center text-gray-500 mt-6">
+        <p className="text-sm text-center text-gray-500 mt-7">
           Don't have an account?{" "}
           <Link to="/register" className="text-brand-primary font-semibold hover:underline">
-            Create account
+            Create one free
           </Link>
         </p>
       </div>

@@ -9,6 +9,7 @@ import agentRoutes from "./routes/agentRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import webhookRoutes from "./routes/webhook.js";
 import emailRoutes from "./routes/emailRoutes.js";
+import coverLetterRoutes from "./routes/coverLetterRoutes.js";
 
 dotenv.config({ path: "./.env" });
 const app = express();
@@ -33,6 +34,7 @@ app.use("/api/ats", atsRoutes);
 app.use("/api/agent", agentRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/email', emailRoutes);
+app.use("/api/cover-letter", coverLetterRoutes);
 
 const PORT = process.env.PORT || 5000;
 

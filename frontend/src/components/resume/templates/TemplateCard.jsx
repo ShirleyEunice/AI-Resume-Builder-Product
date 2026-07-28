@@ -50,9 +50,9 @@ const TemplateCard = ({
         ${
           selected === template
             ? `
-              border-violet-600
+              border-teal-600
               ring-4
-              ring-violet-200
+              ring-teal-200
               shadow-xl
             `
             : `
@@ -140,7 +140,7 @@ const TemplateCard = ({
 
             ${
               selected === template
-                ? "border-violet-600"
+                ? "border-teal-600"
                 : "border-gray-300"
             }
           `}>
@@ -152,7 +152,7 @@ const TemplateCard = ({
                   w-3
                   h-3
                   rounded-full
-                  bg-violet-600
+                  bg-teal-600
                 " />
               )
             }

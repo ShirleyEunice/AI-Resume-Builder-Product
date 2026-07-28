@@ -1,103 +1,41 @@
 import React from "react";
+import { Crown, ArrowRight, Check } from "lucide-react";
 
-import {
-  Crown,
-  ArrowRight,
-} from "lucide-react";
+const perks = ["Unlimited AI generations", "Advanced ATS analysis", "Priority interview coaching"];
 
 const UpgradeBanner = () => {
-
   return (
+    <div
+      className="relative overflow-hidden rounded-3xl p-6 text-white shadow-brand"
+      style={{ background: "radial-gradient(130% 130% at 100% 0%, #123449 0%, #0B1220 60%)" }}
+    >
+      {/* Decoration */}
+      <div className="absolute -right-10 -bottom-10 w-36 h-36 rounded-full blur-2xl" style={{ background: "rgba(245,201,123,0.18)" }} />
 
-    <div className="
-      bg-gradient-to-br
-     from-brand-dark
-via-slate-800
-to-brand-primary
-      rounded-3xl
-      p-6
-      text-white
-      overflow-hidden
-      relative
-      shadow-[0_10px_50px_rgba(20,184,166,0.18)]
-    ">
+      <div className="relative z-10">
+        <div className="w-12 h-12 rounded-2xl bg-brand-accent/20 border border-brand-accent/30 flex items-center justify-center mb-5">
+          <Crown className="w-6 h-6 text-brand-sand" />
+        </div>
 
-      {/* ICON */}
-      <div className="
-        w-14
-        h-14
-        rounded-2xl
-        bg-white/20
-        flex
-        items-center
-        justify-center
-        mb-5
-      ">
+        <h2 className="font-display text-xl font-semibold leading-snug">Upgrade to Premium</h2>
+        <p className="text-slate-300 mt-2 text-xs leading-relaxed">
+          Unlock the most powerful AI models and remove every limit.
+        </p>
 
-        <Crown />
+        <div className="mt-4 space-y-2">
+          {perks.map((perk) => (
+            <div key={perk} className="flex items-center gap-2 text-xs text-slate-200">
+              <Check className="w-3.5 h-3.5 text-brand-sand shrink-0" />
+              {perk}
+            </div>
+          ))}
+        </div>
 
+        <button className="mt-6 w-full bg-brand-accent hover:bg-amber-500 text-brand-ink px-5 py-3 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors shadow-lg">
+          Upgrade Plan
+          <ArrowRight className="w-4 h-4" />
+        </button>
       </div>
-
-      {/* CONTENT */}
-      <h2 className="
-        text-xl
-        font-bold
-        leading-snug
-      ">
-        Upgrade to Premium
-      </h2>
-
-      <p className="
-        text-teal-100
-        mt-3
-        text-xs
-        leading-relaxed
-      ">
-        Unlock GPT-4 powered resume optimization,
-        unlimited ATS analysis,
-        and advanced interview coaching.
-      </p>
-
-      {/* BUTTON */}
-      <button className="
-        mt-6
-bg-brand-accent
-text-white
-px-5
-py-3
-rounded-2xl
-font-semibold
-flex
-items-center
-gap-2
-hover:scale-105
-hover:bg-amber-500
-transition
-shadow-lg
-      ">
-
-        Upgrade Plan
-
-        <ArrowRight
-          className="
-            w-4
-            h-4
-          "
-        />
-
-      </button>
-
-      {/* DECORATION */}
-      <div className="
-        absolute
-        -right-8
-        -bottom-8
-        w-32
-        h-32
-        bg-white/10
-        rounded-full
-      " />
-
     </div>
   );
 };

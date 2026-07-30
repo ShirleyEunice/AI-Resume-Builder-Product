@@ -14,6 +14,8 @@ import ResumeWizardPage from "./pages/resume/ResumeWizardPage";
 import ResumeManagerPage from "./pages/resume/ResumeManagerPage";
 import CoverLetterGenerator from "./pages/cover-letter/CoverLetterGenerator";
 import CoverLetterHistory from "./pages/cover-letter/history/CoverLetterHistory";
+import Upgrade from "./Upgrade";
+import Success from "./pages/Success";
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
             path="/failed"
             element={<div>Payment Failed. Please try again.</div>}
           />
+          <Route path="/success" element={<Success />} />
 
         <Route
           element={
@@ -38,6 +41,8 @@ function App() {
           }
         >
           <Route path="/dashboard" element={<Dashboard />} />
+
+          <Route path="/upgrade" element={<Upgrade />} />
 
           <Route path="/ats" element={<ATSAnalyzer />} />
 

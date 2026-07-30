@@ -45,7 +45,9 @@ export const register = async(req, res)=>{
                 id:user._id,
                 name:user.name,
                 email:user.email,
-                role:user.role
+                role:user.role,
+                credits:user.credits,
+                isPremium:user.isPremium
             }
         })
     } catch (error) {
@@ -78,7 +80,9 @@ export const login = async(req, res)=>{
             id:user._id,
             name:user.name,
             email:user.email,
-            role:user.role
+            role:user.role,
+            credits:user.credits,
+            isPremium:user.isPremium
         },
     })
     } catch (error) {
@@ -116,6 +120,8 @@ export const googleLogin = async (req, res)=>{
                 name:user.name,
                 email:user.email,
                 role:user.role,
+                credits:user.credits,
+                isPremium:user.isPremium,
             },
         })
         

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Zap } from "lucide-react";
+import { Zap, Crown } from "lucide-react";
 
 const CreditUsage = () => {
   const { user } = useSelector((state) => state.auth);
@@ -38,12 +38,23 @@ const CreditUsage = () => {
         </div>
         <p className="text-[11px] text-gray-400 mt-2">{percentage}% remaining</p>
 
-        {/* Footer */}
-        <div className="mt-6 bg-brand-primary/5 border border-brand-primary/15 rounded-2xl p-4">
-          <p className="text-xs text-brand-primary leading-relaxed">
-            Upgrade to Premium for unlimited AI generations and advanced interview coaching.
-          </p>
-        </div>
+        {/* Footer — changes once the user is premium */}
+        {user?.isPremium ? (
+          <div className="mt-6 bg-brand-accent/10 border border-brand-accent/20 rounded-2xl p-4 flex items-start gap-2">
+            <Crown className="w-4 h-4 text-brand-accent shrink-0 mt-0.5" />
+            <p className="text-xs text-brand-ink leading-relaxed">
+              <span className="font-semibold text-brand-accent">Premium active.</span>{" "}
+              You're on our most powerful AI models and advanced interview coaching.
+              Running low? Top up anytime from the Upgrade page.
+            </p>
+          </div>
+        ) : (
+          <div className="mt-6 bg-brand-primary/5 border border-brand-primary/15 rounded-2xl p-4">
+            <p className="text-xs text-brand-primary leading-relaxed">
+              Upgrade to Premium for unlimited AI generations and advanced interview coaching.
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

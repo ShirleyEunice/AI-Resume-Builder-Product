@@ -54,8 +54,7 @@ const Header = () => {
         {/* Plan */}
         <div className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-accent/10 text-brand-accent">
           <Crown className="w-3.5 h-3.5" />
-          <span className="text-xs font-semibold">{user?.isPremium ? "Premium" : "Free"}</span>
-        </div>
++        </div>
 
         {/* Notification */}
         <button className="w-10 h-10 rounded-xl text-gray-500 flex items-center justify-center hover:bg-gray-100 hover:text-gray-700 transition-colors relative">

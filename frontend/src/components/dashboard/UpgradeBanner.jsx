@@ -1,9 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Crown, ArrowRight, Check } from "lucide-react";
 
 const perks = ["Unlimited AI generations", "Advanced ATS analysis", "Priority interview coaching"];
 
 const UpgradeBanner = () => {
+  const navigate = useNavigate();
+
   return (
     <div
       className="relative overflow-hidden rounded-3xl p-6 text-white shadow-brand"
@@ -31,7 +34,10 @@ const UpgradeBanner = () => {
           ))}
         </div>
 
-        <button className="mt-6 w-full bg-brand-accent hover:bg-amber-500 text-brand-ink px-5 py-3 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors shadow-lg">
+        <button
+          onClick={() => navigate("/upgrade")}
+          className="mt-6 w-full bg-brand-accent hover:bg-amber-500 text-brand-ink px-5 py-3 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2 transition-colors shadow-lg"
+        >
           Upgrade Plan
           <ArrowRight className="w-4 h-4" />
         </button>

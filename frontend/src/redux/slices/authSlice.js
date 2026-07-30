@@ -20,6 +20,14 @@ const authSlice = createSlice({
             state.user = action.payload.user;
             state.isAuthenticated = true;
         },
+        // Merge partial fields (e.g. credits, isPremium) into the logged-in
+        // user and persist so a page refresh keeps the new values.
+        updateUser: (state, action)=>{
+            if(state.user){
+                state.user = { ...state.user, ...action.payload };
+                localStorage.setItem("user", JSON.stringify(state.user));
+            }
+        },
         logout: (state)=>{
             state.token = null;
             state.user = null;
@@ -28,6 +36,6 @@ const authSlice = createSlice({
     }
 })
 
-export const {loginSuccess, logout} = authSlice.actions;
+export const {loginSuccess, updateUser, logout} = authSlice.actions;
 
 export default authSlice.reducer;

@@ -28,7 +28,7 @@ import { updateUser } from "../redux/slices/authSlice";
         .then((data) => {
           setResult(data);
           setStatus("success");
-          dispatch(updateUser({ credits: data.credits, isPremium: data.isPremium }));
+          dispatch(updateUser({ credits: data.credits, creditsGranted: data.creditsGranted, isPremium: data.isPremium }));
         })
         .catch(() => setStatus("error"));
     }, [sessionId]);

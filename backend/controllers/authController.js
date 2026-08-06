@@ -47,6 +47,7 @@ export const register = async(req, res)=>{
                 email:user.email,
                 role:user.role,
                 credits:user.credits,
+                creditsGranted:user.creditsGranted,
                 isPremium:user.isPremium
             }
         })
@@ -82,6 +83,7 @@ export const login = async(req, res)=>{
             email:user.email,
             role:user.role,
             credits:user.credits,
+            creditsGranted:user.creditsGranted,
             isPremium:user.isPremium
         },
     })
@@ -121,6 +123,7 @@ export const googleLogin = async (req, res)=>{
                 email:user.email,
                 role:user.role,
                 credits:user.credits,
+                creditsGranted:user.creditsGranted,
                 isPremium:user.isPremium,
             },
         })

@@ -20,6 +20,13 @@ const userSchema = new mongoose.Schema({
         type:Number,
         default:100
     },
+    // Lifetime credits ever granted (free allotment + every top-up). We never
+    // decrement this — it's the denominator for "used vs. total" on the
+    // dashboard, where used = creditsGranted - credits.
+    creditsGranted:{
+        type:Number,
+        default:100
+    },
     isPremium:{
         type:Boolean,
         default:false,

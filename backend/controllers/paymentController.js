@@ -63,11 +63,12 @@ export const verifySession = async (req, res)=>{
             return res.status(402).json({success: false, message: "Payment not completed"});
         }
 
-        const fresh = await User.findById(req.user._id).select("credits isPremium");
+        const fresh = await User.findById(req.user._id).select("credits creditsGranted isPremium");
         res.json({
             success:true,
             creditsAdded: result.creditsAdded ?? 0,
             credits: fresh?.credits ?? req.user.credits,
+            creditsGranted: fresh?.creditsGranted ?? req.user.creditsGranted,
             isPremium: fresh?.isPremium ?? req.user.isPremium,
             alreadyFulfilled: !!result.alreadyFulfilled,
         });

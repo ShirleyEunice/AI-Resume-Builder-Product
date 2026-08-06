@@ -5,9 +5,13 @@ import { Zap, Crown } from "lucide-react";
 const CreditUsage = () => {
   const { user } = useSelector((state) => state.auth);
 
-  const totalCredits = 200;
-  const credits = user?.credits ?? 0;
-  const percentage = Math.min(100, Math.round((credits / totalCredits) * 100));
+  const credits = user?.credits ?? 0; // remaining balance
+  // Total = lifetime credits granted. `Math.max` guards accounts created before
+  // we tracked creditsGranted, so the total is never smaller than what's left.
+  const totalCredits = Math.max(credits, user?.creditsGranted ?? credits);
+  const used = totalCredits - credits;
+  const usedPercentage =
+    totalCredits > 0 ? Math.min(100, Math.round((used / totalCredits) * 100)) : 0;
 
   return (
     <div className="bg-white rounded-3xl p-6 shadow-soft border border-gray-100">
@@ -23,20 +27,22 @@ const CreditUsage = () => {
 
       <div className="mt-6">
         <div className="flex justify-between text-xs mb-2">
-          <span className="text-gray-500">Remaining credits</span>
+          <span className="text-gray-500">Credits used</span>
           <span className="font-semibold text-brand-ink">
-            {credits}/{totalCredits}
+            {used.toLocaleString()} / {totalCredits.toLocaleString()}
           </span>
         </div>
 
-        {/* Progress bar */}
+        {/* Progress bar — fills up as credits are consumed */}
         <div className="w-full h-3 rounded-full bg-gray-100 overflow-hidden">
           <div
-            style={{ width: `${percentage}%`, background: "linear-gradient(90deg, #14B8A6, #2DD4BF)" }}
+            style={{ width: `${usedPercentage}%`, background: "linear-gradient(90deg, #14B8A6, #2DD4BF)" }}
             className="h-full rounded-full transition-all duration-500"
           />
         </div>
-        <p className="text-[11px] text-gray-400 mt-2">{percentage}% remaining</p>
+        <p className="text-[11px] text-gray-400 mt-2">
+          {credits.toLocaleString()} of {totalCredits.toLocaleString()} credits remaining
+        </p>
 
         {/* Footer — changes once the user is premium */}
         {user?.isPremium ? (

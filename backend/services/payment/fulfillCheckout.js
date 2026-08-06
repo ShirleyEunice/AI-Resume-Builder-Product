@@ -52,7 +52,7 @@ export const fulfillCheckout = async (sessionId)=>{
 //6. We own it - grant the credits atomically, and mark the buyer premium.
 const user = await User.findByIdAndUpdate(
     userId,
-    {$inc: {credits: plan.credits}, $set: {isPremium: true}},
+    {$inc: {credits: plan.credits, creditsGranted: plan.credits}, $set: {isPremium: true}},
     {new: true}
 );
 return {
@@ -60,5 +60,6 @@ return {
     paid: true,
     creditsAdded: plan.credits,
     credits: user?.credits,
+    creditsGranted: user?.creditsGranted,
 }
 }

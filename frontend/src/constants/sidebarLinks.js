@@ -6,6 +6,7 @@ import {
   History,
   LayoutDashboard,
   MessageSquare,
+  MessagesSquare,
   ScanSearch,
   Settings,
   ShieldCheck,
@@ -25,6 +26,7 @@ export const sidebarLinks = [
   { title: "Resume Manager", icon: FolderKanban, path: "/resume-manager", section: "Library", role: ["admin", "user"] },
   { title: "Scan History", icon: History, path: "/ats-manager", section: "Library", role: ["admin", "user"] },
   { title: "Letter History", icon: FileClock, path: "/cover-letter/history", section: "Library", role: ["admin", "user"] },
+  { title: "Interview History", icon: MessagesSquare, path: "/interview-history", section: "Library", role: ["admin", "user"] },
 
   // System
   { title: "Admin Panel", icon: ShieldCheck, path: "/admin", section: "System", role: ["admin"] },

@@ -14,6 +14,8 @@ import ResumeWizardPage from "./pages/resume/ResumeWizardPage";
 import ResumeManagerPage from "./pages/resume/ResumeManagerPage";
 import CoverLetterGenerator from "./pages/cover-letter/CoverLetterGenerator";
 import CoverLetterHistory from "./pages/cover-letter/history/CoverLetterHistory";
+import InterviewChat from "./pages/InterviewChat";
+import InterviewHistory from "./pages/interview/InterviewHistory";
 import Upgrade from "./Upgrade";
 import Success from "./pages/Success";
 
@@ -65,6 +67,10 @@ function App() {
           <Route path="/cover-letter" element={<CoverLetterGenerator/>}/>
 
           <Route path="/cover-letter/history" element={<CoverLetterHistory/>}/>
+
+          <Route path="/interview-chat" element={<InterviewChat/>}/>
+
+          <Route path="/interview-history" element={<InterviewHistory/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

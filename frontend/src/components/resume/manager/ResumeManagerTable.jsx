@@ -63,7 +63,7 @@ const RowActions = ({ resume, onEdit, onDelete }) => {
     { label: "Edit",           icon: <Edit2 className="w-4 h-4" />,        color: "text-brand-primary", fn: () => onEdit(resume) },
     { label: "View",           icon: <Eye className="w-4 h-4" />,           color: "text-blue-600",      fn: () => navigate(`/resume/preview/${resume._id}`) },
     { label: "Download",       icon: <Download className="w-4 h-4" />,      color: "text-green-600",     fn: () => onEdit(resume) },
-    { label: "Interview Prep", icon: <MessageSquare className="w-4 h-4" />, color: "text-amber-600",     fn: () => navigate(`/interview?resumeId=${resume._id}`) },
+    { label: "Interview Prep", icon: <MessageSquare className="w-4 h-4" />, color: "text-amber-600",     fn: () => navigate(`/interview-chat?resumeId=${resume._id}`) },
     { label: "Delete",         icon: <Trash2 className="w-4 h-4" />,        color: "text-red-500",       fn: () => onDelete(resume._id), divider: true },
   ];
 
